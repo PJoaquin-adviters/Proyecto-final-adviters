@@ -1,0 +1,30 @@
+.login-section {
+  position: relative;
+  background-color: white;
+  width: 366.27px;
+  height: 405.45px;
+  border: 1px solid #797979;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 10px 10px 10px rgba(128, 128, 128, 0.274);
+  z-index: 1000;
+}
+
+.logo-img {
+  position: absolute;
+  right: 50px;
+  max-width: 800px;
+  z-index: 200;
+  width: 60%;
+  bottom: 50px;
+}
+
+.waves {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+}
