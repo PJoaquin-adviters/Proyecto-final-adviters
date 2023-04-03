@@ -1,6 +1,6 @@
-import "./style.css"
+import "./LoadingPageStyle.css"
 
-const Loading = () => {
+const LoadingPage = () => {
     return(
         <div class="contenedor-icono">
         <img src= {require("./img/advitersLogo.png")} alt="icono de la empresa" id="icono-carga"/>
@@ -9,4 +9,4 @@ const Loading = () => {
     )
 }
 
-export default Loading;
+export default LoadingPage;
