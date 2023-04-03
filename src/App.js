@@ -9,11 +9,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/loading" element={<LoadingPage />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<LoginPage />} />
-            <Route path="/loading" element={<LoadingPage />} />
-
-
             {/* <Route path="*" element={<ErrorPage />} /> */}
           </Route>
         </Routes>
