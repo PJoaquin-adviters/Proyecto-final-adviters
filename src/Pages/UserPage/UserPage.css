@@ -1,0 +1,14 @@
+.user-input-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+
+}
+
+
+.input-container-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
