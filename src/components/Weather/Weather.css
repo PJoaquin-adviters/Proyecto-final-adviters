@@ -1,0 +1,20 @@
+#contenedor-clima {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: left;
+    padding: 1em;
+    box-shadow: 60px -16px teal;
+}
+
+#contenedor-clima h3 {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+#contenedor-clima img {
+    width: 100px;
+}
+
+#contenedor-clima p:last-of-type {
+    margin-top: -2em;
+    color: grey;
+}
