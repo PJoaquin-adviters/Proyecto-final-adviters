@@ -1,6 +1,7 @@
   .contenedor-icono {
     background-color: #0072ab;
-    width: 50%;
+    width: 45%;
+    max-width: 400px;
     height: 40vh;
     display: flex;
     flex-direction: column;
