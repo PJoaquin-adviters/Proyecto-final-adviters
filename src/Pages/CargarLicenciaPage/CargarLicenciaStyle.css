@@ -1,4 +1,37 @@
+main {
+width: 70%;
+border: 2px solid gray;
+}
+
+#responsable-licencias-contenedor {
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+#responsable-licencias-contenedor>p{
+    color: gray;
+    align-self: flex-start;
+}
+
+#contenedor-scaloni {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
 #contenedor-scaloni p{
     display: inline-block;
     color: orange;
+}
+
+#boton-licencia{
+    align-self: flex-end;
+}
+
+aside{
+    width: 30%;
 }
