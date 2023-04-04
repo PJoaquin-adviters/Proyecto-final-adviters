@@ -68,7 +68,7 @@ const Header = () => {
   return (
     <>
       <AppBar position="fixed" color="transparent">
-        <Toolbar>
+        <Toolbar sx={{backgroundColor:"white"}}>
           <DropDownMenu
             name="ham"
             botonIcono={<MenuIcon />}

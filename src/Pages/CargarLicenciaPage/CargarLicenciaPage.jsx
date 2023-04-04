@@ -1,14 +1,14 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import { Avatar, Badge, Select, MenuItem, InputLabel, ButtonGroup } from "@mui/material";
+import { Avatar, Badge, Select, MenuItem, InputLabel, ButtonGroup, Button, DatePicker } from "@mui/material";
+import { DateRangePicker } from "@mui/lab";
 import scaloni from "./scaloni.jpg";
 import "./CargarLicenciaStyle.css";
-import { FormatAlignJustify } from "@mui/icons-material";
 
 const CargarLicenciaPage = () => {
   return (
     <>
       <main id="contenedor">
+        <DateRangePicker/>
         <section id="titulo">
           <div>
             <Avatar alt="scaloni" src={scaloni} />
@@ -73,7 +73,9 @@ const CargarLicenciaPage = () => {
           </Button>
         </section>
       </main>
-      <aside></aside>
+      <aside>
+
+      </aside>
     </>
   );
 };
