@@ -1,10 +1,62 @@
-main {
-width: 70%;
-border: 2px solid gray;
+#contenedor {
+    width: 70%;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 1em 2em;
+    display: flex;
+    gap: 3em;
 }
 
-#responsable-licencias-contenedor {
-    padding: 2em;
+#contenedor #titulo{
+   display: flex; 
+   justify-content: space-between;
+   width: 100%;
+}
+
+#contenedor #titulo b{
+    font-size: 1.5em;
+}
+
+#carga-licencia {
+    width: 100%;
+}
+
+#carga-licencia div:first-child{
+    display: flex;
+    text-align: left;
+    justify-content: space-around;
+}
+
+#fecha-licencia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.calendario-widget {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.calendario-widget span:first-child {
+background-color: rgb(218, 60, 60);
+color: white;
+}
+
+#grupo-botones-licencia{
+    display: block;
+}
+
+#fecha-licencia .calendario-widget span {
+    padding: 1em 0.5em;
+}
+
+#responsable-licencia {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -12,18 +64,18 @@ border: 2px solid gray;
     gap: 1em;
 }
 
-#responsable-licencias-contenedor>p{
+#responsable-licencia>p{
     color: gray;
     align-self: flex-start;
 }
 
-#contenedor-scaloni {
+#contenedor-usuario {
     display: flex;
     align-items: center;
     gap: 0.5em;
 }
 
-#contenedor-scaloni p{
+#contenedor-usuario p{
     display: inline-block;
     color: orange;
 }
