@@ -27,9 +27,7 @@ const LoginPage = () => {
           component="form"
           sx={{
             "& .MuiTextField-root": {
-              width: "100%",
-              // display: "flex",
-              // flexDirection: "column",
+              width: "100%"
             },
             width: "80%",
             display: "flex",
