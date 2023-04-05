@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, Grid } from "@mui/material";
 import "./UserPage.css";
 import pictureNotFound from "../../assets/img/user-not-found.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const UserPage = () => {
+  const [isNew, setIsNew] = useState(false);
+
+  const data = {
+    name: "joa",
+    lastname: "par",
+    date: "18/02/96",
+    ciul: "339999999",
+    admissionDate: "20/30/21",
+    email: "joa@par",
+    street: "calle joa",
+    streetNumber: "123",
+    postalCode: "1223",
+    tower: "1",
+    floor: "3",
+    apartment: "12",
+    location: "Capital",
+    province: "Buenos aires",
+    country: "Argentina",
+    holiday: 12,
+    idAdmin: false,
+    supervisorId: 3
+
+  }
+
   return (
     <section className="profile-page">
       <form className="form-user">
         <div>
-          <h1>Mi perfil</h1>
+          <Typography variant="h2" align="left">Mi Perfil</Typography>
         </div>
-        <section className="user-input-container">
-          {/* Datos personales */}
-          <div className="user-input-container-column">
+        <section className="input-section">
+          <div className="input-column-container">
             <img src={pictureNotFound} className="profile-picture" alt="" />
-
             <Select
               placeholder="Bajo supervisión de: "
               indicator={<KeyboardArrowDown />}
@@ -36,47 +58,70 @@ const UserPage = () => {
               <Option value="cat">Marcus</Option>
               <Option value="fish">Marge</Option>
             </Select>
-
             <TextField
               id="outlined-required"
               label="DNI"
-              defaultValue="23434545"
+              defaultValue="3906645"
             />
-
             <TextField
               id="outlined-required"
-              label="Correo electronico"
-              defaultValue="usu@gmail"
+              label="Email"
+              type="email"
+              defaultValue="fdfgfdg@df"
             />
+          </div>
+          <div className="input-column-container">
             <TextField
               id="outlined-required"
               label="Nombre"
-              defaultValue="Pepito"
+              defaultValue="Pepe"
             />
             <TextField
               id="outlined-required"
               label="Apellido"
-              defaultValue="Urch"
+              defaultValue="Ful"
             />
             <TextField
               id="outlined-required"
-              label="DNI"
+              label="Fecha de nacimiento"
               type="date"
-              defaultValue="23434545"
+
             />
             <TextField
               id="outlined-required"
               label="Cuil"
-              defaultValue="1112222333"
+              defaultValue="1344555"
             />
             <TextField
               id="outlined-required"
               label="Telefono"
-              defaultValue="23434545"
+              defaultValue="1223344"
             />
           </div>
-          {/* Datos personales de residencia */}
-          <div className="user-input-container-column">
+          <div className="input-column-container">
+            <TextField
+              id="outlined-required"
+              label="Password"
+              type="password"
+              defaultValue="password"
+            />
+            <TextField
+              id="outlined-required"
+              label="Repeat password"
+              type="password"
+              defaultValue="password"
+            />
+            <TextField
+              id="outlined-required"
+              label="Fecha de ingreso"
+              type="date"
+            />
+
+          </div>
+
+        </section>
+        <section className="input-section">
+          <div className="input-column-container">
             <TextField
               id="outlined-required"
               label="Calle"
@@ -84,42 +129,68 @@ const UserPage = () => {
             />
             <TextField
               id="outlined-required"
-              label="Altura"
-              defaultValue="23434545"
-            />
-            <TextField
-              id="outlined-required"
-              label="Codigo Postal"
-              defaultValue="23434545"
-            />
-            <TextField id="outlined-required" label="Torre" defaultValue="" />
-            <TextField
-              id="outlined-required"
-              label="Piso"
-              defaultValue="23434545"
-            />
-            <TextField
-              id="outlined-required"
-              label="Departamento"
-              defaultValue="23434545"
+              label="Torre"
             />
             <TextField
               id="outlined-required"
               label="Localidad"
-              defaultValue="Capital Federal"
+              defaultValue="Capital federal"
+            />
+            <TextField
+              id="outlined-required"
+              label="Codigo postal"
+              defaultValue="03455"
+            />
+            <TextField
+              id="outlined-required"
+              label="Dias vacaciones"
+              defaultValue="15"
+            />
+
+          </div>
+          <div className="input-column-container">
+
+            <TextField
+              id="outlined-required"
+              label="Altura"
+              defaultValue="123"
+            />
+            <TextField
+              id="outlined-required"
+              label="Piso"
+              defaultValue="1"
             />
             <TextField
               id="outlined-required"
               label="Provincia"
-              defaultValue="Capital Federal"
+              defaultValue="Buenos Aires"
+            />
+          </div>
+          <div className="input-column-container">
+            <TextField
+              id="outlined-required"
+              label="Codigo postal"
+              defaultValue="345345"
+            />
+            <TextField
+              id="outlined-required"
+              label="Departamento"
+              defaultValue="2A"
             />
             <TextField
               id="outlined-required"
               label="Pais"
-              defaultValue="Capital Federal"
+
+              defaultValue="Argentina"
             />
+
           </div>
+
         </section>
+
+
+
+
 
         <Box
           sx={{
