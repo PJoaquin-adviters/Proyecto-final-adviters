@@ -22,61 +22,64 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="login-section">
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": {
-              width: "100%"
-            },
-            width: "80%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            gap: "30px",
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="outlined-required"
-            label="Usuario"
-            defaultValue="User"
-            onChange={(e) => {
-              setUserAuth(e.target.value);
-            }}
-          />
-          <TextField
-            id="outlined-required"
-            label="Password"
-            type="password"
-            defaultValue="password"
-            onChange={(e) => {
-              setPasswordAuth(e.target.value);
-            }}
-          />
+      <section className="center-page">
+
+        <div className="login-section">
           <Box
+            component="form"
             sx={{
+              "& .MuiTextField-root": {
+                width: "100%"
+              },
+              width: "80%",
               display: "flex",
-              width: "100%",
-              justifyContent: "flex-end",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: "30px",
             }}
+            noValidate
+            autoComplete="off"
           >
-            <Button
-              variant="contained"
-              endIcon={<ArrowForwardIcon />}
-              onClick={(e) => {
-                handleClick(e);
+            <TextField
+              id="outlined-required"
+              label="Usuario"
+              defaultValue="User"
+              onChange={(e) => {
+                setUserAuth(e.target.value);
+              }}
+            />
+            <TextField
+              id="outlined-required"
+              label="Password"
+              type="password"
+              defaultValue="password"
+              onChange={(e) => {
+                setPasswordAuth(e.target.value);
+              }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "flex-end",
               }}
             >
-              Iniciar
-            </Button>
+              <Button
+                variant="contained"
+                endIcon={<ArrowForwardIcon />}
+                onClick={(e) => {
+                  handleClick(e);
+                }}
+              >
+                Iniciar
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </div>
-      <img src={logoAdivters} className="logo-img" alt="" />
-      <img className="waves" src={waves} alt="" />
+        </div>
+        <img src={logoAdivters} className="logo-img" alt="" />
+        <img className="waves" src={waves} alt="" />
+      </section>
     </>
   );
 };
