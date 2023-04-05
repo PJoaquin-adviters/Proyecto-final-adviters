@@ -3,10 +3,9 @@ main {
 }
 
 #contenedor {
-    width: 70%;
     border: 1px solid gray;
     border-radius: 20px;
-    padding: 1em 2em;
+    padding: 3em;
     display: flex;
     gap: 3em;
 }
@@ -85,6 +84,15 @@ color: white;
 #contenedor-usuario p{
     display: inline-block;
     color: orange;
+}
+
+textarea{
+    width: 70%;
+    min-height: 20em;
+    padding: 2em;
+    resize: none;
+    color: gray;
+    font-size: 1em;
 }
 
 #boton-licencia{
