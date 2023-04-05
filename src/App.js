@@ -4,6 +4,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import Layout from "./Pages/Layout/Layout";
 import Loading from "./components/Loading/Loading";
 import CargarLicenciaPage from "./Pages/CargarLicenciaPage/CargarLicenciaPage";
+import User from "./Pages/UserPage/UserPage";
 // import Weather from "./components/Weather/Weather";
 
 function App() {
@@ -12,9 +13,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/loading" element={<Loading/>} />
+            <Route path="/loading" element={<Loading />} />
             <Route index element={<LoginPage />} />
-            <Route path="/cargarLicencia" element={<CargarLicenciaPage/>}/>
+            <Route path="/user" element={<User />} />
+            <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
             {/* <Route path="*" element={<ErrorPage />} /> */}
           </Route>
         </Routes>
