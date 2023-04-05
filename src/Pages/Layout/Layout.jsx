@@ -6,9 +6,14 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main>
+      <div
+        style={{
+          marginTop: "64px",
+          minHeight: "calc(100vh - 64px)",
+        }}
+      >
         <Outlet />
-      </main>
+      </div>
     </>
   );
 };
