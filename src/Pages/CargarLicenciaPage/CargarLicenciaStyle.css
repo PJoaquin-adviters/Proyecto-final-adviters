@@ -2,7 +2,7 @@ main {
     padding-top: 100px
 }
 
-#contenedor {
+#cl-contenedor {
     border: 1px solid gray;
     border-radius: 20px;
     padding: 3em;
@@ -10,37 +10,37 @@ main {
     gap: 3em;
 }
 
-#contenedor #titulo{
+#cl-contenedor #cl-titulo {
    display: flex; 
    justify-content: space-between;
    width: 100%;
 }
 
-#contenedor #titulo b{
+#cl-contenedor #cl-titulo b {
     font-size: 1.5em;
 }
 
-#carga-licencia {
+#cl-carga-licencia {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2em;
 }
 
-#carga-licencia div:first-child{
+#cl-carga-licencia div:first-child {
     display: flex;
     text-align: left;
     justify-content: space-around;
 }
 
-#fecha-licencia {
+#cl-fecha-licencia {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
 }
 
-.calendario-widget {
+.cl-calendario-widget {
     display: flex;
     flex-direction: column;
     max-width: 50%;
@@ -49,20 +49,20 @@ main {
     overflow: hidden;
 }
 
-.calendario-widget span:first-child {
+.cl-calendario-widget span:first-child {
 background-color: rgb(218, 60, 60);
 color: white;
 }
 
-#grupo-botones-licencia{
+#cl-grupo-botones-licencia {
     display: block;
 }
 
-#fecha-licencia .calendario-widget span {
+#cl-fecha-licencia .cl-calendario-widget span {
     padding: 1em 0.5em;
 }
 
-#responsable-licencia {
+#cl-responsable-licencia {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -70,23 +70,23 @@ color: white;
     gap: 1em;
 }
 
-#responsable-licencia>p{
+#cl-responsable-licencia>p {
     color: gray;
     align-self: flex-start;
 }
 
-#contenedor-usuario {
+#cl-contenedor-usuario {
     display: flex;
     align-items: center;
     gap: 0.5em;
 }
 
-#contenedor-usuario p{
+#cl-contenedor-usuario p {
     display: inline-block;
     color: orange;
 }
 
-textarea{
+.cl-textarea {
     width: 70%;
     min-height: 20em;
     padding: 2em;
@@ -95,7 +95,7 @@ textarea{
     font-size: 1em;
 }
 
-#boton-licencia{
+#cl-boton-licencia {
     align-self: flex-end;
 }
 

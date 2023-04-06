@@ -3,6 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import jordi from "../../assets/img/jordi2.jpg";
 import rosa from "../../assets/img/rosa.png";
+import "./ListItem.css";
 
 const ListItem = ({ data, displayIconos }) => {
   return (

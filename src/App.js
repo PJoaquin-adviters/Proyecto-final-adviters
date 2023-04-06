@@ -5,7 +5,8 @@ import Layout from "./Pages/Layout/Layout";
 import Loading from "./components/Loading/Loading";
 import CargarLicenciaPage from "./Pages/CargarLicenciaPage/CargarLicenciaPage";
 import User from "./Pages/UserPage/UserPage";
-// import Weather from "./components/Weather/Weather";
+import Weather from "./components/Weather/Weather";
+import DashboardPage from "./Pages/DashboardPage/DashboardPage";
 
 function App() {
   return (
@@ -13,11 +14,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/loading" element={<Loading />} />
-            <Route index element={<LoginPage />} />
+            <Route index element={<DashboardPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/user" element={<User />} />
             <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
-            {/* <Route path="*" element={<ErrorPage />} /> */}
+            <Route path="*" element={<h1>LA PÁGINA NO EXISTE</h1>} />
           </Route>
         </Routes>
       </BrowserRouter>

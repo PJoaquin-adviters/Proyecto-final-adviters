@@ -1,28 +1,20 @@
-import "./LoadingStyle.css";
+import "./Loading.css";
 
 const Loading = () => {
-    return (
-        <div class="loadingContainer">
-            <img
-                src={require("./img/advitersLogo.png")}
-                alt="icono de la empresa"
-                id="loadingIcon"
-            />
-            <img
-                src={require("./img/advitersLogo2.png")}
-                alt="titulo de la empresa"
-                id="loadingTitle"
-            />
-        </div>
-    );
+  return (
+    <div class="loadingContainer">
+      <img
+        src={require("./img/advitersLogo.png")}
+        alt="icono de la empresa"
+        id="loadingIcon"
+      />
+      <img
+        src={require("./img/advitersLogo2.png")}
+        alt="titulo de la empresa"
+        id="loadingTitle"
+      />
+    </div>
+  );
 };
 
-
-
-
 export default Loading;
-
-
-
-
-

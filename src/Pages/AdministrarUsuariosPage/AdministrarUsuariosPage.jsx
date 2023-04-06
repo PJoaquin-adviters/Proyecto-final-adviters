@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
-import Styles from "./Styles";
+import "./AdministrarUsuariosPage.css";
 
 const AdministrarUsuariosPage = () => {
   const [userList, setUserList] = useState(null);

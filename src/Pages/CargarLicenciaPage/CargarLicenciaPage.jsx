@@ -19,8 +19,8 @@ import "./CargarLicenciaStyle.css";
 const CargarLicenciaPage = () => {
   return (
     <section className="center-page">
-      <div id="contenedor" >
-        <section id="titulo">
+      <div id="cl-contenedor">
+        <section id="cl-titulo">
           <div>
             <Avatar alt="scaloni" src={scaloni} />
             <Typography variant="overline">Ricky</Typography>
@@ -37,11 +37,13 @@ const CargarLicenciaPage = () => {
             <Badge badgeContent={"Aún no enviado"} color="success"></Badge>
           </div>
         </section>
-        <section id="carga-licencia">
+        <section id="cl-carga-licencia">
           <div>
             <span>
-              <InputLabel id="demo-select-small">TIPO DE LICENCIA</InputLabel>
-              <Select labelId="demo-select-small" value="None">
+              <InputLabel id="cl-demo-select-small">
+                TIPO DE LICENCIA
+              </InputLabel>
+              <Select labelId="cl-demo-select-small" value="None">
                 <MenuItem value="None">
                   <em>Licencias</em>
                 </MenuItem>
@@ -59,15 +61,15 @@ const CargarLicenciaPage = () => {
               <Button variant="contained">SUBIR ARCHIVO</Button>
             </span>
           </div>
-          <div id="fecha-licencia">
-            <span className="calendario-widget">
+          <div id="cl-fecha-licencia">
+            <span className="cl-calendario-widget">
               <span>{"Septiembre"}</span>
               <span>
                 {21}
                 {" Lunes"}
               </span>
             </span>
-            <span className="calendario-widget">
+            <span className="cl-calendario-widget">
               <span>{"Septiembre"}</span>
               <span>
                 {21}
@@ -75,7 +77,7 @@ const CargarLicenciaPage = () => {
               </span>
             </span>
             <ButtonGroup
-              id="grupo-botones-licencia"
+              id="cl-grupo-botones-licencia"
               size="small"
               color="primary"
             >
@@ -89,23 +91,24 @@ const CargarLicenciaPage = () => {
               placeholder="Viaje al centro de la tierra"
               rows="4"
               cols="50"
+              className="cl-textarea"
             ></textarea>
           </div>
         </section>
-        <section id="responsable-licencia">
+        <section id="cl-responsable-licencia">
           <Typography variant="h6" align="left">
             Aprobación a cargo de:
           </Typography>
-          <div id="contenedor-usuario">
+          <div id="cl-contenedor-usuario">
             <Avatar alt="avatar-usuario" src={scaloni} />
             <Typography variant="overline">LIONEL SCALONI</Typography>
           </div>
-          <Button variant="contained" id="boton-licencia">
+          <Button variant="contained" id="cl-boton-licencia">
             SOLICITAR APROBACION
           </Button>
         </section>
       </div>
-    </section >
+    </section>
   );
 };
 

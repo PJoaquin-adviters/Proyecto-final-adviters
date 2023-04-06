@@ -7,6 +7,7 @@ import env from "react-dotenv";
 const Weather =  () => {
     const [weatherData, setWeatherData] = useState({});
     const key = env.KEY_CLIMA;
+    console.log(key);
     useEffect(() => {
 
      async function fetchData(){
