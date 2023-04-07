@@ -123,6 +123,8 @@ const CargarLicenciaPage = () => {
           <Lista titulo="Detalle de Vacaciones">
             <>
             <ListItemCargaLicencia></ListItemCargaLicencia>
+            <ListItemCargaLicencia></ListItemCargaLicencia>
+            <ListItemCargaLicencia></ListItemCargaLicencia>
             </>
           </Lista>
         </aside>
