@@ -50,9 +50,9 @@ const CargarLicenciaPage = () => {
                   <MenuItem value="None">
                     <em>SELECCIONE EL MOTIVO</em>
                   </MenuItem>
-                  <MenuItem value={"medica"}>Médica</MenuItem>
+                  <MenuItem value={"licencia medica"}>Licencia médica</MenuItem>
                   <MenuItem value={"vacaciones"}>Vacaciones</MenuItem>
-                  <MenuItem value={"dia-de-estudio"}>Dia de estudio</MenuItem>
+                  <MenuItem value={"dias estudio"}>Dia de estudio</MenuItem>
                 </Select>
               </span>
               <span>
@@ -122,6 +122,7 @@ const CargarLicenciaPage = () => {
         <aside>
           <Lista titulo="Detalle de Vacaciones">
             <>
+            {/* la idea sería hacer acá el map del get, conseguir la data y después hacer un map por cada elemento. con el fin de renderizar cada caso particular */}
             <ListItemCargaLicencia></ListItemCargaLicencia>
             <ListItemCargaLicencia></ListItemCargaLicencia>
             <ListItemCargaLicencia></ListItemCargaLicencia>
