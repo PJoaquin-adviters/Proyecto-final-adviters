@@ -1,34 +1,40 @@
 .profile-page {
-    width: 100%;
-    padding-left: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+.form-user input {
+  width: 200px;
 }
 
 .form-user {
-    width: 95%;
-    border: 1px solid #79797983;
-    min-height: 85vh;
-    max-width: 900px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 30px;
+  width: 95%;
+  border: 1px solid #79797983;
+  min-height: 85vh;
+  max-width: 900px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+  /* justify-content: center;
+  align-items: center; */
 }
 
 .input-section {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
 .input-column-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .input-column-container img {
-    width: 170px;
+  width: 170px;
 }

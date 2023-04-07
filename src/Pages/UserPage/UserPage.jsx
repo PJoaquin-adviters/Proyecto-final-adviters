@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
-import { TextField, Button, Box, Typography, Container, Grid } from "@mui/material";
+import { TextField, Button, Box, Typography } from "@mui/material";
 import "./UserPage.css";
 import pictureNotFound from "../../assets/img/user-not-found.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const UserPage = () => {
-  const [isNew, setIsNew] = useState(false);
-
-  const data = {
+  // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
+  const initData = {
     name: "joa",
     lastname: "par",
-    date: "18/02/96",
+    dni: "39054656",
+    date: "1996-02-18",
     ciul: "339999999",
-    admissionDate: "20/30/21",
+    password: "password",
+    admissionDate: "1996-02-18",
     email: "joa@par",
+    telephone: "1132328090",
     street: "calle joa",
     streetNumber: "123",
     postalCode: "1223",
@@ -28,15 +30,41 @@ const UserPage = () => {
     country: "Argentina",
     holiday: 12,
     idAdmin: false,
-    supervisorId: 3
+    supervisorId: 3,
+  };
+  const [isNew, setIsNew] = useState(true);
+  const [userInfo, setUserInfo] = useState({});
+  const [rePassword, setRePassword] = useState(userInfo.password);
 
-  }
+  useEffect(() => {
+    // si es true traemos los datos del usuario desde llamando a una funcion en service
+    isNew && setUserInfo({ ...initData });
+  }, []);
+
+  const handleChange = (e, inputName) => {
+    const info = userInfo;
+    info[inputName] = e.value;
+    setUserInfo({ ...info });
+  };
+
+  const handleSubmit = () => {
+    // si es nuevo llamamos a metodo saveUser en service POST()
+    if (isNew) {
+      // saveUser(userInfo);
+    }
+    // Si no es nuevo tenemos que hacer un update (PUT)
+    else {
+      // updateUser();
+    }
+  };
 
   return (
     <section className="profile-page">
       <form className="form-user">
         <div>
-          <Typography variant="h2" align="left">Mi Perfil</Typography>
+          <Typography variant="h2" align="left">
+            Mi Perfil
+          </Typography>
         </div>
         <section className="input-section">
           <div className="input-column-container">
@@ -46,6 +74,7 @@ const UserPage = () => {
               indicator={<KeyboardArrowDown />}
               sx={{
                 width: 240,
+                height: 60,
                 [`& .${selectClasses.indicator}`]: {
                   transition: "0.2s",
                   [`&.${selectClasses.expanded}`]: {
@@ -54,143 +83,151 @@ const UserPage = () => {
                 },
               }}
             >
-              <Option value="dog">Pepito</Option>
-              <Option value="cat">Marcus</Option>
-              <Option value="fish">Marge</Option>
+              <Option value="1">Pepito</Option>
+              <Option value="2">Marcus</Option>
+              <Option value="3">Marge</Option>
             </Select>
+
             <TextField
-              id="outlined-required"
+              id="dni"
               label="DNI"
-              defaultValue="3906645"
+              value={userInfo.dni}
+              onChange={(e) => handleChange(e, "dni")}
             />
             <TextField
-              id="outlined-required"
+              id="email"
               label="Email"
               type="email"
-              defaultValue="fdfgfdg@df"
+              value={userInfo.email}
+              onChange={(e) => handleChange(e, "email")}
             />
           </div>
           <div className="input-column-container">
             <TextField
-              id="outlined-required"
+              id="name"
               label="Nombre"
-              defaultValue="Pepe"
+              value={userInfo.name}
+              onChange={(e) => handleChange(e, "name")}
             />
             <TextField
-              id="outlined-required"
+              id="lastname"
               label="Apellido"
-              defaultValue="Ful"
+              value={userInfo.lastname}
+              onChange={(e) => handleChange(e, "lastname")}
             />
             <TextField
-              id="outlined-required"
+              id="date"
               label="Fecha de nacimiento"
               type="date"
-
+              value={userInfo.date}
+              onChange={(e) => handleChange(e, "date")}
             />
             <TextField
-              id="outlined-required"
+              id="ciul"
               label="Cuil"
-              defaultValue="1344555"
+              value={userInfo.ciul}
+              onChange={(e) => handleChange(e, "ciul")}
             />
             <TextField
-              id="outlined-required"
+              id="telephone"
               label="Telefono"
-              defaultValue="1223344"
+              value={userInfo.telephone}
+              onChange={(e) => handleChange(e, "telephone")}
             />
           </div>
           <div className="input-column-container">
             <TextField
-              id="outlined-required"
+              id="password"
               label="Password"
               type="password"
-              defaultValue="password"
+              value={userInfo.password}
+              onChange={(e) => handleChange(e, "password")}
             />
             <TextField
-              id="outlined-required"
+              id="rePassword"
               label="Repeat password"
               type="password"
-              defaultValue="password"
+              value={rePassword}
+              onChange={(e) => setRePassword(e.value)}
             />
             <TextField
-              id="outlined-required"
+              id="admissionDate"
               label="Fecha de ingreso"
               type="date"
+              value={userInfo.admissionDate}
+              onChange={(e) => handleChange(e, "admissionDate")}
             />
-
           </div>
-
         </section>
         <section className="input-section">
           <div className="input-column-container">
             <TextField
-              id="outlined-required"
+              id="street"
               label="Calle"
-              defaultValue="Calle false"
+              value={userInfo.street}
+              onChange={(e) => handleChange(e, "street")}
             />
             <TextField
-              id="outlined-required"
+              id="tower"
               label="Torre"
+              value={userInfo.tower}
+              onChange={(e) => handleChange(e, "tower")}
             />
             <TextField
-              id="outlined-required"
+              id="location"
               label="Localidad"
-              defaultValue="Capital federal"
+              value={userInfo.location}
+              onChange={(e) => handleChange(e, "location")}
             />
             <TextField
-              id="outlined-required"
-              label="Codigo postal"
-              defaultValue="03455"
+              id="supervisorId"
+              label="Supervisor"
+              value={userInfo.supervisorId}
+              onChange={(e) => handleChange(e, "supervisorId")}
             />
             <TextField
-              id="outlined-required"
+              id="holiday"
               label="Dias vacaciones"
-              defaultValue="15"
+              value={userInfo.holiday}
+              onChange={(e) => handleChange(e, "holiday")}
             />
-
           </div>
           <div className="input-column-container">
-
             <TextField
-              id="outlined-required"
+              id="streetNumber"
               label="Altura"
-              defaultValue="123"
+              value={userInfo.streetNumber}
+              onChange={(e) => handleChange(e, "streetNumber")}
             />
+            <TextField id="outlined-required" label="Piso" defaultValue="1" />
             <TextField
-              id="outlined-required"
-              label="Piso"
-              defaultValue="1"
-            />
-            <TextField
-              id="outlined-required"
+              id="province"
               label="Provincia"
-              defaultValue="Buenos Aires"
+              value={userInfo.province}
+              onChange={(e) => handleChange(e, "province")}
             />
           </div>
           <div className="input-column-container">
             <TextField
-              id="outlined-required"
+              id="postalCode"
               label="Codigo postal"
-              defaultValue="345345"
+              value={userInfo.postalCode}
+              onChange={(e) => handleChange(e, "postalCode")}
             />
             <TextField
-              id="outlined-required"
+              id="apartment"
               label="Departamento"
-              defaultValue="2A"
+              value={userInfo.apartment}
+              onChange={(e) => handleChange(e, "apartment")}
             />
             <TextField
-              id="outlined-required"
+              id="country"
               label="Pais"
-
-              defaultValue="Argentina"
+              value={userInfo.country}
+              onChange={(e) => handleChange(e, "country")}
             />
-
           </div>
-
         </section>
-
-
-
-
 
         <Box
           sx={{
@@ -200,8 +237,12 @@ const UserPage = () => {
             paddingRight: "30px",
           }}
         >
-          <Button variant="contained" endIcon={<ArrowForwardIcon />}>
-            Guardar
+          <Button
+            variant="contained"
+            endIcon={<ArrowForwardIcon />}
+            onClick={() => handleSubmit()}
+          >
+            {isNew ? "Guardar" : "Update"}
           </Button>
         </Box>
       </form>
