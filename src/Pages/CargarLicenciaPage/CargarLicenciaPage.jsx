@@ -15,12 +15,13 @@ import {
 import scaloni from "./scaloni.jpg";
 import "./CargarLicenciaStyle.css";
 import Lista from "../../components/lista/Lista";
+import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 
 const CargarLicenciaPage = () => {
   return (
     //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
     <Grid container padding={2} justifyContent={"space-around"}>
-      <Grid xs={12} lg={8} >
+      <Grid xs={12} lg={7} >
         <main id="cl-contenedor">
           <section id="cl-titulo">
             <div>
@@ -117,13 +118,11 @@ const CargarLicenciaPage = () => {
         </main>
       </Grid>
 
-      <Grid xs={12} lg={3}>
+      <Grid xs={12} lg={4}>
         <aside>
           <Lista titulo="Detalle de Vacaciones">
             <>
-            <div>holi</div>
-            <p>holi</p>
-            <p>holi</p>
+            <ListItemCargaLicencia></ListItemCargaLicencia>
             </>
           </Lista>
         </aside>
