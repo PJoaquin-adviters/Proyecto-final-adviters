@@ -18,8 +18,9 @@ import Lista from "../../components/lista/Lista";
 
 const CargarLicenciaPage = () => {
   return (
-    <Grid container>
-      <Grid xs={12} lg={9} spacing={2} padding={2}>
+    //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
+    <Grid container padding={2} justifyContent={"space-around"}>
+      <Grid xs={12} lg={8} >
         <main id="cl-contenedor">
           <section id="cl-titulo">
             <div>
@@ -119,7 +120,11 @@ const CargarLicenciaPage = () => {
       <Grid xs={12} lg={3}>
         <aside>
           <Lista titulo="Detalle de Vacaciones">
-
+            <>
+            <div>holi</div>
+            <p>holi</p>
+            <p>holi</p>
+            </>
           </Lista>
         </aside>
       </Grid>
