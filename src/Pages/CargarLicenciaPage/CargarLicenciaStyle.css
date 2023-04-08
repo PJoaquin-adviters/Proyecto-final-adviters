@@ -36,27 +36,18 @@
   gap: 1em;
 }
 
-.cl-calendario-widget {
-  margin: 1em;
-  display: flex;
-  flex-direction: column;
-  max-width: 50%;
-  border: 1px solid gray;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.cl-calendario-widget span:first-child {
-  background-color: rgb(218, 60, 60);
-  color: white;
-}
-
 #cl-grupo-botones-licencia {
   display: block;
 }
 
-#cl-fecha-licencia .cl-calendario-widget span {
+#cl-fecha-licencia div span{
+  display: block;
+  padding-inline: 2em;
+}
+
+#cl-fecha-licencia div span input {
   padding: 1em 0.5em;
+  font-size: 1em;
 }
 
 #cl-responsable-licencia {
