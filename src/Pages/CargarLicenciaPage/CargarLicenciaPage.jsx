@@ -27,7 +27,7 @@ const CargarLicenciaPage = () => {
 
   const postDatosLicencia = () => {
     //validar data
-    //hacer el post
+    //saveLicencia(datosLicenciaNueva)
     alert(datosLicenciaNueva);
   };
 
@@ -59,7 +59,7 @@ const CargarLicenciaPage = () => {
                 <InputLabel id="cl-demo-select-small">
                   TIPO DE LICENCIA
                 </InputLabel>
-                <Select labelId="cl-demo-select-small" value="None">
+                <Select labelId="cl-demo-select-small" value="None" name="type" onChange={handleChange}>
                   <MenuItem value="None">
                     <em>SELECCIONE EL MOTIVO</em>
                   </MenuItem>
@@ -99,10 +99,12 @@ const CargarLicenciaPage = () => {
             <div>
               <Typography variant="h6">DESCRIPCION</Typography>
               <textarea
-                placeholder="Viaje al centro de la tierra"
+                placeholder="Ingresa más información acerca de la licencia."
                 rows="4"
                 cols="50"
                 className="cl-textarea"
+                name="description" 
+                onChange={handleChange}
               ></textarea>
             </div>
           </section>
@@ -118,6 +120,7 @@ const CargarLicenciaPage = () => {
               variant="contained"
               id="cl-boton-licencia"
               sx={{ width: "fit-content", padding: "1em 2.5em" }}
+              onClick={postDatosLicencia}
             >
               SOLICITAR APROBACION
             </Button>
