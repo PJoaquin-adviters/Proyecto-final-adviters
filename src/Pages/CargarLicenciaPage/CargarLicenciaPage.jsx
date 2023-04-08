@@ -59,7 +59,12 @@ const CargarLicenciaPage = () => {
                 <InputLabel id="cl-demo-select-small">
                   TIPO DE LICENCIA
                 </InputLabel>
-                <Select labelId="cl-demo-select-small" value="None" name="type" onChange={handleChange}>
+                <Select
+                  labelId="cl-demo-select-small"
+                  value="None"
+                  name="type"
+                  onChange={handleChange}
+                >
                   <MenuItem value="None">
                     <em>SELECCIONE EL MOTIVO</em>
                   </MenuItem>
@@ -80,11 +85,11 @@ const CargarLicenciaPage = () => {
               <div>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">DESDE</Typography>
-                  <input type="date" name="startDate" onChange={handleChange}/>
+                  <input type="date" name="startDate" onChange={handleChange} />
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>
-                  <input type="date" name="endDate" onChange={handleChange}/>
+                  <input type="date" name="endDate" onChange={handleChange} />
                 </span>
               </div>
               <ButtonGroup
