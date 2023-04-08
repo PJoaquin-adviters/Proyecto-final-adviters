@@ -38,7 +38,7 @@ const CargarLicenciaPage = () => {
         <main id="cl-contenedor">
           <section id="cl-titulo">
             <div>
-              <Avatar alt="scaloni" src={scaloni} />
+              <Avatar alt="scaloni" src={scaloniUrl} />
               <Typography variant="overline">Ricky</Typography>
             </div>
             <div>
@@ -79,18 +79,12 @@ const CargarLicenciaPage = () => {
             <div id="cl-fecha-licencia">
               <div>
                 <span className="cl-calendario-widget">
-                  <span>{"Septiembre"}</span>
-                  <span>
-                    {21}
-                    {" Lunes"}
-                  </span>
+                  <Typography variant="overline">DESDE</Typography>
+                  <input type="date" name="startDate" onChange={handleChange}/>
                 </span>
                 <span className="cl-calendario-widget">
-                  <span>{"Septiembre"}</span>
-                  <span>
-                    {21}
-                    {" Lunes"}
-                  </span>
+                  <Typography variant="overline">HASTA</Typography>
+                  <input type="date" name="endDate" onChange={handleChange}/>
                 </span>
               </div>
               <ButtonGroup
@@ -117,7 +111,7 @@ const CargarLicenciaPage = () => {
               Aprobación a cargo de:
             </Typography>
             <div id="cl-contenedor-usuario">
-              <Avatar alt="avatar-usuario" src={scaloni} />
+              <Avatar alt="avatar-usuario" src={scaloniUrl} />
               <Typography variant="overline">LIONEL SCALONI</Typography>
             </div>
             <Button
