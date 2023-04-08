@@ -103,7 +103,7 @@ const CargarLicenciaPage = () => {
                 rows="4"
                 cols="50"
                 className="cl-textarea"
-                name="description" 
+                name="description"
                 onChange={handleChange}
               ></textarea>
             </div>
@@ -131,12 +131,12 @@ const CargarLicenciaPage = () => {
       <Grid xs={12} lg={4}>
         <aside>
           <Lista titulo="Detalle de Vacaciones">
-            <>
-            {/* la idea sería hacer acá el map del get, conseguir la data y después hacer un map por cada elemento. con el fin de renderizar cada caso particular */}
-            <ListItemCargaLicencia></ListItemCargaLicencia>
-            <ListItemCargaLicencia></ListItemCargaLicencia>
-            <ListItemCargaLicencia></ListItemCargaLicencia>
-            </>
+              <ListItemCargaLicencia
+                type="licencia medica"
+                totalDiasDisponibles={20}
+                startDate="12/01"
+                endDate="13/01"
+              ></ListItemCargaLicencia>
           </Lista>
         </aside>
       </Grid>

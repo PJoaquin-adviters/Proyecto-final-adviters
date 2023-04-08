@@ -3,15 +3,8 @@ import "./ListItemCargaLicencia.css"
 import { Typography } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create';
 
-const ListItemCargaLicencia = () => {
-    let type = "" || "licencia medica";
-    //este campo no lo tiene la API
-    let totalDiasTomados = 0;
-    let startDate = "";
-    let endDate = "";
-    //acá habría que hacer una resta entre dates
-    let totalDias = endDate - startDate || "";
-
+const ListItemCargaLicencia = ({type, totalDiasDisponibles, startDate, endDate}) => {
+    const totalDiasTomados = endDate - startDate;
     const coloresIconoLicencia = {      
         "vacaciones" : "purple", 
         "dias estudio" : "yellow",
@@ -21,16 +14,16 @@ const ListItemCargaLicencia = () => {
   return (
     <div id='contenedor-item-cargar-licencia' style={{borderLeftColor: `${coloresIconoLicencia[type]}`}}>
         <span>
-            <Typography variant="subtitle2">{type || "Vacaciones"}</Typography>
-            <p className='item-cl-texto-secundario'>dias totales: <b>{totalDias || 1}</b></p>
+            <Typography variant="subtitle2">{type}</Typography>
+            <p className='item-cl-texto-secundario'>dias totales: <b>{totalDiasDisponibles}</b></p>
             <p className='item-cl-motivo'> 
             <span className='item-cl-icono' style={{backgroundColor : `${coloresIconoLicencia[type]}`}}></span> 
-            {type || "Licencia Médica"}
+            {type}
             </p>
         </span>
         <span>
-            <p className='item-cl-texto-secundario'>dias tomados: <b>{totalDiasTomados || 1}</b></p>
-            <p className='item-cl-fecha'><b>{startDate || "12/01"}</b> - <b>{endDate || "13/01"}</b></p>
+            <p className='item-cl-texto-secundario'>dias tomados: <b>{totalDiasTomados}</b></p>
+            <p className='item-cl-fecha'><b>{startDate}</b> - <b>{endDate}</b></p>
         </span>
         <span>
             <CreateIcon></CreateIcon>
