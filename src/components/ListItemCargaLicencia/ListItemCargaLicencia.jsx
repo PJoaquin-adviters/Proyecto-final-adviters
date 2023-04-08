@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create';
 
 const ListItemCargaLicencia = () => {
-    let type = "";
+    let type = "" || "licencia medica";
     //este campo no lo tiene la API
     let totalDiasTomados = 0;
     let startDate = "";
@@ -19,7 +19,7 @@ const ListItemCargaLicencia = () => {
     }
 
   return (
-    <div id='contenedor-item-cargar-licencia'>
+    <div id='contenedor-item-cargar-licencia' style={{borderLeftColor: `${coloresIconoLicencia[type]}`}}>
         <span>
             <Typography variant="subtitle2">{type || "Vacaciones"}</Typography>
             <p className='item-cl-texto-secundario'>dias totales: <b>{totalDias || 1}</b></p>
