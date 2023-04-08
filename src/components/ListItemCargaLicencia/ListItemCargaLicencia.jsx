@@ -11,6 +11,10 @@ const ListItemCargaLicencia = ({type, totalDiasDisponibles, startDate, endDate})
         "licencia medica" : "blue"
     }
 
+    const editarLicencia = () => {
+        alert("editar licencia");
+    }
+
   return (
     <div id='contenedor-item-cargar-licencia' style={{borderLeftColor: `${coloresIconoLicencia[type]}`}}>
         <span>
@@ -26,7 +30,7 @@ const ListItemCargaLicencia = ({type, totalDiasDisponibles, startDate, endDate})
             <p className='item-cl-fecha'><b>{startDate}</b> - <b>{endDate}</b></p>
         </span>
         <span>
-            <CreateIcon></CreateIcon>
+            <CreateIcon onClick={editarLicencia} id="icono-lapiz"></CreateIcon>
         </span>
     </div>
   )

@@ -42,3 +42,8 @@
     font-size: 0.85em;
     color: rgba(255, 0, 0, 0.63);
 }
+
+#contenedor-item-cargar-licencia #icono-lapiz:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
