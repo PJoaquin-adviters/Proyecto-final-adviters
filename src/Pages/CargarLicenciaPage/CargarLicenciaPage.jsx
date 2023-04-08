@@ -8,7 +8,7 @@ import {
   ButtonGroup,
   Button,
   Typography,
-  Grid
+  Grid,
 } from "@mui/material";
 import Lista from "../../components/lista/Lista";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
@@ -18,7 +18,6 @@ import "./CargarLicenciaStyle.css";
 const CargarLicenciaPage = () => {
   const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
   // const datosUsuario = getDatosUsuario();
-
 
   const handleChange = (e) => {
     datosLicenciaNueva[e.target.name] = e.target.value;
@@ -34,7 +33,7 @@ const CargarLicenciaPage = () => {
   return (
     //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
     <Grid container padding={2} justifyContent={"space-around"}>
-      <Grid xs={12} lg={7} >
+      <Grid xs={12} lg={7}>
         <main id="cl-contenedor">
           <section id="cl-titulo">
             <div>
@@ -97,8 +96,8 @@ const CargarLicenciaPage = () => {
                 size="small"
                 color="primary"
               >
-                <Button>{8} dias laborales.</Button>
-                <Button>{24} dias disponibles</Button>
+                <Button disabled>{8} dias laborales.</Button>
+                <Button disabled>{24} dias disponibles</Button>
               </ButtonGroup>
             </div>
             <div>
