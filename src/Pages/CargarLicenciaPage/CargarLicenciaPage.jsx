@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Badge,
@@ -7,15 +7,13 @@ import {
   InputLabel,
   ButtonGroup,
   Button,
-  DatePicker,
-  DateRangePicker,
   Typography,
-  Grid,
+  Grid
 } from "@mui/material";
-import scaloni from "./scaloni.jpg";
-import "./CargarLicenciaStyle.css";
 import Lista from "../../components/lista/Lista";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
+import scaloniUrl from "./scaloni.jpg";
+import "./CargarLicenciaStyle.css";
 
 const CargarLicenciaPage = () => {
   const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
