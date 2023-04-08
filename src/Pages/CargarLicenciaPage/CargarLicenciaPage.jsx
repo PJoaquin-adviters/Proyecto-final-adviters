@@ -18,6 +18,21 @@ import Lista from "../../components/lista/Lista";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 
 const CargarLicenciaPage = () => {
+  const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
+  // const datosUsuario = getDatosUsuario();
+
+
+  const handleChange = (e) => {
+    datosLicenciaNueva[e.target.name] = e.target.value;
+    console.log(datosLicenciaNueva);
+  };
+
+  const postDatosLicencia = () => {
+    //validar data
+    //hacer el post
+    alert(datosLicenciaNueva);
+  };
+
   return (
     //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
     <Grid container padding={2} justifyContent={"space-around"}>
