@@ -63,7 +63,7 @@ const UserPage = () => {
       <form className="form-user">
         <div>
           <Typography variant="h2" align="left">
-            Mi Perfil
+            {isNew ? "Crear Usuario" : "Editar Usuario"}
           </Typography>
         </div>
         <section className="input-section">
