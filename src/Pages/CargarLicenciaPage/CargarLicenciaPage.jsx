@@ -33,8 +33,8 @@ const CargarLicenciaPage = () => {
   return (
     //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
     <Grid container padding={2} justifyContent={"space-around"}>
-      <Grid xs={12} lg={7}>
-        <form id="cl-contenedor">
+      <Grid item xs={12} lg={7}>
+        <main id="cl-contenedor">
           <section id="cl-titulo">
             <div>
               <Avatar alt="scaloni" src={scaloniUrl} />
@@ -129,10 +129,10 @@ const CargarLicenciaPage = () => {
               SOLICITAR APROBACION
             </Button>
           </section>
-        </form>
+        </main>
       </Grid>
 
-      <Grid xs={12} lg={4}>
+      <Grid item xs={12} lg={4}>
         <aside>
           <Lista titulo="Detalle de Vacaciones">
               <ListItemCargaLicencia
