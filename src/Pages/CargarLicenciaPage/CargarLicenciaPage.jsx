@@ -34,7 +34,7 @@ const CargarLicenciaPage = () => {
     //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
     <Grid container padding={2} justifyContent={"space-around"}>
       <Grid xs={12} lg={7}>
-        <main id="cl-contenedor">
+        <form id="cl-contenedor">
           <section id="cl-titulo">
             <div>
               <Avatar alt="scaloni" src={scaloniUrl} />
@@ -60,7 +60,7 @@ const CargarLicenciaPage = () => {
                 </InputLabel>
                 <Select
                   labelId="cl-demo-select-small"
-                  value="None"
+                  defaultValue="None"
                   name="type"
                   onChange={handleChange}
                 >
@@ -129,7 +129,7 @@ const CargarLicenciaPage = () => {
               SOLICITAR APROBACION
             </Button>
           </section>
-        </main>
+        </form>
       </Grid>
 
       <Grid xs={12} lg={4}>
