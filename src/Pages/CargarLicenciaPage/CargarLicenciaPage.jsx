@@ -17,21 +17,44 @@ import "./CargarLicenciaStyle.css";
 
 const CargarLicenciaPage = () => {
   const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
+  const [erroresLicenciaNueva, setErroresLicenciaNueva] = useState([]);
+
   // const datosUsuario = getDatosUsuario();
 
   const handleChange = (e) => {
-    datosLicenciaNueva[e.target.name] = e.target.value;
+    const {name, value} = e.target;
+    datosLicenciaNueva[name] = value;
     console.log(datosLicenciaNueva);
   };
 
   const postDatosLicencia = () => {
-    //validar data
+    validarDatos(datosLicenciaNueva);
     //saveLicencia(datosLicenciaNueva)
     alert(datosLicenciaNueva);
   };
 
+  const validarDatos = (datosLicenciaNueva) => {
+    const errores= [];
+
+    if(datosLicenciaNueva.type === undefined){
+      errores.push("Debes seleccionar el tipo de licencia.")
+    }
+
+    if(datosLicenciaNueva.startDate < datosLicenciaNueva.endDate){
+      errores.push("La fecha de inicio debe ser anterior a la fecha de finalización.")
+    }
+
+    if(datosLicenciaNueva.description === undefined){
+      errores.push("Debes ingresar información a la descripción")
+    } else if (datosLicenciaNueva.description.length > 300){
+      errores.push("No debes ingresar más que 300 carácteres.")
+    }
+
+    setErroresLicenciaNueva(errores);
+    alert(erroresLicenciaNueva)
+  }
+
   return (
-    //el grid es de 12. Entonces, puse lg -> 8 para que un espacio sobre y pueda ser usado como un distanciamiento parejo entre el container principal y la lista
     <Grid container padding={2} justifyContent={"space-around"}>
       <Grid item xs={12} lg={7}>
         <main id="cl-contenedor">
@@ -64,7 +87,7 @@ const CargarLicenciaPage = () => {
                   name="type"
                   onChange={handleChange}
                 >
-                  <MenuItem value="None">
+                  <MenuItem value="None" disabled>
                     <em>SELECCIONE EL MOTIVO</em>
                   </MenuItem>
                   <MenuItem value={"licencia medica"}>Licencia médica</MenuItem>
