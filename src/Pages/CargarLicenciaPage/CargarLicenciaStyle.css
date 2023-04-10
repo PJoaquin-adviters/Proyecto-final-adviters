@@ -1,101 +1,79 @@
-main {
-    padding-top: 100px
-}
-
 #cl-contenedor {
-    border: 1px solid gray;
-    border-radius: 20px;
-    padding: 3em;
-    display: flex;
-    gap: 3em;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 3em;
+  display: flex;
+  gap: 2em;
 }
 
 #cl-contenedor #cl-titulo {
-   display: flex; 
-   justify-content: space-between;
-   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 #cl-contenedor #cl-titulo b {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 #cl-carga-licencia {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
 
 #cl-carga-licencia div:first-child {
-    display: flex;
-    text-align: left;
-    justify-content: space-around;
+  display: flex;
+  text-align: left;
+  justify-content: space-around;
 }
 
 #cl-fecha-licencia {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-}
-
-.cl-calendario-widget {
-    display: flex;
-    flex-direction: column;
-    max-width: 50%;
-    border: 1px solid gray;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.cl-calendario-widget span:first-child {
-background-color: rgb(218, 60, 60);
-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
 }
 
 #cl-grupo-botones-licencia {
-    display: block;
+  display: block;
 }
 
-#cl-fecha-licencia .cl-calendario-widget span {
-    padding: 1em 0.5em;
+#cl-fecha-licencia div span{
+  display: block;
+  padding-inline: 2em;
+}
+
+#cl-fecha-licencia div span input {
+  padding: 1em 0.5em;
+  font-size: 1em;
 }
 
 #cl-responsable-licencia {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1em;
 }
 
-#cl-responsable-licencia>p {
-    color: gray;
-    align-self: flex-start;
+#cl-responsable-licencia > p {
+  color: gray;
+  align-self: flex-start;
 }
 
 #cl-contenedor-usuario {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-}
-
-#cl-contenedor-usuario p {
-    display: inline-block;
-    color: orange;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .cl-textarea {
-    width: 70%;
-    min-height: 20em;
-    padding: 2em;
-    resize: none;
-    color: gray;
-    font-size: 1em;
+  width: 70%;
+  min-height: 20em;
+  padding: 2em;
+  resize: none;
+  color: gray;
+  font-size: 1em;
 }
-
-#cl-boton-licencia {
-    align-self: flex-end;
-}
-

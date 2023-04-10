@@ -1,0 +1,49 @@
+#contenedor-item-cargar-licencia{
+    padding: 1em;
+    border-bottom: 1px solid gray;
+    border-left: 0.5em solid black;
+    display: flex;
+    gap: 1em
+}
+
+#contenedor-item-cargar-licencia span{
+    width: 40%;
+    text-align: left;
+}
+
+#contenedor-item-cargar-licencia span:last-of-type{
+    width: 10%;
+    text-align: left;
+    color: grey;
+    align-self: center;
+}
+
+#contenedor-item-cargar-licencia  .item-cl-texto-secundario{
+    font-size: 0.82em;
+    color: gray;
+    margin-bottom: 0.4em;
+}
+
+#contenedor-item-cargar-licencia .item-cl-motivo{
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+#contenedor-item-cargar-licencia .item-cl-icono {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: black;
+    border-radius: 50%;
+    margin-right: 0.3em;
+}
+
+#contenedor-item-cargar-licencia .item-cl-fecha {
+    font-size: 0.85em;
+    color: rgba(255, 0, 0, 0.63);
+}
+
+#contenedor-item-cargar-licencia #icono-lapiz:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
