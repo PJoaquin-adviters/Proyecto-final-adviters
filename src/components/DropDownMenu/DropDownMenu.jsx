@@ -6,11 +6,15 @@ import MenuItem from "@mui/material/MenuItem";
 const CustomizedMenus = ({ name, botonIcono, listItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const redirect = (path, title) => {
+    window.location.href = `${path}?title=${title.toUpperCase()}`
+  }
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (e) => {
     setAnchorEl(null);
   };
   return (
@@ -41,7 +45,7 @@ const CustomizedMenus = ({ name, botonIcono, listItems }) => {
         {listItems.map((el, index) => (
           <MenuItem
             key={`${name}-${index}`}
-            onClick={handleClose}
+            onClick={() => redirect(el.path, el.text)}
             sx={{
               display: "flex",
               gap: "20px",

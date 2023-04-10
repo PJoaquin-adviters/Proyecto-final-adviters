@@ -7,6 +7,8 @@ import CargarLicenciaPage from "./Pages/CargarLicenciaPage/CargarLicenciaPage";
 import User from "./Pages/UserPage/UserPage";
 import Weather from "./components/Weather/Weather";
 import DashboardPage from "./Pages/DashboardPage/DashboardPage";
+import CalendarPage from "./Pages/CalendarPage/CalendarPage";
+import AdministrarUsuariosPage from "./Pages/AdministrarUsuariosPage/AdministrarUsuariosPage";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route index element={<DashboardPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user" element={<User />} />
+            <Route path="/administrarUsuarios" element={<AdministrarUsuariosPage />} />
+            <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
             <Route path="*" element={<h1>LA PÁGINA NO EXISTE</h1>} />
           </Route>

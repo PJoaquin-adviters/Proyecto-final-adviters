@@ -21,18 +21,32 @@ const Header = () => {
     </Avatar>
   );
 
+  const getTitle = () => {
+    const query = new URLSearchParams(window.location.search)
+    return query.get("title");
+
+  }
+
+  const redirect = (evento) => {
+    console.log(evento.target)
+    //window.location.href = `${path}?title=${title}`
+  }
+
   const itemListHam = [
     {
       icono: <BarChartIcon />,
       text: "Dashboard",
+      path: '/'
     },
     {
       icono: <CalendarTodayRoundedIcon />,
-      text: "Cargar licencias",
+      text: "Cargar Licencias",
+      path: '/cargarLicencia'
     },
     {
       icono: <CalendarTodayRoundedIcon />,
-      text: "Administrar usuarios",
+      text: "Administrar Usuarios",
+      path: '/administrarUsuarios'
     },
   ];
   const notificationList = [
@@ -68,12 +82,14 @@ const Header = () => {
   return (
     <>
       <AppBar position="fixed" color="transparent">
-        <Toolbar sx={{backgroundColor:"white"}}>
+
+        <Toolbar sx={{ backgroundColor: "white" }}>
           <DropDownMenu
             name="ham"
             botonIcono={<MenuIcon />}
             listItems={itemListHam}
           />
+          <h2 style={{ width: '100%', textAlign: 'center' }}>{getTitle()}</h2>
           <nav className="nav-header">
             <DropDownMenu
               name="notification"

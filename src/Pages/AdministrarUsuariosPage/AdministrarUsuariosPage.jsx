@@ -31,7 +31,7 @@ const AdministrarUsuariosPage = () => {
   useEffect(() => getData(), []);
 
   return (
-    <div style={Styles.container}>
+    <div>
       {!userList ? (
         <Loading />
       ) : (
