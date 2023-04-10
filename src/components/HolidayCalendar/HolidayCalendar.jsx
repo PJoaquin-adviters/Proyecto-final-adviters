@@ -51,7 +51,7 @@ function ServerDay(props) {
     <Badge
       key={props.day.toString()}
       overlap="circular"
-      badgeContent={isSelected ? <EventIcon /> : undefined}
+      badgeContent={isSelected ? <EventIcon color="warning" /> : undefined}
     >
       <PickersDay
         {...other}
