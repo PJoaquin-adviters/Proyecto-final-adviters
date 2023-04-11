@@ -19,7 +19,10 @@ function App() {
             <Route index element={<DashboardPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user" element={<User />} />
-            <Route path="/administrarUsuarios" element={<AdministrarUsuariosPage />} />
+            <Route
+              path="/administrarUsuarios"
+              element={<AdministrarUsuariosPage />}
+            />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
             <Route path="*" element={<h1>LA PÁGINA NO EXISTE</h1>} />
