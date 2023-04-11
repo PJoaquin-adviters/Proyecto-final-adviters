@@ -1,0 +1,20 @@
+.lista-dashboard-container {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+
+}
+
+.lista-dashboard {
+    width: 450px;
+}
+
+.btn-check-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
