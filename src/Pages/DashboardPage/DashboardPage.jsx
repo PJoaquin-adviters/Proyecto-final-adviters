@@ -10,7 +10,7 @@ const DashboardPage = () => {
   const solicitudesPendientes = [{
     "username": "flex",
     "lastname": "joe",
-    "img": "fgdfg",
+    "img": null,
     "startDate": "2023-02-18",
     "endDate": "2023-02-18",
     "type": "Vacaciones"

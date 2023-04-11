@@ -16,7 +16,7 @@ const ListItemSolicitudes = ({ data, displayIconos }) => {
     return (
         <ListItem alignItems="flex-start" sx={{ display: "flex", alignItems: "center" }} divider={true} >
             <ListItemAvatar>
-                <Avatar alt={data.username} src={pictureNotFound} />
+                <Avatar alt={data.username} src={data.img ? data.img : pictureNotFound} />
             </ListItemAvatar>
             <ListItemText
                 primary={
