@@ -27,14 +27,9 @@ const Header = () => {
 
   }
 
-  const redirect = (evento) => {
-    console.log(evento.target)
-    //window.location.href = `${path}?title=${title}`
-  }
-
   const itemListHam = [
     {
-      icono: <BarChartIcon />,
+      icono: <BarChartIcon color="primary" />,
       text: "Dashboard",
       path: '/'
     },
@@ -44,9 +39,14 @@ const Header = () => {
       path: '/cargarLicencia'
     },
     {
-      icono: <CalendarTodayRoundedIcon />,
+      icono: <GroupsRoundedIcon color="error" />,
       text: "Administrar Usuarios",
       path: '/administrarUsuarios'
+    },
+    {
+      icono: <CalendarTodayRoundedIcon />,
+      text: "Mantenimiento de Calendario",
+      path: '/calendar'
     },
   ];
   const notificationList = [
