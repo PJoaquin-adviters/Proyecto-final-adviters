@@ -7,9 +7,11 @@ import "./UserPage.css";
 import pictureNotFound from "../../assets/img/user-not-found.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Loading from "../../components/Loading/Loading";
+import { getUserRoles } from "../../services/UsersService";
 
 const UserPage = () => {
   // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
+  
   const initData = {
     name: "joa",
     lastname: "par",

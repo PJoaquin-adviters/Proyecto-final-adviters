@@ -11,3 +11,7 @@ export const getLicenseTypes = () => httpRequest.get('/licenses/types')
 
 //GET LICENSE TYPES
 export const updateLicenseState = (licenseId, state) => httpRequest.post(`/licenses/${licenseId}`, {state})
+
+export default methods = {
+    newLicense, getLicenses, getLicenseTypes, updateLicenseState
+}
