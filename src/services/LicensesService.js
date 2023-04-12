@@ -8,3 +8,6 @@ export const getLicenses = (queryParams) => httpRequest.get(`/licenses?${queryPa
 
 //GET LICENSE TYPES
 export const getLicenseTypes = () => httpRequest.get('/licenses/types')
+
+//GET LICENSE TYPES
+export const updateLicenseState = (licenseId, state) => httpRequest.post(`/licenses/${licenseId}`, {state})
