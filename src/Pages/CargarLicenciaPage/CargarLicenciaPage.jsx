@@ -14,11 +14,10 @@ import Lista from "../../components/lista/Lista";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 import scaloniUrl from "./scaloni.jpg";
 import "./CargarLicenciaStyle.css";
+import { newLicense } from "../../utils/LicensesUtils";
 
 const CargarLicenciaPage = () => {
   const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
-  const [erroresLicenciaNueva, setErroresLicenciaNueva] = useState([]);
-
   // const datosUsuario = getDatosUsuario();
 
   const handleChange = (e) => {
@@ -28,33 +27,14 @@ const CargarLicenciaPage = () => {
   };
 
   const postDatosLicencia = () => {
-    validarDatos(datosLicenciaNueva);
-    //saveLicencia(datosLicenciaNueva)
-    alert(datosLicenciaNueva);
+    try {
+    newLicense(datosLicenciaNueva);
+    } catch (errores) {
+      errores.map(err=>{alert(err)});
+    }
   };
 
-  const validarDatos = (datosLicenciaNueva) => {
-    const errores= [];
-
-    if(datosLicenciaNueva.type === undefined){
-      errores.push("Debes seleccionar el tipo de licencia.")
-    }
-
-    if(datosLicenciaNueva.startDate < datosLicenciaNueva.endDate){
-      errores.push("La fecha de inicio debe ser anterior a la fecha de finalización.")
-    }
-
-    if(datosLicenciaNueva.description === undefined){
-      errores.push("Debes ingresar información a la descripción")
-    } else if (datosLicenciaNueva.description.length > 300){
-      errores.push("No debes ingresar más que 300 carácteres.")
-    }
-
-    setErroresLicenciaNueva(errores);
-    alert(erroresLicenciaNueva)
-  }
-
-  return (
+   return (
     <Grid container padding={2} justifyContent={"space-around"}>
       <Grid item xs={12} lg={7}>
         <main id="cl-contenedor">
