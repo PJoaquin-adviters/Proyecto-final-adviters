@@ -11,7 +11,9 @@ export const getLicensesInDateRange = (from, to) => LicensesService.getLicenses(
 export const newLicense = (data) => {
 
     const errors = [];
-    if (data.name.length > 50) errors.push("El nombre es inválido")
+    const formatoFechaEsValido = (fecha) =>{
+        return /^(?:(?:(?:0?[13578]|1[02])(\/)31)\1|(?:(?:0?[1,3-9]|1[0-2])(\/)(?:29|30)\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:0?2(\/)29\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\/)(?:0?[1-9]|1\d|2[0-8])\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(fecha);
+    }
     const getTotalDiasLicencia = (fechaInicio, fechaFin) => {
         const diferenciaDiasMilisegundos = Math.abs(fechaInicio - fechaFin);
         const totalDiasLicencia = Math.ceil(diferenciaDiasMilisegundos / (1000 * 60 * 60 * 24)); 
