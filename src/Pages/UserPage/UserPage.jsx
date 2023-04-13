@@ -8,32 +8,60 @@ import pictureNotFound from "../../assets/img/user-not-found.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Loading from "../../components/Loading/Loading";
 import { getUserRoles } from "../../services/UsersService";
+import { newUser } from "../../utils/UsersUtils";
 
 const UserPage = () => {
   // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
+
+  //verificar que la contraseña se repita?
   
   const initData = {
-    name: "joa",
-    lastname: "par",
-    dni: "39054656",
-    date: "1996-02-18",
-    ciul: "339999999",
-    password: "password",
-    admissionDate: "1996-02-18",
-    email: "joa@par",
-    telephone: "1132328090",
-    street: "calle joa",
-    streetNumber: "123",
-    postalCode: "1223",
-    tower: "1",
-    floor: "3",
-    apartment: "12",
-    location: "Capital",
-    province: "Buenos aires",
-    country: "Argentina",
-    holiday: 12,
-    idAdmin: false,
-    supervisorId: 3,
+    //id?
+    name: "",
+    lastname: "",
+    password: "",
+    //chequear eso
+    mail: "",
+    phone: "",
+    floor: "",
+    apartment: "",
+    street: "",
+    Street_number: "",
+    Postal_code: "",
+    tower: "",
+    town: "",
+    state: "",
+    country: "",
+    Profile_picture: "",
+    Role_id: "0",
+    Birth_date: "",
+    Start_working_date: "",
+    dni: "",
+    cuil: "",
+    Vacation_days: "",
+    Available_vacations_days: "",
+    Available_study_days: "",
+    supervisor: null,
+    //
+    Created_at:"",
+    Created_by:"",
+    Updated_at: "",
+    Updated_by: "",
+    Deleted_at: "", 
+
+
+
+    //arreglar los campos del input
+    //arreglar las validaciones para cada input 
+    //arreglar que se vean los problemas
+
+    //////tenemos que referenciar al obj del supervisor (tipo, a la data) para poder acceder a eso
+    //primero con los inputs, después completamos todo el objeto agarrando datos de los otros objetos.
+
+//    admissionDate: "",
+//    location: "",
+//    province: "",
+    holiday: 0,
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]
@@ -44,10 +72,13 @@ const UserPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [rePassword, setRePassword] = useState(userInfo?.password);
 
+  //
+  const [errores, setErrores] = useState(null);
+
   useEffect(() => {
     // si es true traemos los datos del usuario desde llamando a una funcion en service
     // isNew && setUserInfo({});
-    if (isNew) setUserInfo({});
+    if (isNew) setUserInfo(initData);
     else {
       setTimeout(() => {
         setUserInfo({});
@@ -57,13 +88,28 @@ const UserPage = () => {
 
   const handleChange = (e, inputName) => {
     const info = userInfo;
-    info[inputName] = e.value;
+    info[inputName] = e.target.value;
+    console.log(info)
     setUserInfo({ ...info });
   };
 
-  const createUser = () => {};
+  const createUser = async () => {
+    try {
+      
+      await newUser(userInfo)
 
-  const editUser = () => {};
+      
+    } catch (error) {
+      //le paso al set para ver si puedo renderizar
+      setErrores(error);
+      console.log(error);
+      
+    }
+  };
+
+  const editUser = () => {
+    let errores = newUser(userInfo);
+  };
 
   return (
     <>
@@ -81,6 +127,7 @@ const UserPage = () => {
               <div className="input-column-container">
                 <img src={pictureNotFound} className="profile-picture" alt="" />
                 <Select
+                  name=""
                   placeholder="Bajo supervisión de: "
                   indicator={<KeyboardArrowDown />}
                   sx={{
@@ -127,23 +174,23 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "lastname")}
                 />
                 <TextField
-                  id="date"
+                  id="Birth_date"
                   label="Fecha de nacimiento"
                   type="date"
                   value={userInfo?.date}
-                  onChange={(e) => handleChange(e, "date")}
+                  onChange={(e) => handleChange(e, "Birth_date")}
                 />
                 <TextField
-                  id="ciul"
-                  label="Cuil"
+                  id="cuil"
+                  label="cuil"
                   value={userInfo?.ciul}
-                  onChange={(e) => handleChange(e, "ciul")}
+                  onChange={(e) => handleChange(e, "cuil")}
                 />
                 <TextField
-                  id="telephone"
-                  label="Telefono"
+                  id="phone"
+                  label="phone"
                   value={userInfo?.telephone}
-                  onChange={(e) => handleChange(e, "telephone")}
+                  onChange={(e) => handleChange(e, "phone")}
                 />
               </div>
               <div className="input-column-container">
@@ -162,11 +209,11 @@ const UserPage = () => {
                   onChange={(e) => setRePassword(e.value)}
                 />
                 <TextField
-                  id="admissionDate"
+                  id="Start_working_date"
                   label="Fecha de ingreso"
                   type="date"
-                  value={userInfo?.admissionDate}
-                  onChange={(e) => handleChange(e, "admissionDate")}
+                  value={userInfo?.Start_working_date}
+                  onChange={(e) => handleChange(e, "Start_working_date")}
                 />
               </div>
             </section>
@@ -185,10 +232,10 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "tower")}
                 />
                 <TextField
-                  id="location"
+                  id="town"
                   label="Localidad"
-                  value={userInfo?.location}
-                  onChange={(e) => handleChange(e, "location")}
+                  value={userInfo?.town}
+                  onChange={(e) => handleChange(e, "town")}
                 />
                 <TextField
                   id="supervisorId"
@@ -197,18 +244,18 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "supervisorId")}
                 />
                 <TextField
-                  id="holiday"
+                  id="Vacation_days"
                   label="Dias vacaciones"
-                  value={userInfo?.holiday}
-                  onChange={(e) => handleChange(e, "holiday")}
+                  value={userInfo?.Vacation_days}
+                  onChange={(e) => handleChange(e, "Vacation_days")}
                 />
               </div>
               <div className="input-column-container">
                 <TextField
-                  id="streetNumber"
+                  id="Street_number"
                   label="Altura"
                   value={userInfo?.streetNumber}
-                  onChange={(e) => handleChange(e, "streetNumber")}
+                  onChange={(e) => handleChange(e, "Street_number")}
                 />
                 <TextField
                   id="outlined-required"
@@ -216,10 +263,10 @@ const UserPage = () => {
                   defaultValue="1"
                 />
                 <TextField
-                  id="province"
-                  label="Provincia"
-                  value={userInfo?.province}
-                  onChange={(e) => handleChange(e, "province")}
+                  id="state"
+                  label="state"
+                  value={userInfo?.state}
+                  onChange={(e) => handleChange(e, "state")}
                 />
               </div>
               <div className="input-column-container">
@@ -244,6 +291,16 @@ const UserPage = () => {
               </div>
             </section>
 
+            <div className="UserPageErrors">
+            {
+              errores&& (
+                errores.map((err, index) => 
+                  <p key={index}>{err}</p>
+                )
+              )
+            }
+            </div>
+
             <Box
               sx={{
                 display: "flex",
@@ -263,6 +320,7 @@ const UserPage = () => {
           </form>
         </section>
       )}
+
     </>
   );
 };

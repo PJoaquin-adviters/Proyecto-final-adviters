@@ -38,3 +38,21 @@
 .input-column-container img {
   width: 170px;
 }
+
+.UserPageErrors{
+  background-color: rgb(255, 106, 106);
+  border: 2px solid rgba(139, 0, 0, 0.514);
+  border-radius: 10px;
+} 
+
+.UserPageErrors p{
+  padding-bottom: 1em;
+}
+
+.UserPageErrors p:first-of-type{
+  padding-top: 2em;
+}
+
+.UserPageErrors p:last-of-type{
+padding-bottom: 2em;
+}

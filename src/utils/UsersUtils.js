@@ -22,9 +22,9 @@ export const newUser = (data) => {
     if (! /^[a-zA-Z]+$/.test(data.name)) errors.push("El nombre solo debe contener letras.");
     
         
-    if (data.lastname.length > 30) errors.push("El nombre debe contener menos que 30 carácteres");
+    if (data.lastname.length > 30) errors.push("El apellido debe contener menos que 30 carácteres");
     
-    if (! /^[a-zA-Z]+$/.test(data.lastname)) errors.push("El nombre solo debe contener letras.");
+    if (! /^[a-zA-Z]+$/.test(data.lastname)) errors.push("El apellido solo debe contener letras.");
     
     
     
@@ -100,7 +100,7 @@ export const newUser = (data) => {
     
     //role id
     
-    if(data.role_id.length <= 0) errors.push("Debe ingresar un rol para el usuario.");
+    if(data.Role_id.length <= 0) errors.push("Debe ingresar un rol para el usuario.");
     
     
     
@@ -110,21 +110,20 @@ export const newUser = (data) => {
     
     
     
-    if (data.Vacations_days <0 ) errors.push("Los dias de vacaciones deben ser 0 o un numero mayor.");
+    if (data.Vacation_days <0 ) errors.push("Los dias de vacaciones deben ser 0 o un numero mayor.");
     
-    if (data.Vacations_days.trim().length >0 ) errors.push("Debe ingresar dias de vacaciones.");
-    
-    
-    
-    
-    if (data.supervisor.trim().length === 0) errors.push("Debe seleccionar un supervisor para el usuario.");
+    if (data.Vacation_days.trim().length >0 ) errors.push("Debe ingresar dias de vacaciones.");
     
     
     
     
+    if (data.supervisor === null) errors.push("Debe seleccionar un supervisor para el usuario.");
     
-    if (errors.length > 0) throw new Error(errors)
     
-    else return UsersService.newUser(data)
+    
+    
+    if(errors.length > 0) throw errors;
+    
+    //else return UsersService.newUser(data)
     
 }
