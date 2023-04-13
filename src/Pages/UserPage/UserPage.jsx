@@ -61,7 +61,6 @@ const UserPage = () => {
 //    admissionDate: "",
 //    location: "",
 //    province: "",
-    holiday: 0,
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]
