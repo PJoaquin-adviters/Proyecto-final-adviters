@@ -20,6 +20,9 @@ export const newLicense = (data) => {
         return totalDiasLicencia;
     }
     
+    //verifica tipo de licencias
+    if(data.licenceType.length === 0) errors.push("Debes ingresar un tipo de licencia.")
+
     //verificaciones fechas
     if (data.startDate > data.endDate) errors.push("La fecha de inicio de licencia debe ser mayor a la de finalización.");
     if (data.startDate < new Date()) errors.push("La fecha de inicio de licencia no puede haber pasado.");
