@@ -17,20 +17,31 @@ import "./CargarLicenciaStyle.css";
 import { newLicense } from "../../utils/LicensesUtils";
 
 const CargarLicenciaPage = () => {
-  const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
-  // const datosUsuario = getDatosUsuario();
+  const formInicial = {
+    type: "",
+    description: "",
+    files: "",
+    startDate: "",
+    endDate: "",
+  }
+  const [form, setForm] = useState(formInicial);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
-    datosLicenciaNueva[name] = value;
-    console.log(datosLicenciaNueva);
+    setForm({
+      ...form,
+      [name]:value
+    })
+    console.log(form);
   };
 
-  const postDatosLicencia = () => {
+  const handleSubmit = async () => {
     try {
-    newLicense(datosLicenciaNueva);
+    await newLicense(form);
     } catch (errores) {
-      errores.map(err=>{alert(err)});
+      console.log(errores);
+      // errores.foreach(err =>{ 
+      //   console.log(err)});
     }
   };
 
@@ -64,15 +75,15 @@ const CargarLicenciaPage = () => {
                 <Select
                   labelId="cl-demo-select-small"
                   defaultValue="None"
-                  name="type"
+                  name="licenceType"
                   onChange={handleChange}
                 >
                   <MenuItem value="None" disabled>
                     <em>SELECCIONE EL MOTIVO</em>
                   </MenuItem>
-                  <MenuItem value={"licencia medica"}>Licencia médica</MenuItem>
-                  <MenuItem value={"vacaciones"}>Vacaciones</MenuItem>
-                  <MenuItem value={"dias estudio"}>Dia de estudio</MenuItem>
+                  <MenuItem value={0}>Licencia médica</MenuItem>
+                  <MenuItem value={1}>Vacaciones</MenuItem>
+                  <MenuItem value={2}>Dia de estudio</MenuItem>
                 </Select>
               </span>
               <span>
@@ -127,7 +138,7 @@ const CargarLicenciaPage = () => {
               variant="contained"
               id="cl-boton-licencia"
               sx={{ width: "fit-content", padding: "1em 2.5em" }}
-              onClick={postDatosLicencia}
+              onClick={handleSubmit}
             >
               SOLICITAR APROBACION
             </Button>
