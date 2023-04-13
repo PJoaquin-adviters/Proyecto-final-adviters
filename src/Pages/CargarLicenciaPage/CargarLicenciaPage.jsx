@@ -14,47 +14,38 @@ import Lista from "../../components/lista/Lista";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 import scaloniUrl from "./scaloni.jpg";
 import "./CargarLicenciaStyle.css";
+import { newLicense } from "../../utils/LicensesUtils";
 
 const CargarLicenciaPage = () => {
-  const [datosLicenciaNueva, setDatosLicenciaNueva] = useState({});
-  const [erroresLicenciaNueva, setErroresLicenciaNueva] = useState([]);
-
-  // const datosUsuario = getDatosUsuario();
+  const formInicial = {
+    licenseType: "",
+    description: "",
+    files: "",
+    startDate: "",
+    endDate: "",
+  }
+  const [form, setForm] = useState(formInicial);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
-    datosLicenciaNueva[name] = value;
-    console.log(datosLicenciaNueva);
+    setForm({
+      ...form,
+      [name]:value
+    })
+    console.log(form);
   };
 
-  const postDatosLicencia = () => {
-    validarDatos(datosLicenciaNueva);
-    //saveLicencia(datosLicenciaNueva)
-    alert(datosLicenciaNueva);
+  const handleSubmit = async () => {
+    try {
+    await newLicense(form);
+    } catch (errores) {
+      console.log(errores);
+      // errores.foreach(err =>{ 
+      //   console.log(err)});
+    }
   };
 
-  const validarDatos = (datosLicenciaNueva) => {
-    const errores= [];
-
-    if(datosLicenciaNueva.type === undefined){
-      errores.push("Debes seleccionar el tipo de licencia.")
-    }
-
-    if(datosLicenciaNueva.startDate < datosLicenciaNueva.endDate){
-      errores.push("La fecha de inicio debe ser anterior a la fecha de finalización.")
-    }
-
-    if(datosLicenciaNueva.description === undefined){
-      errores.push("Debes ingresar información a la descripción")
-    } else if (datosLicenciaNueva.description.length > 300){
-      errores.push("No debes ingresar más que 300 carácteres.")
-    }
-
-    setErroresLicenciaNueva(errores);
-    alert(erroresLicenciaNueva)
-  }
-
-  return (
+   return (
     <Grid container padding={2} justifyContent={"space-around"}>
       <Grid item xs={12} lg={7}>
         <main id="cl-contenedor">
@@ -84,15 +75,15 @@ const CargarLicenciaPage = () => {
                 <Select
                   labelId="cl-demo-select-small"
                   defaultValue="None"
-                  name="type"
+                  name="licenseType"
                   onChange={handleChange}
                 >
                   <MenuItem value="None" disabled>
                     <em>SELECCIONE EL MOTIVO</em>
                   </MenuItem>
-                  <MenuItem value={"licencia medica"}>Licencia médica</MenuItem>
-                  <MenuItem value={"vacaciones"}>Vacaciones</MenuItem>
-                  <MenuItem value={"dias estudio"}>Dia de estudio</MenuItem>
+                  <MenuItem value={0}>Licencia médica</MenuItem>
+                  <MenuItem value={1}>Vacaciones</MenuItem>
+                  <MenuItem value={2}>Dia de estudio</MenuItem>
                 </Select>
               </span>
               <span>
@@ -147,7 +138,7 @@ const CargarLicenciaPage = () => {
               variant="contained"
               id="cl-boton-licencia"
               sx={{ width: "fit-content", padding: "1em 2.5em" }}
-              onClick={postDatosLicencia}
+              onClick={handleSubmit}
             >
               SOLICITAR APROBACION
             </Button>
