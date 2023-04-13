@@ -15,6 +15,8 @@ export const deleteUser = (userId) => httpRequest.delete(`/users/${userId}`)
 //GET USER ROLES
 export const getUserRoles = () => httpRequest.get('/users/roles')
 
-export default methods = {
+const methods = {
     getUsers, newUser, updateUser, deleteUser, getUserRoles
 }
+
+export default methods;

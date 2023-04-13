@@ -9,6 +9,8 @@ const newHoliday = (name, date) => httpRequest.post('/calendar/holidays/new', {n
 //DELETE A HOLIDAY
 const deleteHoliday = (holidayId) => httpRequest.delete(`/calendar/holidays/${holidayId}`)
 
-export default methods = {
+const methods = {
     getHolidays, newHoliday, deleteHoliday
 }
+
+export default methods;
