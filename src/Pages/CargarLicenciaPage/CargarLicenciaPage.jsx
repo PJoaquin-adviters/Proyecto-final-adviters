@@ -18,34 +18,41 @@ import { newLicense } from "../../utils/LicensesUtils";
 
 const CargarLicenciaPage = () => {
   const formInicial = {
-    licenseType: "",
+    idUser: "",
+    idLicenceType: "",
     description: "",
-    files: "",
+    documentation: "",
     startDate: "",
     endDate: "",
-  }
+    status: "",
+    totalAvailableDays: 30,
+    createdAt: "",
+    createdBy: "",
+    updatedAt: "",
+    updatedBy: "",
+  };
   const [form, setForm] = useState(formInicial);
+  const [errores, setErrores] = useState(null);
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setForm({
       ...form,
-      [name]:value
-    })
-    console.log(form);
+      [name]: value,
+    });
   };
 
   const handleSubmit = async () => {
     try {
-    await newLicense(form);
-    } catch (errores) {
-      console.log(errores);
-      // errores.foreach(err =>{ 
+      await newLicense(form);
+    } catch (error) {
+      setErrores(error);
+      // errores.foreach(err =>{
       //   console.log(err)});
     }
   };
 
-   return (
+  return (
     <Grid container padding={2} justifyContent={"space-around"}>
       <Grid item xs={12} lg={7}>
         <main id="cl-contenedor">
@@ -75,7 +82,7 @@ const CargarLicenciaPage = () => {
                 <Select
                   labelId="cl-demo-select-small"
                   defaultValue="None"
-                  name="licenseType"
+                  name="idLicenceType"
                   onChange={handleChange}
                 >
                   <MenuItem value="None" disabled>
@@ -91,7 +98,10 @@ const CargarLicenciaPage = () => {
                 <Typography variant="caption" display="block">
                   No hay archivos adjuntos todavia
                 </Typography>
-                <Button variant="contained">SUBIR ARCHIVO</Button>
+                <Button variant="contained" component="label">
+                  SUBIR ARCHIVO
+                  <input type="file" hidden name="documentation" />
+                </Button>
               </span>
             </div>
             <div id="cl-fecha-licencia">
@@ -143,18 +153,21 @@ const CargarLicenciaPage = () => {
               SOLICITAR APROBACION
             </Button>
           </section>
+          <div className="cargarLicenciaPageErrors">
+            {errores && errores.map((err, index) => <p key={index}>{err}</p>)}
+          </div>
         </main>
       </Grid>
 
       <Grid item xs={12} lg={4}>
         <aside>
           <Lista titulo="Detalle de Vacaciones">
-              <ListItemCargaLicencia
-                type="licencia medica"
-                totalDiasDisponibles={20}
-                startDate="12/01"
-                endDate="13/01"
-              ></ListItemCargaLicencia>
+            <ListItemCargaLicencia
+              type="licencia medica"
+              totalDiasDisponibles={20}
+              startDate="12/01"
+              endDate="13/01"
+            ></ListItemCargaLicencia>
           </Lista>
         </aside>
       </Grid>
