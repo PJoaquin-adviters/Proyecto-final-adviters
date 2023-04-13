@@ -18,7 +18,7 @@ import { newLicense } from "../../utils/LicensesUtils";
 
 const CargarLicenciaPage = () => {
   const formInicial = {
-    type: "",
+    licenseType: "",
     description: "",
     files: "",
     startDate: "",
@@ -75,7 +75,7 @@ const CargarLicenciaPage = () => {
                 <Select
                   labelId="cl-demo-select-small"
                   defaultValue="None"
-                  name="licenceType"
+                  name="licenseType"
                   onChange={handleChange}
                 >
                   <MenuItem value="None" disabled>
