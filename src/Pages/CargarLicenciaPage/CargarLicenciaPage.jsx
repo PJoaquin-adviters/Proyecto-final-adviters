@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Avatar,
   Badge,
@@ -15,6 +16,7 @@ import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListIt
 import scaloniUrl from "./scaloni.jpg";
 import "./CargarLicenciaStyle.css";
 import { newLicense } from "../../utils/LicensesUtils";
+import { useTheme } from "@emotion/react";
 
 const CargarLicenciaPage = () => {
   const formInicial = {
@@ -58,25 +60,57 @@ const CargarLicenciaPage = () => {
         <main id="cl-contenedor">
           <section id="cl-titulo">
             <div>
-              <Avatar alt="scaloni" src={scaloniUrl} />
-              <Typography variant="overline">Ricky</Typography>
+              <Avatar
+                sx={{
+                  marginRight: "20px",
+                }}
+                className="fotocargarlicencia"
+                alt="scaloni"
+                src={scaloniUrl}
+              />
+              <Typography
+                variant="overline"
+                sx={{
+                  paddingRight: "20px",
+                }}
+              >
+                Ricky
+              </Typography>
             </div>
             <div>
-              <Typography variant="h6">
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: "0.8em",
+                }}
+              >
                 Balance actual: <b>24 días</b>
               </Typography>
             </div>
             <div>
-              <Typography variant="button" display={"block"}>
+              <Typography
+                variant="button"
+                display={"block"}
+                sx={{
+                  fontSize: "0.9em",
+                  padding: "0 0 0 20px",
+                }}
+              >
                 ESTADO
               </Typography>
-              <Badge badgeContent={"Aún no enviado"} color="success"></Badge>
+              <Badge
+                badgeContent={"Aún no enviado"}
+                color="success"
+                sx={{
+                  margin: "10px 0 0 20px",
+                }}
+              ></Badge>
             </div>
           </section>
           <section id="cl-carga-licencia">
             <div>
-              <span>
-                <InputLabel id="cl-demo-select-small">
+              <span className="center-items">
+                <InputLabel id="cl-demo-select-small" sx={{}}>
                   TIPO DE LICENCIA
                 </InputLabel>
                 <Select
@@ -93,7 +127,7 @@ const CargarLicenciaPage = () => {
                   <MenuItem value={2}>Dia de estudio</MenuItem>
                 </Select>
               </span>
-              <span>
+              <span className="center-items">
                 <Typography variant="h6">Archivo adjuntos</Typography>
                 <Typography variant="caption" display="block">
                   No hay archivos adjuntos todavia
@@ -116,6 +150,10 @@ const CargarLicenciaPage = () => {
                 </span>
               </div>
               <ButtonGroup
+                sx={{
+                  paddingTop: "10px",
+                  gap: "10px",
+                }}
                 id="cl-grupo-botones-licencia"
                 size="small"
                 color="primary"
@@ -160,7 +198,7 @@ const CargarLicenciaPage = () => {
       </Grid>
 
       <Grid item xs={12} lg={4}>
-        <aside>
+        <aside className="cl-aside-licencia">
           <Lista titulo="Detalle de Vacaciones">
             <ListItemCargaLicencia
               type="licencia medica"
