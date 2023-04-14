@@ -39,3 +39,10 @@
   width: 170px;
 }
 
+@media screen and (max-width: 767px) {
+  .input-column-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+}
