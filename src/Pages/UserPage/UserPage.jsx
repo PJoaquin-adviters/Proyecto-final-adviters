@@ -8,32 +8,60 @@ import pictureNotFound from "../../assets/img/user-not-found.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Loading from "../../components/Loading/Loading";
 import { getUserRoles } from "../../services/UsersService";
+import { newUser } from "../../utils/UsersUtils";
+import { BorderColor } from "@mui/icons-material";
 
 const UserPage = () => {
   // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
-  
+
+  //verificar que la contraseña se repita?
+
   const initData = {
-    name: "joa",
-    lastname: "par",
-    dni: "39054656",
-    date: "1996-02-18",
-    ciul: "339999999",
-    password: "password",
-    admissionDate: "1996-02-18",
-    email: "joa@par",
-    telephone: "1132328090",
-    street: "calle joa",
-    streetNumber: "123",
-    postalCode: "1223",
-    tower: "1",
-    floor: "3",
-    apartment: "12",
-    location: "Capital",
-    province: "Buenos aires",
-    country: "Argentina",
-    holiday: 12,
-    idAdmin: false,
-    supervisorId: 3,
+    //id?
+    //después sumo una clase al input con error
+    name: "",
+    lastname: "",
+    password: "",
+    rePassword: "",
+    //chequear eso
+    mail: "",
+    phone: "",
+    floor: "",
+    apartment: "",
+    street: "",
+    Street_number: "",
+    Postal_code: "",
+    tower: "",
+    town: "",
+    state: "",
+    country: "",
+    Profile_picture: "",
+    Role_id: "0",
+    Birth_date: "",
+    Start_working_date: "",
+    dni: "",
+    cuil: "",
+    Vacation_days: "",
+    Available_vacations_days: "",
+    Available_study_days: "",
+    supervisor: null,
+    //
+    Created_at: "",
+    Created_by: "",
+    Updated_at: "",
+    Updated_by: "",
+    Deleted_at: "",
+
+    //arreglar los campos del input
+    //arreglar las validaciones para cada input
+    //arreglar que se vean los problemas
+
+    //////tenemos que referenciar al obj del supervisor (tipo, a la data) para poder acceder a eso
+    //primero con los inputs, después completamos todo el objeto agarrando datos de los otros objetos.
+
+    //    admissionDate: "",
+    //    location: "",
+    //    province: "",
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]
@@ -44,10 +72,13 @@ const UserPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [rePassword, setRePassword] = useState(userInfo?.password);
 
+  //
+  const [errores, setErrores] = useState({});
+
   useEffect(() => {
     // si es true traemos los datos del usuario desde llamando a una funcion en service
     // isNew && setUserInfo({});
-    if (isNew) setUserInfo({});
+    if (isNew) setUserInfo(initData);
     else {
       setTimeout(() => {
         setUserInfo({});
@@ -57,13 +88,26 @@ const UserPage = () => {
 
   const handleChange = (e, inputName) => {
     const info = userInfo;
-    info[inputName] = e.value;
+    info[inputName] = e.target.value;
+    console.log(info);
     setUserInfo({ ...info });
   };
 
-  const createUser = () => {};
+  const createUser = async () => {
+    try {
+      await newUser(userInfo);
+    } catch (error) {
+      //le paso al set para ver si puedo renderizar
+      setErrores(error);
+      console.log(error);
+    }
+  };
 
-  const editUser = () => {};
+  const editUser = () => {
+    //no sacar una funcion, sino dejar las dos pero que la segunda haga un fetch anterior
+    //traer datos anteriores
+    //permitir que se sobreescriban, validar, guardar
+  };
 
   return (
     <>
@@ -81,6 +125,7 @@ const UserPage = () => {
               <div className="input-column-container">
                 <img src={pictureNotFound} className="profile-picture" alt="" />
                 <Select
+                  name="supervisor"
                   placeholder="Bajo supervisión de: "
                   indicator={<KeyboardArrowDown />}
                   sx={{
@@ -92,7 +137,10 @@ const UserPage = () => {
                         transform: "rotate(-180deg)",
                       },
                     },
+                    
                   }}
+                  error={errores.supervisor}
+                  helpertext= {errores.supervisor}
                 >
                   <Option value="1">Pepito</Option>
                   <Option value="2">Marcus</Option>
@@ -104,14 +152,20 @@ const UserPage = () => {
                   label="DNI"
                   value={userInfo?.dni}
                   onChange={(e) => handleChange(e, "dni")}
+                  error={errores.dni}
+                  helperText= {errores.dni}
                 />
+
                 <TextField
                   id="email"
                   label="Email"
                   type="email"
                   value={userInfo?.email}
                   onChange={(e) => handleChange(e, "email")}
+                  error={errores.email}
+                  helperText= {errores.email}
                 />
+
               </div>
               <div className="input-column-container">
                 <TextField
@@ -119,31 +173,45 @@ const UserPage = () => {
                   label="Nombre"
                   value={userInfo?.name}
                   onChange={(e) => handleChange(e, "name")}
+                  error={errores.name}
+                  helperText= {errores.name}
                 />
+
                 <TextField
                   id="lastname"
                   label="Apellido"
                   value={userInfo?.lastname}
                   onChange={(e) => handleChange(e, "lastname")}
+                  error={errores.lastname}
+                  helperText= {errores.lastname}
                 />
+
                 <TextField
-                  id="date"
+                  id="Birth_date"
                   label="Fecha de nacimiento"
                   type="date"
                   value={userInfo?.date}
-                  onChange={(e) => handleChange(e, "date")}
+                  onChange={(e) => handleChange(e, "Birth_date")}
+                  error={errores.Birth_date}
+                  helperText= {errores.Birth_date}
                 />
+
                 <TextField
-                  id="ciul"
-                  label="Cuil"
+                  id="cuil"
+                  label="cuil"
                   value={userInfo?.ciul}
-                  onChange={(e) => handleChange(e, "ciul")}
+                  onChange={(e) => handleChange(e, "cuil")}
+                  error={errores.cuil}
+                  helperText= {errores.cuil}
                 />
+
                 <TextField
-                  id="telephone"
-                  label="Telefono"
+                  id="phone"
+                  label="Teléfono"
                   value={userInfo?.telephone}
-                  onChange={(e) => handleChange(e, "telephone")}
+                  onChange={(e) => handleChange(e, "phone")}
+                  error={errores.phone}
+                  helperText= {errores.phone}
                 />
               </div>
               <div className="input-column-container">
@@ -154,20 +222,27 @@ const UserPage = () => {
                   value={userInfo?.password}
                   onChange={(e) => handleChange(e, "password")}
                 />
+
                 <TextField
                   id="rePassword"
                   label="Repeat password"
                   type="password"
                   value={rePassword}
-                  onChange={(e) => setRePassword(e.value)}
+                  onChange={(e) => handleChange(e, "rePassword")}
+                  error={errores.rePassword}
+                  helperText= {errores.rePassword}
                 />
+
                 <TextField
-                  id="admissionDate"
+                  id="Start_working_date"
                   label="Fecha de ingreso"
                   type="date"
-                  value={userInfo?.admissionDate}
-                  onChange={(e) => handleChange(e, "admissionDate")}
+                  value={userInfo?.Start_working_date}
+                  onChange={(e) => handleChange(e, "Start_working_date")}
+                  error={errores.Start_working_date}
+                  helperText= {errores.Start_working_date}
                 />
+
               </div>
             </section>
             <section className="input-section">
@@ -177,70 +252,104 @@ const UserPage = () => {
                   label="Calle"
                   value={userInfo?.street}
                   onChange={(e) => handleChange(e, "street")}
+                  error={errores.street}
+                  helperText= {errores.street}
                 />
+
                 <TextField
                   id="tower"
                   label="Torre"
                   value={userInfo?.tower}
                   onChange={(e) => handleChange(e, "tower")}
+                  error={errores.tower}
+                  helperText= {errores.tower}
                 />
+
                 <TextField
-                  id="location"
+                  id="town"
                   label="Localidad"
-                  value={userInfo?.location}
-                  onChange={(e) => handleChange(e, "location")}
+                  value={userInfo?.town}
+                  onChange={(e) => handleChange(e, "town")}
+                  error={errores.town}
+                  helperText= {errores.town}
                 />
+
                 <TextField
                   id="supervisorId"
                   label="Supervisor"
                   value={userInfo?.supervisorId}
                   onChange={(e) => handleChange(e, "supervisorId")}
+                  error={errores.supervisor}
+                  helperText= {errores.supervisor}
                 />
+
                 <TextField
-                  id="holiday"
+                  id="Vacation_days"
                   label="Dias vacaciones"
-                  value={userInfo?.holiday}
-                  onChange={(e) => handleChange(e, "holiday")}
+                  value={userInfo?.Vacation_days}
+                  onChange={(e) => handleChange(e, "Vacation_days")}
+                  error={errores.Vacation_days}
+                  helperText= {errores.Vacation_days}
                 />
               </div>
               <div className="input-column-container">
                 <TextField
-                  id="streetNumber"
+                  id="Street_number"
                   label="Altura"
                   value={userInfo?.streetNumber}
-                  onChange={(e) => handleChange(e, "streetNumber")}
+                  onChange={(e) => handleChange(e, "Street_number")}
+                  error={errores.Street_number}
+                  helperText= {errores.Street_number}
                 />
+
                 <TextField
                   id="outlined-required"
                   label="Piso"
                   defaultValue="1"
+                  type="number"
+                  error={errores.floor}
+                  helperText= {errores.floor}
                 />
+
                 <TextField
-                  id="province"
-                  label="Provincia"
-                  value={userInfo?.province}
-                  onChange={(e) => handleChange(e, "province")}
+                  id="state"
+                  label="Estado"
+                  value={userInfo?.state}
+                  onChange={(e) => handleChange(e, "state")}
+                  error={errores.state}
+                  helperText= {errores.state}
                 />
+
               </div>
               <div className="input-column-container">
                 <TextField
                   id="postalCode"
                   label="Codigo postal"
                   value={userInfo?.postalCode}
+                  type="number"
                   onChange={(e) => handleChange(e, "postalCode")}
+                  error={errores.postalCode}
+                  helperText= {errores.postalCode}
                 />
+
                 <TextField
                   id="apartment"
                   label="Departamento"
                   value={userInfo?.apartment}
                   onChange={(e) => handleChange(e, "apartment")}
+                  error={errores.apartment}
+                  helperText= {errores.apartment}
                 />
+
                 <TextField
                   id="country"
                   label="Pais"
                   value={userInfo?.country}
                   onChange={(e) => handleChange(e, "country")}
+                  error={errores.country}
+                  helperText= {errores.country}
                 />
+
               </div>
             </section>
 
