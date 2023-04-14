@@ -40,7 +40,7 @@
   display: block;
 }
 
-#cl-fecha-licencia div span{
+#cl-fecha-licencia div span {
   display: block;
   padding-inline: 2em;
 }
@@ -76,4 +76,22 @@
   resize: none;
   color: gray;
   font-size: 1em;
+}
+
+.cargarLicenciaPageErrors {
+  background-color: rgb(255, 106, 106);
+  border: 2px solid rgba(139, 0, 0, 0.514);
+  border-radius: 10px;
+}
+
+.cargarLicenciaPageErrors p {
+  padding-bottom: 1em;
+}
+
+.cargarLicenciaPageErrors p:first-of-type {
+  padding-top: 2em;
+}
+
+.UserPageErrors p:last-of-type {
+  padding-bottom: 2em;
 }
