@@ -143,7 +143,9 @@ const UserPage = () => {
                   <Option value="3">Marge</Option>
                 </Select>
 
-                {errores.supervisor && <p>{errores.supervisor}</p>}
+                {errores.supervisor && (
+                  <p className="error">{errores.supervisor}</p>
+                )}
 
                 <TextField
                   id="dni"
@@ -152,7 +154,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "dni")}
                 />
 
-                {errores.dni && <p>{errores.dni}</p>}
+                {errores.dni && <p className="error">{errores.dni}</p>}
 
                 <TextField
                   id="email"
@@ -162,7 +164,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "email")}
                 />
 
-                {errores.email && <p>{errores.email}</p>}
+                {errores.email && <p className="error">{errores.email}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -172,7 +174,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "name")}
                 />
 
-                {errores.name && <p>{errores.name}</p>}
+                {errores.name && <p className="error">{errores.name}</p>}
 
                 <TextField
                   id="lastname"
@@ -181,7 +183,9 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "lastname")}
                 />
 
-                {errores.lastname && <p>{errores.lastname}</p>}
+                {errores.lastname && (
+                  <p className="error">{errores.lastname}</p>
+                )}
 
                 <TextField
                   id="Birth_date"
@@ -191,7 +195,9 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "Birth_date")}
                 />
 
-                {errores.Birth_date && <p>{errores.Birth_date}</p>}
+                {errores.Birth_date && (
+                  <p className="error">{errores.Birth_date}</p>
+                )}
 
                 <TextField
                   id="cuil"
@@ -200,7 +206,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "cuil")}
                 />
 
-                {errores.cuil && <p>{errores.cuil}</p>}
+                {errores.cuil && <p className="error">{errores.cuil}</p>}
 
                 <TextField
                   id="phone"
@@ -209,7 +215,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "phone")}
                 />
 
-                {errores.phone && <p>{errores.phone}</p>}
+                {errores.phone && <p className="error">{errores.phone}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -228,7 +234,7 @@ const UserPage = () => {
                   onChange={(e) => setRePassword(e.value)}
                 />
 
-               {/* sumar las validaciones de rePassword */}
+                {/* sumar las validaciones de rePassword */}
                 <TextField
                   id="Start_working_date"
                   label="Fecha de ingreso"
@@ -238,7 +244,7 @@ const UserPage = () => {
                 />
 
                 {errores.Start_working_date && (
-                  <p>{errores.Start_working_date}</p>
+                  <p className="error">{errores.Start_working_date}</p>
                 )}
               </div>
             </section>
@@ -251,7 +257,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "street")}
                 />
 
-                {errores.street && <p>{errores.street}</p>}
+                {errores.street && <p className="error">{errores.street}</p>}
 
                 <TextField
                   id="tower"
@@ -260,7 +266,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "tower")}
                 />
 
-                {errores.tower && <p>{errores.tower}</p>}
+                {errores.tower && <p className="error">{errores.tower}</p>}
 
                 <TextField
                   id="town"
@@ -269,7 +275,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "town")}
                 />
 
-                {errores.town && <p>{errores.town}</p>}
+                {errores.town && <p className="error">{errores.town}</p>}
 
                 <TextField
                   id="supervisorId"
@@ -285,7 +291,9 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "Vacation_days")}
                 />
 
-                {errores.Vacation_days && <p>{errores.Vacation_days}</p>}
+                {errores.Vacation_days && (
+                  <p className="error">{errores.Vacation_days}</p>
+                )}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -295,7 +303,9 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "Street_number")}
                 />
 
-                {errores.Street_number && <p>{errores.Street_number}</p>}
+                {errores.Street_number && (
+                  <p className="error">{errores.Street_number}</p>
+                )}
 
                 <TextField
                   id="outlined-required"
@@ -303,7 +313,7 @@ const UserPage = () => {
                   defaultValue="1"
                 />
 
-                {errores.floor && <p>{errores.floor}</p>}
+                {errores.floor && <p className="error">{errores.floor}</p>}
 
                 <TextField
                   id="state"
@@ -312,8 +322,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "state")}
                 />
 
-                {errores.state && <p>{errores.state}</p>}
-
+                {errores.state && <p className="error">{errores.state}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -323,7 +332,9 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "postalCode")}
                 />
 
-{errores.postalCode && <p>{errores.postalCode}</p>}
+                {errores.postalCode && (
+                  <p className="error">{errores.postalCode}</p>
+                )}
 
                 <TextField
                   id="apartment"
@@ -332,7 +343,9 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "apartment")}
                 />
 
-{errores.apartment && <p>{errores.apartment}</p>}
+                {errores.apartment && (
+                  <p className="error">{errores.apartment}</p>
+                )}
 
                 <TextField
                   id="country"
@@ -341,9 +354,7 @@ const UserPage = () => {
                   onChange={(e) => handleChange(e, "country")}
                 />
 
-{errores.country && <p>{errores.country}</p>}
-
-
+                {errores.country && <p className="error">{errores.country}</p>}
               </div>
             </section>
 
