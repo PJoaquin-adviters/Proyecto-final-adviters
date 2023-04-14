@@ -14,12 +14,14 @@ const UserPage = () => {
   // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
 
   //verificar que la contraseña se repita?
-  
+
   const initData = {
     //id?
+    //después sumo una clase al input con error
     name: "",
     lastname: "",
     password: "",
+    rePassword: "",
     //chequear eso
     mail: "",
     phone: "",
@@ -43,24 +45,22 @@ const UserPage = () => {
     Available_study_days: "",
     supervisor: null,
     //
-    Created_at:"",
-    Created_by:"",
+    Created_at: "",
+    Created_by: "",
     Updated_at: "",
     Updated_by: "",
-    Deleted_at: "", 
-
-
+    Deleted_at: "",
 
     //arreglar los campos del input
-    //arreglar las validaciones para cada input 
+    //arreglar las validaciones para cada input
     //arreglar que se vean los problemas
 
     //////tenemos que referenciar al obj del supervisor (tipo, a la data) para poder acceder a eso
     //primero con los inputs, después completamos todo el objeto agarrando datos de los otros objetos.
 
-//    admissionDate: "",
-//    location: "",
-//    province: "",
+    //    admissionDate: "",
+    //    location: "",
+    //    province: "",
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]
@@ -72,7 +72,7 @@ const UserPage = () => {
   const [rePassword, setRePassword] = useState(userInfo?.password);
 
   //
-  const [errores, setErrores] = useState(null);
+  const [errores, setErrores] = useState({});
 
   useEffect(() => {
     // si es true traemos los datos del usuario desde llamando a una funcion en service
@@ -88,26 +88,24 @@ const UserPage = () => {
   const handleChange = (e, inputName) => {
     const info = userInfo;
     info[inputName] = e.target.value;
-    console.log(info)
+    console.log(info);
     setUserInfo({ ...info });
   };
 
   const createUser = async () => {
     try {
-      
-      await newUser(userInfo)
-
-      
+      await newUser(userInfo);
     } catch (error) {
       //le paso al set para ver si puedo renderizar
       setErrores(error);
       console.log(error);
-      
     }
   };
 
   const editUser = () => {
-    let errores = newUser(userInfo);
+    //no sacar una funcion, sino dejar las dos pero que la segunda haga un fetch anterior
+    //traer datos anteriores
+    //permitir que se sobreescriban, validar, guardar
   };
 
   return (
@@ -145,12 +143,17 @@ const UserPage = () => {
                   <Option value="3">Marge</Option>
                 </Select>
 
+                {errores.supervisor && <p>{errores.supervisor}</p>}
+
                 <TextField
                   id="dni"
                   label="DNI"
                   value={userInfo?.dni}
                   onChange={(e) => handleChange(e, "dni")}
                 />
+
+                {errores.dni && <p>{errores.dni}</p>}
+
                 <TextField
                   id="email"
                   label="Email"
@@ -158,6 +161,8 @@ const UserPage = () => {
                   value={userInfo?.email}
                   onChange={(e) => handleChange(e, "email")}
                 />
+
+                {errores.email && <p>{errores.email}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -166,12 +171,18 @@ const UserPage = () => {
                   value={userInfo?.name}
                   onChange={(e) => handleChange(e, "name")}
                 />
+
+                {errores.name && <p>{errores.name}</p>}
+
                 <TextField
                   id="lastname"
                   label="Apellido"
                   value={userInfo?.lastname}
                   onChange={(e) => handleChange(e, "lastname")}
                 />
+
+                {errores.lastname && <p>{errores.lastname}</p>}
+
                 <TextField
                   id="Birth_date"
                   label="Fecha de nacimiento"
@@ -179,18 +190,26 @@ const UserPage = () => {
                   value={userInfo?.date}
                   onChange={(e) => handleChange(e, "Birth_date")}
                 />
+
+                {errores.Birth_date && <p>{errores.Birth_date}</p>}
+
                 <TextField
                   id="cuil"
                   label="cuil"
                   value={userInfo?.ciul}
                   onChange={(e) => handleChange(e, "cuil")}
                 />
+
+                {errores.cuil && <p>{errores.cuil}</p>}
+
                 <TextField
                   id="phone"
-                  label="phone"
+                  label="Teléfono"
                   value={userInfo?.telephone}
                   onChange={(e) => handleChange(e, "phone")}
                 />
+
+                {errores.phone && <p>{errores.phone}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -200,6 +219,7 @@ const UserPage = () => {
                   value={userInfo?.password}
                   onChange={(e) => handleChange(e, "password")}
                 />
+
                 <TextField
                   id="rePassword"
                   label="Repeat password"
@@ -207,6 +227,8 @@ const UserPage = () => {
                   value={rePassword}
                   onChange={(e) => setRePassword(e.value)}
                 />
+
+               {/* sumar las validaciones de rePassword */}
                 <TextField
                   id="Start_working_date"
                   label="Fecha de ingreso"
@@ -214,6 +236,10 @@ const UserPage = () => {
                   value={userInfo?.Start_working_date}
                   onChange={(e) => handleChange(e, "Start_working_date")}
                 />
+
+                {errores.Start_working_date && (
+                  <p>{errores.Start_working_date}</p>
+                )}
               </div>
             </section>
             <section className="input-section">
@@ -224,30 +250,42 @@ const UserPage = () => {
                   value={userInfo?.street}
                   onChange={(e) => handleChange(e, "street")}
                 />
+
+                {errores.street && <p>{errores.street}</p>}
+
                 <TextField
                   id="tower"
                   label="Torre"
                   value={userInfo?.tower}
                   onChange={(e) => handleChange(e, "tower")}
                 />
+
+                {errores.tower && <p>{errores.tower}</p>}
+
                 <TextField
                   id="town"
                   label="Localidad"
                   value={userInfo?.town}
                   onChange={(e) => handleChange(e, "town")}
                 />
+
+                {errores.town && <p>{errores.town}</p>}
+
                 <TextField
                   id="supervisorId"
                   label="Supervisor"
                   value={userInfo?.supervisorId}
                   onChange={(e) => handleChange(e, "supervisorId")}
                 />
+
                 <TextField
                   id="Vacation_days"
                   label="Dias vacaciones"
                   value={userInfo?.Vacation_days}
                   onChange={(e) => handleChange(e, "Vacation_days")}
                 />
+
+                {errores.Vacation_days && <p>{errores.Vacation_days}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -256,17 +294,26 @@ const UserPage = () => {
                   value={userInfo?.streetNumber}
                   onChange={(e) => handleChange(e, "Street_number")}
                 />
+
+                {errores.Street_number && <p>{errores.Street_number}</p>}
+
                 <TextField
                   id="outlined-required"
                   label="Piso"
                   defaultValue="1"
                 />
+
+                {errores.floor && <p>{errores.floor}</p>}
+
                 <TextField
                   id="state"
-                  label="state"
+                  label="Estado"
                   value={userInfo?.state}
                   onChange={(e) => handleChange(e, "state")}
                 />
+
+                {errores.state && <p>{errores.state}</p>}
+
               </div>
               <div className="input-column-container">
                 <TextField
@@ -275,22 +322,32 @@ const UserPage = () => {
                   value={userInfo?.postalCode}
                   onChange={(e) => handleChange(e, "postalCode")}
                 />
+
+{errores.postalCode && <p>{errores.postalCode}</p>}
+
                 <TextField
                   id="apartment"
                   label="Departamento"
                   value={userInfo?.apartment}
                   onChange={(e) => handleChange(e, "apartment")}
                 />
+
+{errores.apartment && <p>{errores.apartment}</p>}
+
                 <TextField
                   id="country"
                   label="Pais"
                   value={userInfo?.country}
                   onChange={(e) => handleChange(e, "country")}
                 />
+
+{errores.country && <p>{errores.country}</p>}
+
+
               </div>
             </section>
 
-            <div className="UserPageErrors">
+            {/* <div className="UserPageErrors">
             {
               errores&& (
                 errores.map((err, index) => 
@@ -298,7 +355,7 @@ const UserPage = () => {
                 )
               )
             }
-            </div>
+            </div> */}
 
             <Box
               sx={{
@@ -319,7 +376,6 @@ const UserPage = () => {
           </form>
         </section>
       )}
-
     </>
   );
 };
