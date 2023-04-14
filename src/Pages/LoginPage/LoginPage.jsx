@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./LoginPage.css";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import waves from "../../assets/img/waves.png";
-import logoAdivters from "../../assets/img/logo-adviters.png";
 import { useNavigate } from "react-router-dom";
 import LoginContext from "../../context/LoginContext";
+import fondo1 from "../../assets/img/fondo1.jpg";
+import logoAdviters from "../../assets/img/adviterslogo.png";
 
 const LoginPage = () => {
   const [userAuth, setUserAuth] = useState("");
@@ -17,30 +18,50 @@ const LoginPage = () => {
   const handleClick = (e) => {
     e.preventDefault();
     abrirSesion(true);
-    navigate("/grupos");
+    navigate("/");
   };
 
   return (
     <>
-      <section className="center-page">
-
+      <section className="login-center-page">
         <div className="login-section">
+          <div className="logoAdviters2">
+            <img className="login-logo2" src={logoAdviters} alt="" />
+            <Typography
+              variant="h4"
+              component="h4"
+              sx={{
+                color: "white",
+                marginBottom: "20px",
+                fontWeight: "bold",
+              }}
+            >
+              Adviters
+            </Typography>
+          </div>
           <Box
             component="form"
             sx={{
               "& .MuiTextField-root": {
-                width: "100%"
+                width: "100%",
               },
-              width: "80%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              gap: "30px",
+              gap: "40px",
+              backgroundColor: "whitesmoke",
+              padding: "30px",
+              borderRadius: "10px",
+              marginRight: "1em",
+              marginLeft: "1em",
             }}
             noValidate
             autoComplete="off"
           >
+            <Typography variant="h4" component="h4">
+              ¡Bienvenido!
+            </Typography>
             <TextField
               id="outlined-required"
               label="Usuario"
@@ -61,13 +82,19 @@ const LoginPage = () => {
             <Box
               sx={{
                 display: "flex",
-                width: "100%",
-                justifyContent: "flex-end",
+                justifyContent: "center",
+                paddingRight: "20px",
+                paddingLeft: "20px",
               }}
             >
               <Button
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  minWidth: "15vw",
+                }}
                 onClick={(e) => {
                   handleClick(e);
                 }}
@@ -77,8 +104,6 @@ const LoginPage = () => {
             </Box>
           </Box>
         </div>
-        <img src={logoAdivters} className="logo-img" alt="" />
-        <img className="waves" src={waves} alt="" />
       </section>
     </>
   );
