@@ -9,6 +9,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Loading from "../../components/Loading/Loading";
 import { getUserRoles } from "../../services/UsersService";
 import { newUser } from "../../utils/UsersUtils";
+import { BorderColor } from "@mui/icons-material";
 
 const UserPage = () => {
   // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
@@ -124,7 +125,7 @@ const UserPage = () => {
               <div className="input-column-container">
                 <img src={pictureNotFound} className="profile-picture" alt="" />
                 <Select
-                  name=""
+                  name="supervisor"
                   placeholder="Bajo supervisión de: "
                   indicator={<KeyboardArrowDown />}
                   sx={{
@@ -136,25 +137,24 @@ const UserPage = () => {
                         transform: "rotate(-180deg)",
                       },
                     },
+                    
                   }}
+                  error={errores.supervisor}
+                  helpertext= {errores.supervisor}
                 >
                   <Option value="1">Pepito</Option>
                   <Option value="2">Marcus</Option>
                   <Option value="3">Marge</Option>
                 </Select>
 
-                {errores.supervisor && (
-                  <p className="error">{errores.supervisor}</p>
-                )}
-
                 <TextField
                   id="dni"
                   label="DNI"
                   value={userInfo?.dni}
                   onChange={(e) => handleChange(e, "dni")}
+                  error={errores.dni}
+                  helperText= {errores.dni}
                 />
-
-                {errores.dni && <p className="error">{errores.dni}</p>}
 
                 <TextField
                   id="email"
@@ -162,9 +162,10 @@ const UserPage = () => {
                   type="email"
                   value={userInfo?.email}
                   onChange={(e) => handleChange(e, "email")}
+                  error={errores.email}
+                  helperText= {errores.email}
                 />
 
-                {errores.email && <p className="error">{errores.email}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -172,20 +173,18 @@ const UserPage = () => {
                   label="Nombre"
                   value={userInfo?.name}
                   onChange={(e) => handleChange(e, "name")}
+                  error={errores.name}
+                  helperText= {errores.name}
                 />
-
-                {errores.name && <p className="error">{errores.name}</p>}
 
                 <TextField
                   id="lastname"
                   label="Apellido"
                   value={userInfo?.lastname}
                   onChange={(e) => handleChange(e, "lastname")}
+                  error={errores.lastname}
+                  helperText= {errores.lastname}
                 />
-
-                {errores.lastname && (
-                  <p className="error">{errores.lastname}</p>
-                )}
 
                 <TextField
                   id="Birth_date"
@@ -193,29 +192,27 @@ const UserPage = () => {
                   type="date"
                   value={userInfo?.date}
                   onChange={(e) => handleChange(e, "Birth_date")}
+                  error={errores.Birth_date}
+                  helperText= {errores.Birth_date}
                 />
-
-                {errores.Birth_date && (
-                  <p className="error">{errores.Birth_date}</p>
-                )}
 
                 <TextField
                   id="cuil"
                   label="cuil"
                   value={userInfo?.ciul}
                   onChange={(e) => handleChange(e, "cuil")}
+                  error={errores.cuil}
+                  helperText= {errores.cuil}
                 />
-
-                {errores.cuil && <p className="error">{errores.cuil}</p>}
 
                 <TextField
                   id="phone"
                   label="Teléfono"
                   value={userInfo?.telephone}
                   onChange={(e) => handleChange(e, "phone")}
+                  error={errores.phone}
+                  helperText= {errores.phone}
                 />
-
-                {errores.phone && <p className="error">{errores.phone}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -231,21 +228,21 @@ const UserPage = () => {
                   label="Repeat password"
                   type="password"
                   value={rePassword}
-                  onChange={(e) => setRePassword(e.value)}
+                  onChange={(e) => handleChange(e, "rePassword")}
+                  error={errores.rePassword}
+                  helperText= {errores.rePassword}
                 />
 
-                {/* sumar las validaciones de rePassword */}
                 <TextField
                   id="Start_working_date"
                   label="Fecha de ingreso"
                   type="date"
                   value={userInfo?.Start_working_date}
                   onChange={(e) => handleChange(e, "Start_working_date")}
+                  error={errores.Start_working_date}
+                  helperText= {errores.Start_working_date}
                 />
 
-                {errores.Start_working_date && (
-                  <p className="error">{errores.Start_working_date}</p>
-                )}
               </div>
             </section>
             <section className="input-section">
@@ -255,33 +252,35 @@ const UserPage = () => {
                   label="Calle"
                   value={userInfo?.street}
                   onChange={(e) => handleChange(e, "street")}
+                  error={errores.street}
+                  helperText= {errores.street}
                 />
-
-                {errores.street && <p className="error">{errores.street}</p>}
 
                 <TextField
                   id="tower"
                   label="Torre"
                   value={userInfo?.tower}
                   onChange={(e) => handleChange(e, "tower")}
+                  error={errores.tower}
+                  helperText= {errores.tower}
                 />
-
-                {errores.tower && <p className="error">{errores.tower}</p>}
 
                 <TextField
                   id="town"
                   label="Localidad"
                   value={userInfo?.town}
                   onChange={(e) => handleChange(e, "town")}
+                  error={errores.town}
+                  helperText= {errores.town}
                 />
-
-                {errores.town && <p className="error">{errores.town}</p>}
 
                 <TextField
                   id="supervisorId"
                   label="Supervisor"
                   value={userInfo?.supervisorId}
                   onChange={(e) => handleChange(e, "supervisorId")}
+                  error={errores.supervisor}
+                  helperText= {errores.supervisor}
                 />
 
                 <TextField
@@ -289,11 +288,9 @@ const UserPage = () => {
                   label="Dias vacaciones"
                   value={userInfo?.Vacation_days}
                   onChange={(e) => handleChange(e, "Vacation_days")}
+                  error={errores.Vacation_days}
+                  helperText= {errores.Vacation_days}
                 />
-
-                {errores.Vacation_days && (
-                  <p className="error">{errores.Vacation_days}</p>
-                )}
               </div>
               <div className="input-column-container">
                 <TextField
@@ -301,72 +298,60 @@ const UserPage = () => {
                   label="Altura"
                   value={userInfo?.streetNumber}
                   onChange={(e) => handleChange(e, "Street_number")}
+                  error={errores.Street_number}
+                  helperText= {errores.Street_number}
                 />
-
-                {errores.Street_number && (
-                  <p className="error">{errores.Street_number}</p>
-                )}
 
                 <TextField
                   id="outlined-required"
                   label="Piso"
                   defaultValue="1"
+                  type="number"
+                  error={errores.floor}
+                  helperText= {errores.floor}
                 />
-
-                {errores.floor && <p className="error">{errores.floor}</p>}
 
                 <TextField
                   id="state"
                   label="Estado"
                   value={userInfo?.state}
                   onChange={(e) => handleChange(e, "state")}
+                  error={errores.state}
+                  helperText= {errores.state}
                 />
 
-                {errores.state && <p className="error">{errores.state}</p>}
               </div>
               <div className="input-column-container">
                 <TextField
                   id="postalCode"
                   label="Codigo postal"
                   value={userInfo?.postalCode}
+                  type="number"
                   onChange={(e) => handleChange(e, "postalCode")}
+                  error={errores.postalCode}
+                  helperText= {errores.postalCode}
                 />
-
-                {errores.postalCode && (
-                  <p className="error">{errores.postalCode}</p>
-                )}
 
                 <TextField
                   id="apartment"
                   label="Departamento"
                   value={userInfo?.apartment}
                   onChange={(e) => handleChange(e, "apartment")}
+                  error={errores.apartment}
+                  helperText= {errores.apartment}
                 />
-
-                {errores.apartment && (
-                  <p className="error">{errores.apartment}</p>
-                )}
 
                 <TextField
                   id="country"
                   label="Pais"
                   value={userInfo?.country}
                   onChange={(e) => handleChange(e, "country")}
+                  error={errores.country}
+                  helperText= {errores.country}
                 />
 
-                {errores.country && <p className="error">{errores.country}</p>}
               </div>
             </section>
-
-            {/* <div className="UserPageErrors">
-            {
-              errores&& (
-                errores.map((err, index) => 
-                  <p key={index}>{err}</p>
-                )
-              )
-            }
-            </div> */}
 
             <Box
               sx={{

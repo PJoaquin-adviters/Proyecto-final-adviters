@@ -24,8 +24,8 @@ export const newUser = (data) => {
     if (data.lastname.length > 30) errors.lastname = "El apellido debe contener menos que 30 carácteres";
     if (! /^[a-zA-Z]+$/.test(data.lastname)) errors.lastname = "El apellido solo debe contener letras.";
     
-    
-    
+
+    if (data.rePassword !== data.password) errors.rePassword = "Las contraseñas deben ser iguales entre sí."
     
     //password no lo validamos
     
