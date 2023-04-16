@@ -54,26 +54,26 @@ export const newUser = (data) => {
     //telefono
     if (campoContieneNroDecimalONegativo("phone")){errors.phone = "Debe ingresar un número entero positivo.";}
     else if (data.phone.length === 0) {errors.phone = "Debe ingresar un número de teléfono.";}
-    else if (data.phone.length <= 16){errors.phone = "El teléfono debe contener 16 carácteres.";}
+    else if (data.phone.length < 16){errors.phone = "El teléfono debe contener 16 carácteres.";}
     /////////11 3627 3232 -> validar espacios y numeros
     
     //calle
     if (campoEstaVacio("street")){errors.street ="El campo debe estar completo.";}    
-    else if (! /^[a-zA-Z0-9]+$/.test(data.street)){errors.street = "La calle debe contener solo números y letras.";} 
+    else if (! /^[a-zA-Z0-9 ]+$/.test(data.street)){errors.street = "La calle debe contener solo números y letras.";} 
     
     //numero de calle
     if (campoContieneNroDecimalONegativo("Street_number")){errors.Street_number ="El campo debe estar completo.";}    
-    else if (data.Street_number.trim().length <= 6){errors.Street_number = "El número de calle debe contener de 0 a 6 números.";} 
+    // else if (data.Street_number.length >=1 && data.Street_number.length <= 6){errors.Street_number = "El número de calle debe contener de 1 a 6 números.";} 
 
     //ciudad    
     if (campoEstaVacio("town")){errors.town ="El campo debe estar completo."}
-    else if (! /^[a-zA-Z]+$/.test(data.town)) errors.town ="La ciudad debe contener solo letras";
+    else if (! /^[a-zA-Z ]+$/.test(data.town)) errors.town ="La ciudad debe contener solo letras";
 
     if (campoEstaVacio("state")){errors.state ="El campo debe estar completo."}
-    else if (! /^[a-zA-Z0-9]+$/.test(data.state)) errors.state ="La localidad debe contener solo letras y números";
+    else if (! /^[a-zA-Z ]+$/.test(data.state)) errors.state ="La provincia debe contener solo letras";
 
     if (campoEstaVacio("country")){errors.country ="El campo debe estar completo."}
-    else if (! /^[a-zA-Z]+$/.test(data.country)){errors.country ="El país debe contener solo letras"};
+    else if (! /^[a-zA-Z ]+$/.test(data.country)){errors.country ="El país debe contener solo letras"};
     
     
     if(data.Birth_date.length === 0){
