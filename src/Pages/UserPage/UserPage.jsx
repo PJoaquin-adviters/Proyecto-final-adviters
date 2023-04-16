@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  FormControl,
+  FormHelperText,
+} from "@mui/material";
 import "./UserPage.css";
 import pictureNotFound from "../../assets/img/user-not-found.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -10,20 +17,13 @@ import Loading from "../../components/Loading/Loading";
 import { getUserRoles } from "../../services/UsersService";
 import { newUser } from "../../utils/UsersUtils";
 import { BorderColor } from "@mui/icons-material";
-
 const UserPage = () => {
-  // El objeto va a estar vacio, ahora esta lleno porque es de prueba pero es para que tenga las keys
-
-  //verificar que la contraseña se repita?
-
   const initData = {
     //id?
-    //después sumo una clase al input con error
     name: "",
     lastname: "",
     password: "",
     rePassword: "",
-    //chequear eso
     mail: "",
     phone: "",
     floor: "",
@@ -41,7 +41,7 @@ const UserPage = () => {
     Start_working_date: "",
     dni: "",
     cuil: "",
-    Vacation_days: "",
+    Vacation_days: null,
     Available_vacations_days: "",
     Available_study_days: "",
     supervisor: null,
@@ -51,17 +51,6 @@ const UserPage = () => {
     Updated_at: "",
     Updated_by: "",
     Deleted_at: "",
-
-    //arreglar los campos del input
-    //arreglar las validaciones para cada input
-    //arreglar que se vean los problemas
-
-    //////tenemos que referenciar al obj del supervisor (tipo, a la data) para poder acceder a eso
-    //primero con los inputs, después completamos todo el objeto agarrando datos de los otros objetos.
-
-    //    admissionDate: "",
-    //    location: "",
-    //    province: "",
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]
@@ -97,7 +86,6 @@ const UserPage = () => {
     try {
       await newUser(userInfo);
     } catch (error) {
-      //le paso al set para ver si puedo renderizar
       setErrores(error);
       console.log(error);
     }
@@ -107,6 +95,14 @@ const UserPage = () => {
     //no sacar una funcion, sino dejar las dos pero que la segunda haga un fetch anterior
     //traer datos anteriores
     //permitir que se sobreescriban, validar, guardar
+
+    // try {
+    //   await getUsers();
+    // } catch (error) {
+    //   setErrores(error);
+    //   console.log(error);
+    // }
+
   };
 
   return (
@@ -124,27 +120,33 @@ const UserPage = () => {
             <section className="input-section">
               <div className="input-column-container">
                 <img src={pictureNotFound} className="profile-picture" alt="" />
-                <Select
-                  name="supervisor"
-                  placeholder="Bajo supervisión de: "
-                  indicator={<KeyboardArrowDown />}
-                  sx={{
-                    width: 240,
-                    height: 60,
-                    [`& .${selectClasses.indicator}`]: {
-                      transition: "0.2s",
-                      [`&.${selectClasses.expanded}`]: {
-                        transform: "rotate(-180deg)",
+
+                <FormControl error={errores.supervisor}
+                sx={{width: 240}}>
+                  <Select
+                    placeholder="Bajo supervisión  de:"
+                    name="supervisor"
+                    indicator={<KeyboardArrowDown />}
+                    onChange={(e) => {
+                      handleChange(e, "supervisor");
+                    }}
+                    className={`${errores.supervisor && "selectError"}`}
+                    sx={{
+                      height: 60,
+                      [`& .${selectClasses.indicator}`]: {
+                        transition: "0.2s",
+                        [`&.${selectClasses.expanded}`]: {
+                          transform: "rotate(-180deg)",
+                        },
                       },
-                    },
-                  }}
-                  error={errores.supervisor}
-                  helpertext={errores.supervisor}
-                >
-                  <Option value="1">Pepito</Option>
-                  <Option value="2">Marcus</Option>
-                  <Option value="3">Marge</Option>
-                </Select>
+                    }}
+                  >
+                    <Option value="1">Pepito</Option>
+                    <Option value="2">Marcus</Option>
+                    <Option value="3">Marge</Option>
+                  </Select>
+                  <FormHelperText>{errores.supervisor}</FormHelperText>
+                </FormControl>
 
                 <TextField
                   sx={{
@@ -152,6 +154,8 @@ const UserPage = () => {
                   }}
                   id="dni"
                   label="DNI"
+                  InputLabelProps={{required: true }}
+                  type="number"
                   value={userInfo?.dni}
                   onChange={(e) => handleChange(e, "dni")}
                   error={errores.dni}
@@ -162,13 +166,14 @@ const UserPage = () => {
                   sx={{
                     width: "80%",
                   }}
-                  id="email"
+                  id="Email"
                   label="Email"
+                  InputLabelProps={{required: true }}
                   type="email"
-                  value={userInfo?.email}
-                  onChange={(e) => handleChange(e, "email")}
-                  error={errores.email}
-                  helperText={errores.email}
+                  value={userInfo?.mail}
+                  onChange={(e) => handleChange(e, "mail")}
+                  error={errores.mail}
+                  helperText={errores.mail}
                 />
               </div>
               <div className="input-column-container">
@@ -178,6 +183,7 @@ const UserPage = () => {
                   }}
                   id="name"
                   label="Nombre"
+                  InputLabelProps={{required: true }}
                   value={userInfo?.name}
                   onChange={(e) => handleChange(e, "name")}
                   error={errores.name}
@@ -190,18 +196,21 @@ const UserPage = () => {
                   }}
                   id="lastname"
                   label="Apellido"
+                  InputLabelProps={{required: true }}
                   value={userInfo?.lastname}
                   onChange={(e) => handleChange(e, "lastname")}
                   error={errores.lastname}
                   helperText={errores.lastname}
                 />
 
+              {/* usar un date picker cuando haya más tiempo*/}
                 <TextField
                   sx={{
                     width: "80%",
                   }}
+                  InputLabelProps={{ shrink: true, required: true }}
                   id="Birth_date"
-                  label="Fecha de nacimiento"
+                  label="Fecha de nacimiento"        
                   type="date"
                   value={userInfo?.date}
                   onChange={(e) => handleChange(e, "Birth_date")}
@@ -214,7 +223,9 @@ const UserPage = () => {
                     width: "80%",
                   }}
                   id="cuil"
-                  label="cuil"
+                  label="Cuil"
+                  InputLabelProps={{required: true }}
+                  type="number"
                   value={userInfo?.ciul}
                   onChange={(e) => handleChange(e, "cuil")}
                   error={errores.cuil}
@@ -227,6 +238,8 @@ const UserPage = () => {
                   }}
                   id="phone"
                   label="Teléfono"
+                  InputLabelProps={{required: true }}
+                  type="number"
                   value={userInfo?.telephone}
                   onChange={(e) => handleChange(e, "phone")}
                   error={errores.phone}
@@ -239,10 +252,13 @@ const UserPage = () => {
                     width: "80%",
                   }}
                   id="password"
-                  label="Password"
+                  label="Contraseña"
+                  InputLabelProps={{required: true }}
                   type="password"
                   value={userInfo?.password}
                   onChange={(e) => handleChange(e, "password")}
+                  error={errores.password}
+                  helperText={errores.password}
                 />
 
                 <TextField
@@ -250,7 +266,7 @@ const UserPage = () => {
                     width: "80%",
                   }}
                   id="rePassword"
-                  label="Repeat password"
+                  label="Repita su contraseña"
                   type="password"
                   value={rePassword}
                   onChange={(e) => handleChange(e, "rePassword")}
@@ -262,6 +278,7 @@ const UserPage = () => {
                   sx={{
                     width: "80%",
                   }}
+                  InputLabelProps={{ shrink: true, required: true }}
                   id="Start_working_date"
                   label="Fecha de ingreso"
                   type="date"
@@ -270,6 +287,7 @@ const UserPage = () => {
                   error={errores.Start_working_date}
                   helperText={errores.Start_working_date}
                 />
+
               </div>
             </section>
             <section className="input-section">
@@ -280,6 +298,7 @@ const UserPage = () => {
                   }}
                   id="street"
                   label="Calle"
+                  InputLabelProps={{required: true }}
                   value={userInfo?.street}
                   onChange={(e) => handleChange(e, "street")}
                   error={errores.street}
@@ -304,6 +323,7 @@ const UserPage = () => {
                   }}
                   id="town"
                   label="Localidad"
+                  InputLabelProps={{required: true }}
                   value={userInfo?.town}
                   onChange={(e) => handleChange(e, "town")}
                   error={errores.town}
@@ -314,20 +334,10 @@ const UserPage = () => {
                   sx={{
                     width: "80%",
                   }}
-                  id="supervisorId"
-                  label="Supervisor"
-                  value={userInfo?.supervisorId}
-                  onChange={(e) => handleChange(e, "supervisorId")}
-                  error={errores.supervisor}
-                  helperText={errores.supervisor}
-                />
-
-                <TextField
-                  sx={{
-                    width: "80%",
-                  }}
                   id="Vacation_days"
                   label="Dias vacaciones"
+                  InputLabelProps={{required: true }}
+                  type="number"
                   value={userInfo?.Vacation_days}
                   onChange={(e) => handleChange(e, "Vacation_days")}
                   error={errores.Vacation_days}
@@ -341,6 +351,8 @@ const UserPage = () => {
                   }}
                   id="Street_number"
                   label="Altura"
+                  InputLabelProps={{required: true }}
+                  type="number"
                   value={userInfo?.streetNumber}
                   onChange={(e) => handleChange(e, "Street_number")}
                   error={errores.Street_number}
@@ -363,32 +375,6 @@ const UserPage = () => {
                   sx={{
                     width: "80%",
                   }}
-                  id="state"
-                  label="Estado"
-                  value={userInfo?.state}
-                  onChange={(e) => handleChange(e, "state")}
-                  error={errores.state}
-                  helperText={errores.state}
-                />
-              </div>
-              <div className="input-column-container">
-                <TextField
-                  sx={{
-                    width: "80%",
-                  }}
-                  id="postalCode"
-                  label="Codigo postal"
-                  value={userInfo?.postalCode}
-                  type="number"
-                  onChange={(e) => handleChange(e, "postalCode")}
-                  error={errores.postalCode}
-                  helperText={errores.postalCode}
-                />
-
-                <TextField
-                  sx={{
-                    width: "80%",
-                  }}
                   id="apartment"
                   label="Departamento"
                   value={userInfo?.apartment}
@@ -397,12 +383,41 @@ const UserPage = () => {
                   helperText={errores.apartment}
                 />
 
+              </div>
+              <div className="input-column-container">
+                <TextField
+                  sx={{
+                    width: "80%",
+                  }}
+                  id="Postal_code"
+                  label="Codigo postal"
+                  InputLabelProps={{required: true }}
+                  value={userInfo?.Postal_code}
+                  onChange={(e) => handleChange(e, "Postal_code")}
+                  error={errores.Postal_code}
+                  helperText={errores.Postal_code}
+                />
+
+                <TextField
+                  sx={{
+                    width: "80%",
+                  }}
+                  id="state"
+                  label="Provincia"
+                  InputLabelProps={{required: true }}
+                  value={userInfo?.state}
+                  onChange={(e) => handleChange(e, "state")}
+                  error={errores.state}
+                  helperText={errores.state}
+                />
+
                 <TextField
                   sx={{
                     width: "80%",
                   }}
                   id="country"
                   label="Pais"
+                  InputLabelProps={{required: true }}
                   value={userInfo?.country}
                   onChange={(e) => handleChange(e, "country")}
                   error={errores.country}
