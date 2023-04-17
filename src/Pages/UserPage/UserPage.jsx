@@ -119,6 +119,8 @@ const UserPage = () => {
             </div>
             <section className="input-section">
               <div className="input-column-container">
+
+                {/* sumar para sumar una imagen */}
                 <img src={pictureNotFound} className="profile-picture" alt="" />
 
                 <FormControl error={errores.supervisor}
@@ -154,7 +156,7 @@ const UserPage = () => {
                   }}
                   id="dni"
                   label="DNI"
-                  InputLabelProps={{required: true }}
+                  required
                   type="number"
                   value={userInfo?.dni}
                   onChange={(e) => handleChange(e, "dni")}
@@ -168,7 +170,7 @@ const UserPage = () => {
                   }}
                   id="Email"
                   label="Email"
-                  InputLabelProps={{required: true }}
+                  required
                   type="email"
                   value={userInfo?.mail}
                   onChange={(e) => handleChange(e, "mail")}
@@ -183,7 +185,7 @@ const UserPage = () => {
                   }}
                   id="name"
                   label="Nombre"
-                  InputLabelProps={{required: true }}
+                  required
                   value={userInfo?.name}
                   onChange={(e) => handleChange(e, "name")}
                   error={errores.name}
@@ -196,7 +198,7 @@ const UserPage = () => {
                   }}
                   id="lastname"
                   label="Apellido"
-                  InputLabelProps={{required: true }}
+                  required
                   value={userInfo?.lastname}
                   onChange={(e) => handleChange(e, "lastname")}
                   error={errores.lastname}
@@ -212,7 +214,7 @@ const UserPage = () => {
                   id="Birth_date"
                   label="Fecha de nacimiento"        
                   type="date"
-                  value={userInfo?.date}
+                  value={userInfo?.Birth_date}
                   onChange={(e) => handleChange(e, "Birth_date")}
                   error={errores.Birth_date}
                   helperText={errores.Birth_date}
@@ -224,7 +226,7 @@ const UserPage = () => {
                   }}
                   id="cuil"
                   label="Cuil"
-                  InputLabelProps={{required: true }}
+                  required
                   type="number"
                   value={userInfo?.ciul}
                   onChange={(e) => handleChange(e, "cuil")}
@@ -238,7 +240,6 @@ const UserPage = () => {
                   }}
                   id="phone"
                   label="Teléfono"
-                  InputLabelProps={{required: true }}
                   type="number"
                   value={userInfo?.telephone}
                   onChange={(e) => handleChange(e, "phone")}
@@ -253,7 +254,7 @@ const UserPage = () => {
                   }}
                   id="password"
                   label="Contraseña"
-                  InputLabelProps={{required: true }}
+                  required
                   type="password"
                   value={userInfo?.password}
                   onChange={(e) => handleChange(e, "password")}
@@ -267,6 +268,7 @@ const UserPage = () => {
                   }}
                   id="rePassword"
                   label="Repita su contraseña"
+                  required
                   type="password"
                   value={rePassword}
                   onChange={(e) => handleChange(e, "rePassword")}
@@ -298,7 +300,7 @@ const UserPage = () => {
                   }}
                   id="street"
                   label="Calle"
-                  InputLabelProps={{required: true }}
+                  required
                   value={userInfo?.street}
                   onChange={(e) => handleChange(e, "street")}
                   error={errores.street}
@@ -323,7 +325,7 @@ const UserPage = () => {
                   }}
                   id="town"
                   label="Localidad"
-                  InputLabelProps={{required: true }}
+                  required
                   value={userInfo?.town}
                   onChange={(e) => handleChange(e, "town")}
                   error={errores.town}
@@ -336,7 +338,7 @@ const UserPage = () => {
                   }}
                   id="Vacation_days"
                   label="Dias vacaciones"
-                  InputLabelProps={{required: true }}
+                  required
                   type="number"
                   value={userInfo?.Vacation_days}
                   onChange={(e) => handleChange(e, "Vacation_days")}
@@ -351,7 +353,7 @@ const UserPage = () => {
                   }}
                   id="Street_number"
                   label="Altura"
-                  InputLabelProps={{required: true }}
+                  required
                   type="number"
                   value={userInfo?.streetNumber}
                   onChange={(e) => handleChange(e, "Street_number")}
@@ -391,7 +393,6 @@ const UserPage = () => {
                   }}
                   id="Postal_code"
                   label="Codigo postal"
-                  InputLabelProps={{required: true }}
                   value={userInfo?.Postal_code}
                   onChange={(e) => handleChange(e, "Postal_code")}
                   error={errores.Postal_code}
@@ -404,7 +405,7 @@ const UserPage = () => {
                   }}
                   id="state"
                   label="Provincia"
-                  InputLabelProps={{required: true }}
+                  required
                   value={userInfo?.state}
                   onChange={(e) => handleChange(e, "state")}
                   error={errores.state}
@@ -417,7 +418,7 @@ const UserPage = () => {
                   }}
                   id="country"
                   label="Pais"
-                  InputLabelProps={{required: true }}
+                  required
                   value={userInfo?.country}
                   onChange={(e) => handleChange(e, "country")}
                   error={errores.country}
