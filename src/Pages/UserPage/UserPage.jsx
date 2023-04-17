@@ -116,11 +116,11 @@ const UserPage = () => {
               </Typography>
             </div>
             <section className="input-section">
-              <div className="input-column-container">
+              <div className="input-column-container-user">
                 {/* sumar para sumar una imagen */}
                 <img src={pictureNotFound} className="profile-picture" alt="" />
 
-                <FormControl error={errores.supervisor} sx={{ width: 240 }}>
+                <FormControl error={errores.supervisor} sx={{ width: 200 }}>
                   <Select
                     placeholder="Bajo supervisión  de:"
                     name="supervisor"
@@ -174,7 +174,7 @@ const UserPage = () => {
                   helperText={errores.mail}
                 />
               </div>
-              <div className="input-column-container">
+              <div className="input-column-container-inicio">
                 <TextField
                   sx={{
                     width: "80%",
@@ -243,7 +243,7 @@ const UserPage = () => {
                   helperText={errores.phone}
                 />
               </div>
-              <div className="input-column-container">
+              <div className="input-column-container-start">
                 <TextField
                   sx={{
                     width: "80%",
@@ -288,7 +288,7 @@ const UserPage = () => {
               </div>
             </section>
             <section className="input-section">
-              <div className="input-column-container">
+              <div className="input-column-container-calles">
                 <TextField
                   sx={{
                     width: "80%",
@@ -341,7 +341,7 @@ const UserPage = () => {
                   helperText={errores.Vacation_days}
                 />
               </div>
-              <div className="input-column-container">
+              <div className="input-column-container-ciudad">
                 <TextField
                   sx={{
                     width: "80%",
@@ -380,7 +380,7 @@ const UserPage = () => {
                   helperText={errores.apartment}
                 />
               </div>
-              <div className="input-column-container">
+              <div className="input-column-container-final">
                 <TextField
                   sx={{
                     width: "80%",
