@@ -2,7 +2,7 @@
 import { ListItem } from "@mui/material";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 import Lista from "../../components/lista/Lista";
-import "./DashboardPage.css";
+import "./DashboardPageSupervisor.css";
 import ListItemSolicitudes from "../../components/ListItemSolicitudes/ListItemSolicitudes";
 
 
