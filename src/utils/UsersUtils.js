@@ -5,7 +5,6 @@ export const getUsersBySupervisor = (supervisor) =>
 
 export const getSupervisors = () => UsersService.getUsers(`role=supervisor`);
 
-
 export const newUser = (data) => {
   console.log(data);
   const errors = {};
@@ -23,8 +22,7 @@ export const newUser = (data) => {
   const campoContieneNroDecimalONegativo = (input) => {
     if (data[input] < 0) {
       return true;
-    } else if (data[input] === Math.floor(data[input])) {
-      //cuando ingreso 20.5 en días de vacaciones hace algo raro y lo redondea a 18?
+    } else if (data[input] != Math.floor(data[input])) {
       return true;
     }
     return false;
@@ -126,12 +124,9 @@ export const newUser = (data) => {
   //fecha nacimiento
   if (data.Birth_date.length === 0) {
     errors.Birth_date = "La fecha de nacimiento no puede estar vacía.";
-  } else if (data.Birth_date > new Date()) {
-    // tengo que arreglar esto
-    console.log(data.Birth_date);
+  } else if (new Date(data.Birth_date) > new Date()) {
     errors.Birth_date =
       "La fecha de nacimiento no puede ser mayor a la actual.";
-    /////
   }
 
   //código postal
@@ -149,14 +144,13 @@ export const newUser = (data) => {
     errors.Vacation_days = "Debe ingresar días de vacaciones.";
   } else if (campoContieneNroDecimalONegativo("Vacation_days")) {
     errors.Vacation_days =
-      "Los dias de vacaciones deben ser 0 o un numero mayor.";
+      "Los dias de vacaciones deben ser un número entero y positivo.";
   }
 
   //supervisor
   if (data.supervisor === null)
     errors.supervisor = "Debe seleccionar un supervisor para el usuario.";
 
-    
   if (Object.keys(errors).length > 0) throw errors;
   // else return UsersService.newUser(data);
 };

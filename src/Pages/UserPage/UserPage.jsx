@@ -78,7 +78,7 @@ const UserPage = () => {
   const handleChange = (e, inputName) => {
     const info = userInfo;
     info[inputName] = e.target.value;
-    console.log(info);
+    console.log(userInfo);
     setUserInfo({ ...info });
   };
 
@@ -95,14 +95,12 @@ const UserPage = () => {
     //no sacar una funcion, sino dejar las dos pero que la segunda haga un fetch anterior
     //traer datos anteriores
     //permitir que se sobreescriban, validar, guardar
-
     // try {
     //   await getUsers();
     // } catch (error) {
     //   setErrores(error);
     //   console.log(error);
     // }
-
   };
 
   return (
@@ -119,12 +117,10 @@ const UserPage = () => {
             </div>
             <section className="input-section">
               <div className="input-column-container">
-
                 {/* sumar para sumar una imagen */}
                 <img src={pictureNotFound} className="profile-picture" alt="" />
 
-                <FormControl error={errores.supervisor}
-                sx={{width: 240}}>
+                <FormControl error={errores.supervisor} sx={{ width: 240 }}>
                   <Select
                     placeholder="Bajo supervisión  de:"
                     name="supervisor"
@@ -205,14 +201,14 @@ const UserPage = () => {
                   helperText={errores.lastname}
                 />
 
-              {/* usar un date picker cuando haya más tiempo*/}
+                {/* usar un date picker cuando haya más tiempo*/}
                 <TextField
                   sx={{
                     width: "80%",
                   }}
                   InputLabelProps={{ shrink: true, required: true }}
                   id="Birth_date"
-                  label="Fecha de nacimiento"        
+                  label="Fecha de nacimiento"
                   type="date"
                   value={userInfo?.Birth_date}
                   onChange={(e) => handleChange(e, "Birth_date")}
@@ -289,7 +285,6 @@ const UserPage = () => {
                   error={errores.Start_working_date}
                   helperText={errores.Start_working_date}
                 />
-
               </div>
             </section>
             <section className="input-section">
@@ -384,7 +379,6 @@ const UserPage = () => {
                   error={errores.apartment}
                   helperText={errores.apartment}
                 />
-
               </div>
               <div className="input-column-container">
                 <TextField
