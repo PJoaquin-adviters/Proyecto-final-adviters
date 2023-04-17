@@ -39,6 +39,10 @@
   width: 170px;
 }
 
+.selectError{
+  border: 1px solid darkred !important;
+}
+
 @media screen and (max-width: 767px) {
   .input-column-container {
     display: flex;
