@@ -118,6 +118,8 @@ const CargarLicenciaPage = () => {
                   defaultValue="None"
                   name="idLicenceType"
                   onChange={handleChange}
+                  error={errores.supervisor}
+                  helpertext={errores.supervisor}
                 >
                   <MenuItem value="None" disabled>
                     <em>SELECCIONE EL MOTIVO</em>
@@ -135,6 +137,7 @@ const CargarLicenciaPage = () => {
                 <Button variant="contained" component="label">
                   SUBIR ARCHIVO
                   <input type="file" hidden name="documentation" />
+                  value={form?.documentation}
                 </Button>
               </span>
             </div>
@@ -143,10 +146,16 @@ const CargarLicenciaPage = () => {
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">DESDE</Typography>
                   <input type="date" name="startDate" onChange={handleChange} />
+                  value={form?.startDate}
+                  error = {errores.startDate} 
+                  helpertext = {errores.startDate}/>
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>
                   <input type="date" name="endDate" onChange={handleChange} />
+                  value={form?.endDate}
+                  error = {errores.endDate} 
+                  helpertext = {errores.endDate}
                 </span>
               </div>
               <ButtonGroup
@@ -171,6 +180,9 @@ const CargarLicenciaPage = () => {
                 className="cl-textarea"
                 name="description"
                 onChange={handleChange}
+                value={form?.description}
+                error = {errores.description} 
+                helpertext = {errores.description}
               ></textarea>
             </div>
           </section>
