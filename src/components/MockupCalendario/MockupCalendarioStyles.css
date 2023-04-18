@@ -1,0 +1,14 @@
+.mock-calendar-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mock-calendar-holidayList{
+  text-align: left;
+  margin: 0.5em;
+  }
+
+  .mock-calendar-holidayList p{
+    text-align: left;
+    margin: 0 0.5em;
+    }

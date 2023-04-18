@@ -127,7 +127,7 @@ export default function HolidayCalendar({ holidays }) {
         loading={isLoading}
         onMonthChange={handleMonthChange}
         sx={{
-          border: "3px solid black",
+          border: "1px solid gray",
           borderRadius: "10px",
         }}
         renderLoading={() => <DayCalendarSkeleton />}

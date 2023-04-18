@@ -24,7 +24,7 @@ const LoginPage = () => {
     const user = {
       name : "iara",
       lastname : "pou", 
-      idRol: 1,
+      idRol: 0,
       userPicture: foto
     }
 

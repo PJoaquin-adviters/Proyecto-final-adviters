@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import HolidayCalendar from "../../components/HolidayCalendar/HolidayCalendar";
 import Typography from "@mui/material/Typography";
-import HolidayList from "../../components/HolidayList/HolidayList";
-
+import HolidayList from "../../components/HolidayList/HolidayList"
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./CalendarPage.css";
