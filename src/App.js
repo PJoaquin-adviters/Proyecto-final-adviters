@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
@@ -10,25 +10,22 @@ import Weather from "./components/Weather/Weather";
 import DashboardPageSupervisor from "./Pages/DashboardPageSupervisor/DashboardPageSupervisor";
 import CalendarPage from "./Pages/CalendarPage/CalendarPage";
 import AdministrarUsuariosPage from "./Pages/AdministrarUsuariosPage/AdministrarUsuariosPage";
-import UserContext from "./components/UserContext/UserContext"
+import UserTypeContext from "./context/UserTypeContext";
 
 function App() {
 
-  //id 0 es supervisor, 1 es usuario
-  const [idRol, setIdRol] = useState(0);
-
-  return (
-      <UserContext.Provider value={{idRol, setIdRol}}>
-        
+  const {idRol} = useContext(UserTypeContext);
+  
+  return (       
         <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Layout />}>
 
-              {(idRol===0) ? 
+              {(idRol === 0) ? 
                 <Route index element={<DashboardPageSupervisor />} /> :
-                <Route index element={<h1>Pagina usuario</h1>} />
+                <Route index element={<h1>hola</h1>} />
               }
 
               <Route path="/user" element={<User />} />
@@ -43,7 +40,6 @@ function App() {
           </Routes>
         </BrowserRouter>
         </div>
-      </UserContext.Provider>
   );
 }
 
