@@ -9,15 +9,23 @@ import Typography from "@mui/material/Typography";
 import ListaAusentesDashboard from "../../components/ListaAusentesDashboard/ListaAusentesDashboard";
 import ListaDashboardLicenciaUsuarios from "../../components/ListaDashboardLicenciaUsuarios/ListaDashboardLicenciaUsuarios";
 import "./DashboardPageUsuario.css";
+import MockupCalendario from "../../components/MockupCalendario/MockupCalendario";
+import MockupWeather from "../../components/MockupWeather/MockupWeather";
 import { Box, Button } from "@mui/material";
 const DashboardPageUsuarios = () => {
   return (
     <div className="dashUsuarios-container-Gral">
-      <div></div>
-      <div className="dashUsuarios-flex">
+
+      <div className="dashUsuarios-mockup-container">
+        <MockupWeather></MockupWeather>
+        <MockupCalendario></MockupCalendario>
+      </div>
+
+      <div className="dashUsuarios-lista-licencias">
         <ListaDashboardLicenciaUsuarios></ListaDashboardLicenciaUsuarios>
         <ListaDashboardLicenciaUsuarios></ListaDashboardLicenciaUsuarios>
       </div>
+
       <div className="dashUsuarios-flexColumn">
         <Button
           sx={{

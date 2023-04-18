@@ -7,13 +7,20 @@
 .dashUsuarios-container-Gral {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
   min-height: 50vh;
   padding: 1em;
 }
-.dashUsuarios-flex {
+
+.dashUsuarios-mockup-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  gap: 1em;
+}
+
+.dashUsuarios-lista-licencias{
+  display: flex;
   gap: 1em;
 }
 
@@ -29,12 +36,12 @@
   border: 1px solid gray;
   border-radius: 10px;
 }
-h2 {
+.ds-usu-vacaciones h2 {
   font-size: 26px;
   color: gray;
   font-weight: 400;
 }
-p {
+.ds-usu-vacaciones p {
   margin-top: 1em;
   font-size: 26px;
   font-weight: bold;
