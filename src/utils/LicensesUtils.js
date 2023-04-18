@@ -35,7 +35,7 @@ export const newLicense = (data) => {
   };
 
   //tipo de licencias
-  if (data.idLicenceType < 0 || data.idLicenceType>2){errors.idLicenceType = "Debes ingresar un tipo de licencia.";}
+  if (inputEstaVacio(data.idLicenceType)){errors.idLicenceType = "Debes ingresar un tipo de licencia.";}
 
   //fecha inicio
   if(inputEstaVacio(data.startDate)){errors.startDate = "La fecha debe estar completa.";}
