@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashUsuarios-container-Gral {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  min-height: 50vh;
+  padding: 1em;
+}
+.dashUsuarios-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.ds-usu-vacaciones {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: end;
+  gap: 1em;
+  position: relative;
+  width: 20vw;
+  margin-top: 1em;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+h2 {
+  font-size: 26px;
+  color: gray;
+  font-weight: 400;
+}
+p {
+  margin-top: 1em;
+  font-size: 26px;
+  font-weight: bold;
+  color: rgb(207, 21, 21);
+}
