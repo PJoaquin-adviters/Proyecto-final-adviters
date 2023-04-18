@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-
+import Select, { selectClasses } from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
+import {FormControl, FormHelperText, TextField} from "@mui/material";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import {
   Avatar,
   Badge,
-  Select,
   MenuItem,
   InputLabel,
   ButtonGroup,
@@ -34,14 +36,24 @@ const CargarLicenciaPage = () => {
     updatedBy: "",
   };
   const [form, setForm] = useState(formInicial);
-  const [errores, setErrores] = useState(null);
+  const [errores, setErrores] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
+  const handleChange = (e, nameInput) => {
+    // const { name, value } = e.target;
+
+    // if (e.target.id == ":r2:-option-0") {
+    //   name = "idLicenceType",
+    //   value = "0"
+    // } else if (e.target.id == ":r2:-option-1") {
+    //   name = "idLicenceType",
+    //   value = "1"
+    // }
+    console.log(e)
+
+    const info = form;
+    form[nameInput] = e.target.value;
+    console.log(info);
+    setForm({ ...info });
   };
 
   const handleSubmit = async () => {
@@ -49,6 +61,7 @@ const CargarLicenciaPage = () => {
       await newLicense(form);
     } catch (error) {
       setErrores(error);
+      console.log(error)
       // errores.foreach(err =>{
       //   console.log(err)});
     }
@@ -109,25 +122,37 @@ const CargarLicenciaPage = () => {
           </section>
           <section id="cl-carga-licencia">
             <div>
-              <span className="center-items">
-                <InputLabel id="cl-demo-select-small" sx={{}}>
+              <span className="center-items" style={{flexDirection: "column"}}>
+                <Typography variant="button">
                   TIPO DE LICENCIA
-                </InputLabel>
+                </Typography>
+                
+                <FormControl error={errores.supervisor}>
                 <Select
-                  labelId="cl-demo-select-small"
-                  defaultValue="None"
                   name="idLicenceType"
-                  onChange={handleChange}
-                  error={errores.supervisor}
-                  helpertext={errores.supervisor}
+                  placeholder="Bajo supervisión de: "
+                  indicator={<KeyboardArrowDown />}
+                  sx={{
+                    width: 240,
+                    height: 60,
+                    [`& .${selectClasses.indicator}`]: {
+                      transition: "0.2s",
+                      [`&.${selectClasses.expanded}`]: {
+                        transform: "rotate(-180deg)",
+                      },
+                    },
+                  }}
+                  onChange= {(e) => {handleChange(e, "idLicenceType")}}
                 >
-                  <MenuItem value="None" disabled>
-                    <em>SELECCIONE EL MOTIVO</em>
-                  </MenuItem>
-                  <MenuItem value={0}>Licencia médica</MenuItem>
-                  <MenuItem value={1}>Vacaciones</MenuItem>
-                  <MenuItem value={2}>Dia de estudio</MenuItem>
+                  <Option value={0}>Licencia médica</Option>
+                  <Option value={1}>Vacaciones</Option>
+                  <Option value={2}>Dia de estudio</Option>
                 </Select>
+                <FormHelperText>{errores.supervisor}</FormHelperText>
+                </FormControl>
+
+
+
               </span>
               <span className="center-items">
                 <Typography variant="h6">Archivo adjuntos</Typography>
@@ -136,8 +161,12 @@ const CargarLicenciaPage = () => {
                 </Typography>
                 <Button variant="contained" component="label">
                   SUBIR ARCHIVO
-                  <input type="file" hidden name="documentation" />
+                  <input type="file"
+                  hidden 
+                  name="documentation" 
                   value={form?.documentation}
+                  onChange={(e)=>{handleChange(e, "documentation")}}
+                  />
                 </Button>
               </span>
             </div>
@@ -145,17 +174,27 @@ const CargarLicenciaPage = () => {
               <div>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">DESDE</Typography>
-                  <input type="date" name="startDate" onChange={handleChange} />
+                  <TextField type="date" 
+                  InputLabelProps={{ shrink: true}}
+                  label="Día Inicio"
+                  name="startDate" 
+                  onChange={(e)=>{handleChange(e, "startDate")}}
                   value={form?.startDate}
-                  error = {errores.startDate} 
-                  helpertext = {errores.startDate}/>
+                  error = {(errores.startDate)&&true} 
+                  helpertext = {errores.startDate}
+                  />
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>
-                  <input type="date" name="endDate" onChange={handleChange} />
+                  <TextField type="date" 
+                  InputLabelProps={{ shrink: true}}
+                  label="Día Fin"
+                  name="endDate" 
+                  onChange={(e)=>{handleChange(e, "endDate")}}
                   value={form?.endDate}
-                  error = {errores.endDate} 
+                  error = {(errores.endDate&&true)} 
                   helpertext = {errores.endDate}
+                  />
                 </span>
               </div>
               <ButtonGroup
@@ -179,7 +218,7 @@ const CargarLicenciaPage = () => {
                 cols="50"
                 className="cl-textarea"
                 name="description"
-                onChange={handleChange}
+                onChange={(e)=>{handleChange(e, "description")}}
                 value={form?.description}
                 error = {errores.description} 
                 helpertext = {errores.description}
@@ -203,9 +242,9 @@ const CargarLicenciaPage = () => {
               SOLICITAR APROBACION
             </Button>
           </section>
-          <div className="cargarLicenciaPageErrors">
+          {/* <div className="cargarLicenciaPageErrors">
             {errores && errores.map((err, index) => <p key={index}>{err}</p>)}
-          </div>
+          </div> */}
         </main>
       </Grid>
 
