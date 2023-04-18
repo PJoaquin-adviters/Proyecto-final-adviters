@@ -10,13 +10,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import UserTypeContext from "../../context/UserTypeContext";
-
+import UserDataContext from "../../context/UserDataContext";
 // css
 import "./Header.css";
 
 const Header = () => {
-  const {idRol} = useContext(UserTypeContext);
+  const {dataUser} = useContext(UserDataContext);
+  const {idRol} = dataUser;
 
   const avatar = (
     <Avatar>

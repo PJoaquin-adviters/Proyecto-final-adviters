@@ -148,7 +148,7 @@ const CargarLicenciaPage = () => {
                   <input type="date" name="startDate" onChange={handleChange} />
                   value={form?.startDate}
                   error = {errores.startDate} 
-                  helpertext = {errores.startDate}/>
+                  helpertext = {errores.startDate}
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>

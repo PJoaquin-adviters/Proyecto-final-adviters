@@ -9,7 +9,7 @@ import "./CalendarPage.css";
 import { Button, TextField } from "@mui/material";
 import BasicModal from "../../components/BasicModal/BasicModal";
 import Loading from "../../components/Loading/Loading";
-import UserTypeContext from "../../context/UserTypeContext";
+import UserDataContext from "../../context/UserDataContext";
 
 const holidayFakeApi = [
   {
@@ -76,7 +76,8 @@ const holidayFakeApi = [
 
 const CalendarPage = () => {
   const [holidays, setHolidays] = useState(null);
-  const {idRol} = useContext(UserTypeContext);
+  const {dataUser} = useContext(UserDataContext);
+  
 
   useEffect(() => {
     setHolidays(holidayFakeApi);
@@ -100,7 +101,7 @@ const CalendarPage = () => {
                 Feriados
               </Typography>
 
-              {idRol === 0 && (
+              {dataUser.idRol === 0 && (
                 <>
                   <BasicModal
                     titulo="Crear nuevo Feriado"

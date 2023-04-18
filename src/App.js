@@ -10,11 +10,12 @@ import Weather from "./components/Weather/Weather";
 import DashboardPageSupervisor from "./Pages/DashboardPageSupervisor/DashboardPageSupervisor";
 import CalendarPage from "./Pages/CalendarPage/CalendarPage";
 import AdministrarUsuariosPage from "./Pages/AdministrarUsuariosPage/AdministrarUsuariosPage";
-import UserTypeContext from "./context/UserTypeContext";
+import UserDataContext from "./context/UserDataContext";
 
 function App() {
 
-  const {idRol} = useContext(UserTypeContext);
+  const {dataUser} = useContext(UserDataContext);
+  console.log(dataUser)
   
   return (       
         <div className="App">
@@ -23,9 +24,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Layout />}>
 
-              {(idRol === 0) ? 
+              {(dataUser.idRol === 0) ? 
                 <Route index element={<DashboardPageSupervisor />} /> :
-                <Route index element={<h1>hola</h1>} />
+                <Route index element={<h1>hola {dataUser.name} {dataUser.lastname}</h1>} />
               }
 
               <Route path="/user" element={<User />} />
