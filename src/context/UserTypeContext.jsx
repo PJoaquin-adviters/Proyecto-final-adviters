@@ -5,7 +5,7 @@ const UserTypeContext = createContext();
 const UserTypeProvider = ({ children }) => {
     //0 = supervisor
     //1 = usuario
-  const [idRol, setIdRol] = useState(1);
+  const [idRol, setIdRol] = useState(0);
 
   return (
     <UserTypeContext.Provider value={{ idRol, setIdRol }}>

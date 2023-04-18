@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 import LoginContext from "../../context/LoginContext";
 import fondo1 from "../../assets/img/fondo1.jpg";
 import logoAdviters from "../../assets/img/adviterslogo.png";
+import UserTypeContext from "../../context/UserTypeContext";
+import { getUsers } from "../../services/UsersService";
 
 const LoginPage = () => {
+  const {idRol, setIdRol} = useContext(UserTypeContext);
   const [userAuth, setUserAuth] = useState("");
   const [passwordAuth, setPasswordAuth] = useState("");
 
@@ -18,6 +21,8 @@ const LoginPage = () => {
   const handleClick = (e) => {
     e.preventDefault();
     abrirSesion(true);
+    //aca setear si el useState es 0 -> supervisor o 1-> usuario
+    //setIdRol()
     navigate("/");
   };
 
