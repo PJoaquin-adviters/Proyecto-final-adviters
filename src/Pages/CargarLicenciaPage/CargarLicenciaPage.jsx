@@ -127,29 +127,23 @@ const CargarLicenciaPage = () => {
                   TIPO DE LICENCIA
                 </Typography>
                 
-                <FormControl error={errores.supervisor}>
-                <Select
-                  name="idLicenceType"
-                  placeholder="Bajo supervisión de: "
-                  indicator={<KeyboardArrowDown />}
-                  sx={{
-                    width: 240,
-                    height: 60,
-                    [`& .${selectClasses.indicator}`]: {
-                      transition: "0.2s",
-                      [`&.${selectClasses.expanded}`]: {
-                        transform: "rotate(-180deg)",
-                      },
-                    },
-                  }}
-                  onChange= {(e) => {handleChange(e, "idLicenceType")}}
+
+                <TextField 
+                select
+                label="Licencia"
+                onChange= {(e) => {handleChange(e, "idLicenceType")}}
+                value={form?.idLicenceType}
+                indicator={<KeyboardArrowDown />}
+                placeholder="licencia"
+                name="idLicenceType"
+                error={errores.supervisor}
+                helpertext={errores.supervisor}
                 >
-                  <Option value={0}>Licencia médica</Option>
-                  <Option value={1}>Vacaciones</Option>
-                  <Option value={2}>Dia de estudio</Option>
-                </Select>
-                <FormHelperText>{errores.supervisor}</FormHelperText>
-                </FormControl>
+                  <MenuItem value={0}>Licencia médica</MenuItem>
+                  <MenuItem value={1}>Vacaciones</MenuItem>
+                  <MenuItem value={2}>Dia de estudio</MenuItem>
+
+                </TextField>
 
 
 
