@@ -1,0 +1,16 @@
+.mockWeather-container{
+    width: fit-content;
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+.mockWeather-clima{
+display: flex;
+align-items: center;
+gap: 1em;
+}
+
+.mockWeather-clima-detalle{
+    text-align: left;
+}
