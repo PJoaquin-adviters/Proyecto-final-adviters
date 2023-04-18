@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -10,11 +10,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
+import UserDataContext from "../../context/UserDataContext";
 // css
 import "./Header.css";
 
 const Header = () => {
+  const {dataUser} = useContext(UserDataContext);
+  const {idRol} = dataUser;
+
   const avatar = (
     <Avatar>
       <AccountCircleIcon />
@@ -35,18 +38,24 @@ const Header = () => {
     },
     {
       icono: <CalendarTodayRoundedIcon />,
-      text: "Cargar Licencias",
+      text: (idRol === 0)?"Cargar Licencias":"Solicitar Licencia",
       path: '/cargarLicencia'
     },
-    {
+    (idRol === 0)&&{
       icono: <GroupsRoundedIcon color="error" />,
       text: "Administrar Usuarios",
       path: '/administrarUsuarios'
     },
     {
       icono: <CalendarTodayRoundedIcon />,
-      text: "Mantenimiento de Calendario",
+      // si es supervisor, muestra mantenimiento. Sino, calendario
+      text: (idRol === 0)?"Mantenimiento de Calendario":"Calendario",
       path: '/calendar'
+    },
+    (idRol === 1)&&{
+      icono: <GroupsRoundedIcon color="error" />,
+      text: "Editar mi perfil",
+      path: '/user'
     },
   ];
   const notificationList = [

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage/LoginPage";
@@ -10,41 +10,43 @@ import Weather from "./components/Weather/Weather";
 import DashboardPageSupervisor from "./Pages/DashboardPageSupervisor/DashboardPageSupervisor";
 import CalendarPage from "./Pages/CalendarPage/CalendarPage";
 import AdministrarUsuariosPage from "./Pages/AdministrarUsuariosPage/AdministrarUsuariosPage";
-import UserContext from "./components/UserContext/UserContext";
-import DashboardPageUsuarios from "./Pages/DashboardPageUsuarios/DashboardPageUsuarios";
-import ListaDashboard from "./components/listaDashboard/ListaDashboard";
-import ListaLicenciaUsuarios from "./components/ListaLicenciaUsuarios/ListaLicenciaUsuarios";
-import ListaDashboardLicenciaUsuarios from "./components/ListaDashboardLicenciaUsuarios";
+import UserDataContext from "./context/UserDataContext";
 
 function App() {
-  //id 0 es supervisor, 1 es usuario
-  const [idRol, setIdRol] = useState(0);
+  const { dataUser } = useContext(UserDataContext);
+  console.log(dataUser);
 
   return (
-    <UserContext.Provider value={{ idRol, setIdRol }}>
-      <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<Layout />}>
-              {idRol === 1 ? (
-                <Route index element={<DashboardPageSupervisor />} />
-              ) : (
-                <Route index element={<DashboardPageUsuarios />} />
-              )}
-              <Route path="/user" element={<User />} />
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<Layout />}>
+            {dataUser.idRol === 0 ? (
+              <Route index element={<DashboardPageSupervisor />} />
+            ) : (
               <Route
-                path="/administrarUsuarios"
-                element={<AdministrarUsuariosPage />}
+                index
+                element={
+                  <h1>
+                    hola {dataUser.name} {dataUser.lastname}
+                  </h1>
+                }
               />
-              <Route path="/calendar" element={<CalendarPage />} />
-              <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
-              <Route path="*" element={<h1>LA PÁGINA NO EXISTE</h1>} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </UserContext.Provider>
+            )}
+
+            <Route path="/user" element={<User />} />
+            <Route
+              path="/administrarUsuarios"
+              element={<AdministrarUsuariosPage />}
+            />
+            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
+            <Route path="*" element={<h1>LA PÁGINA NO EXISTE</h1>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
