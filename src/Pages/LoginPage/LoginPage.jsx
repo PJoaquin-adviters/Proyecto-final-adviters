@@ -4,21 +4,34 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import waves from "../../assets/img/waves.png";
 import { useNavigate } from "react-router-dom";
-import LoginContext from "../../context/LoginContext";
 import fondo1 from "../../assets/img/fondo1.jpg";
 import logoAdviters from "../../assets/img/adviterslogo.png";
+import UserDataContext from "../../context/UserDataContext";
+import { getUsers } from "../../services/UsersService";
+import foto from "../../assets/img/fotoPerfil.jpg"
 
 const LoginPage = () => {
+  const {dataUser, abrirSesion, setDataUser, cerrarSesion } = useContext(UserDataContext);
   const [userAuth, setUserAuth] = useState("");
   const [passwordAuth, setPasswordAuth] = useState("");
 
   const navigate = useNavigate();
-  const { abrirSesion } = useContext(LoginContext);
 
   const handleClick = (e) => {
     e.preventDefault();
-    abrirSesion(true);
+
+    //aca pedimos el user según el mail + contraseña y lo mandamos
+    const user = {
+      name : "iara",
+      lastname : "pou", 
+      idRol: 1,
+      userPicture: foto
+    }
+
+    abrirSesion(user);
     navigate("/");
+
+
   };
 
   return (
