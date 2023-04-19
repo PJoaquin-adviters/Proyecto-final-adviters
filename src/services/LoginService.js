@@ -1,10 +1,11 @@
+import axios from "axios";
 import httpRequest from "./httpRequest";
 
 //LOGIN
-const auth = (username, password) => httpRequest.post('/auth', {username, password})
+const auth = (mail, password) => httpRequest.post("/auth", { mail, password });
 
 const methods = {
-    auth
-}
+  auth,
+};
 
 export default methods;

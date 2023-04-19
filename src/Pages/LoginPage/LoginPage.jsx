@@ -8,30 +8,43 @@ import fondo1 from "../../assets/img/fondo1.jpg";
 import logoAdviters from "../../assets/img/adviterslogo.png";
 import UserDataContext from "../../context/UserDataContext";
 import { getUsers } from "../../services/UsersService";
-import foto from "../../assets/img/fotoPerfil.jpg"
+import foto from "../../assets/img/fotoPerfil.jpg";
+import LoginService from "../../services/LoginService";
 
 const LoginPage = () => {
-  const {dataUser, abrirSesion, setDataUser, cerrarSesion } = useContext(UserDataContext);
+  const { dataUser, abrirSesion, setDataUser, cerrarSesion } =
+    useContext(UserDataContext);
   const [userAuth, setUserAuth] = useState("");
   const [passwordAuth, setPasswordAuth] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
 
-    //aca pedimos el user según el mail + contraseña y lo mandamos
-    const user = {
-      name : "iara",
-      lastname : "pou", 
-      idRol: 0,
-      userPicture: foto
+    setError("");
+
+    try {
+      const { headers } = await LoginService.auth(userAuth, passwordAuth);
+      const token = headers.get("Authorization");
+
+      localStorage.setItem("Authorization", token);
+
+      const user = {
+        name: headers.get("name"),
+        lastname: headers.get("lastname"),
+        idRol: headers.get("roleId"),
+        userPicture: headers.get("profilePicture"),
+      };
+
+      abrirSesion(user);
+      navigate("/");
+    } catch (e) {
+      const status = e.response?.status;
+      if (status == 401) return setError("Usuario y/o contraseña incorrectos.");
+      setError("Ocurrió un error. Intente nuevamente.");
     }
-
-    abrirSesion(user);
-    navigate("/");
-
-
   };
 
   return (
@@ -62,12 +75,14 @@ const LoginPage = () => {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              gap: "40px",
+              gap: "20px",
               backgroundColor: "whitesmoke",
               padding: "30px",
               borderRadius: "10px",
               marginRight: "1em",
               marginLeft: "1em",
+              width: "300px",
+              height: "400px",
             }}
             noValidate
             autoComplete="off"
@@ -78,20 +93,23 @@ const LoginPage = () => {
             <TextField
               id="outlined-required"
               label="Usuario"
-              defaultValue="User"
               onChange={(e) => {
                 setUserAuth(e.target.value);
               }}
+              error={error && true}
+              helperText={error}
             />
             <TextField
               id="outlined-required"
               label="Password"
               type="password"
-              defaultValue="password"
               onChange={(e) => {
                 setPasswordAuth(e.target.value);
               }}
+              error={error && true}
+              helperText={error}
             />
+
             <Box
               sx={{
                 display: "flex",

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import HolidayCalendar from "../../components/HolidayCalendar/HolidayCalendar";
 import Typography from "@mui/material/Typography";
-import HolidayList from "../../components/HolidayList/HolidayList"
+import HolidayList from "../../components/HolidayList/HolidayList";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./CalendarPage.css";
@@ -9,6 +9,7 @@ import { Button, TextField } from "@mui/material";
 import BasicModal from "../../components/BasicModal/BasicModal";
 import Loading from "../../components/Loading/Loading";
 import UserDataContext from "../../context/UserDataContext";
+import CalendarService from "../../services/CalendarService";
 
 const holidayFakeApi = [
   {
@@ -75,12 +76,21 @@ const holidayFakeApi = [
 
 const CalendarPage = () => {
   const [holidays, setHolidays] = useState(null);
-  const {dataUser} = useContext(UserDataContext);
-  
+  const { dataUser } = useContext(UserDataContext);
 
   useEffect(() => {
-    setHolidays(holidayFakeApi);
+    getHolidays();
   }, []);
+
+  const getHolidays = async () => {
+    try {
+      const { data } = await CalendarService.getHolidays();
+      setHolidays(data);
+    } catch (e) {
+      console.log(e);
+      alert("Ocurrió un error");
+    }
+  };
 
   return (
     <>
@@ -100,7 +110,7 @@ const CalendarPage = () => {
                 Feriados
               </Typography>
 
-              {dataUser.idRol === 0 && (
+              {dataUser.idRol == 0 && (
                 <>
                   <BasicModal
                     titulo="Crear nuevo Feriado"
@@ -150,7 +160,7 @@ const CalendarPage = () => {
                           variant="h5"
                           color="text.primary"
                         >
-                          {holiday.date} - {holiday.name}
+                          {holiday.date} - {holiday.descripcion}
                         </Typography>
                       </React.Fragment>
                     }

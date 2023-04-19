@@ -1,16 +1,20 @@
 import httpRequest from "./httpRequest";
 
 //GET HOLIDAYS
-const getHolidays = () => httpRequest.get('/calendar/holidays')
+const getHolidays = () => httpRequest.get("/feriado/");
 
 //SAVE NEW HOLIDAY
-const newHoliday = (name, date) => httpRequest.post('/calendar/holidays/new', {name, date})
+const newHoliday = (name, date) =>
+  httpRequest.post("/calendar/holidays/new", { name, date });
 
 //DELETE A HOLIDAY
-const deleteHoliday = (holidayId) => httpRequest.delete(`/calendar/holidays/${holidayId}`)
+const deleteHoliday = (holidayId) =>
+  httpRequest.delete(`/calendar/holidays/${holidayId}`);
 
 const methods = {
-    getHolidays, newHoliday, deleteHoliday
-}
+  getHolidays,
+  newHoliday,
+  deleteHoliday,
+};
 
 export default methods;
