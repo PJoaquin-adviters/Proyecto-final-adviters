@@ -104,7 +104,7 @@ const ListaDashboardLicenciaUsuarios = () => {
           borderLeft: "",
         }}
       >
-        Mi Historial De Solicitudes
+        Mis proximas licencias
       </Typography>
       <Divider></Divider>
       {ausentesLista.map((element, index) => (
