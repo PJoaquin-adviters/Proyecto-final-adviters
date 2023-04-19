@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import "./AdministrarUsuariosPage.css";
 import { Paper, Button } from "@mui/material";
@@ -7,9 +7,11 @@ import Jordi from "../../assets/img/jordi2.jpg";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NoUser from "../../assets/img/user-not-found.png";
+import UserDataContext from "../../context/UserDataContext";
 
 const AdministrarUsuariosPage = () => {
   const [userList, setUserList] = useState(null);
+  const { dataUser } = useContext(UserDataContext);
 
   const getData = () => {
     const data = [

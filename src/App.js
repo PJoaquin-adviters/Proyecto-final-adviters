@@ -12,6 +12,7 @@ import DashboardPageUsuarios from "./Pages/DashboardPageUsuarios/DashboardPageUs
 import CalendarPage from "./Pages/CalendarPage/CalendarPage";
 import AdministrarUsuariosPage from "./Pages/AdministrarUsuariosPage/AdministrarUsuariosPage";
 import UserDataContext from "./context/UserDataContext";
+import Protected from "./components/Protected/Protected";
 
 function App() {
   const { dataUser } = useContext(UserDataContext);
@@ -23,19 +24,45 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<Layout />}>
-            {dataUser.idRol == 0 ? (
+            {dataUser?.idRol == 0 ? (
               <Route index element={<DashboardPageSupervisor />} />
             ) : (
               <Route index element={<DashboardPageUsuarios />} />
             )}
 
-            <Route path="/user" element={<User />} />
+            <Route
+              path="/user"
+              element={
+                //<Protected>
+                <User />
+                //</Protected>
+              }
+            />
             <Route
               path="/administrarUsuarios"
-              element={<AdministrarUsuariosPage />}
+              element={
+                <Protected>
+                  <AdministrarUsuariosPage />
+                </Protected>
+              }
             />
-            <Route path="/calendar" element={<CalendarPage />} />
-            <Route path="/cargarLicencia" element={<CargarLicenciaPage />} />
+
+            <Route
+              path="/calendar"
+              element={
+                <Protected>
+                  <CalendarPage />
+                </Protected>
+              }
+            />
+            <Route
+              path="/cargarLicencia"
+              element={
+                <Protected>
+                  <CargarLicenciaPage />
+                </Protected>
+              }
+            />
             <Route path="*" element={<h1>LA PÁGINA NO EXISTE</h1>} />
           </Route>
         </Routes>
