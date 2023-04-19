@@ -2,47 +2,175 @@
   width: 100%;
   display: flex;
   justify-content: center;
+
   align-items: center;
   padding-top: 20px;
 }
 .form-user input {
-  width: 200px;
+  width: 220px;
 }
 
 .form-user {
   width: 95%;
   border: 1px solid #79797983;
-  min-height: 85vh;
+  min-height: 95vh;
   max-width: 900px;
   background-color: white;
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 30px;
+  justify-content: center;
+  align-items: center;
+
   /* justify-content: center;
   align-items: center; */
 }
 
+.input-column-container-calles {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: start;
+  width: 30%;
+  min-height: 10vh;
+}
+.input-column-container-ciudad {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: start;
+  width: 30%;
+  min-height: 10vh;
+  margin-bottom: 5em;
+}
 .input-section {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
 }
-
+.input-column-container-user {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 3em;
+  width: 30%;
+  min-height: 10vh;
+}
 .input-column-container {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 30%;
+  min-height: 10vh;
 }
 
-.input-column-container img {
-  width: 170px;
+.input-column-container-user img {
+  width: 130px;
+  position: relative;
+  left: 30px;
+}
+.input-column-container-start {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 2.8em;
+  width: 30%;
+  min-height: 10vh;
+}
+.input-column-container-inicio {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 30%;
+  margin-top: 2.6em;
+  min-height: 10vh;
+}
+.input-column-container-final {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 5.3em;
+  width: 30%;
+  min-height: 10vh;
+  position: relative;
+  bottom: 85px;
+}
+.selectError {
+  border: 1px solid darkred !important;
 }
 
 @media screen and (max-width: 767px) {
   .input-column-container {
     display: flex;
     align-items: center;
+    margin-left: 2em;
     width: 100%;
+  }
+  .input-column-container-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    gap: 30px;
+    margin-top: 3em;
+    width: 100%;
+  }
+  .input-column-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2em;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .input-column-container-user img {
+    width: 170px;
+  }
+  .input-column-container-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    gap: 30px;
+    margin-top: 2.2em;
+    width: 100%;
+  }
+  .input-column-container-inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    gap: 30px;
+    width: 100%;
+    margin-top: 2.2em;
+  }
+  .input-column-container-calles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    gap: 30px;
+    width: 100%;
+    margin-top: 2.2em;
+  }
+  .input-column-container-ciudad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    gap: 30px;
+    width: 100%;
+    margin-top: 2.2em;
+  }
+  .input-column-container-final {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 2em;
+    gap: 30px;
+    width: 100%;
+    margin-top: 2.2em;
   }
 }

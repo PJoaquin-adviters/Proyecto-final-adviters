@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashUsuarios-container-Gral {
+  display: flex;
+  justify-content: space-around;
+  min-height: 50vh;
+  padding: 1em;
+}
+
+.dashUsuarios-mockup-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  gap: 1em;
+}
+
+.dashUsuarios-lista-licencias{
+  display: flex;
+  gap: 1em;
+}
+
+.ds-usu-vacaciones {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: end;
+  gap: 1em;
+  position: relative;
+  width: 20vw;
+  margin-top: 1em;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+.ds-usu-vacaciones h2 {
+  font-size: 26px;
+  color: gray;
+  font-weight: 400;
+}
+.ds-usu-vacaciones p {
+  margin-top: 1em;
+  font-size: 26px;
+  font-weight: bold;
+  color: rgb(207, 21, 21);
+}

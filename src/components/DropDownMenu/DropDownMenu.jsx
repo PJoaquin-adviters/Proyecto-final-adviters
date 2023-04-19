@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
@@ -45,13 +46,16 @@ const CustomizedMenus = ({ name, botonIcono, listItems }) => {
         {listItems.map((el, index) => (
           <MenuItem
             key={`${name}-${index}`}
-            onClick={() => redirect(el.path, el.text)}
+            // onClick={() => redirect(el.path, el.text)}
             sx={{
               display: "flex",
               gap: "20px",
             }}
           >
+            <Link to={el.path}>
             {el.icono} {el.text}
+            </Link>
+            {/* poner link, link to.  */}
           </MenuItem>
         ))}
       </Menu>

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HolidayCalendar from "../../components/HolidayCalendar/HolidayCalendar";
 import Typography from "@mui/material/Typography";
-import HolidayList from "../../components/HolidayList/HolidayList";
-
+import HolidayList from "../../components/HolidayList/HolidayList"
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./CalendarPage.css";
 import { Button, TextField } from "@mui/material";
 import BasicModal from "../../components/BasicModal/BasicModal";
 import Loading from "../../components/Loading/Loading";
+import UserDataContext from "../../context/UserDataContext";
 
 const holidayFakeApi = [
   {
@@ -75,6 +75,8 @@ const holidayFakeApi = [
 
 const CalendarPage = () => {
   const [holidays, setHolidays] = useState(null);
+  const {dataUser} = useContext(UserDataContext);
+  
 
   useEffect(() => {
     setHolidays(holidayFakeApi);
@@ -98,40 +100,45 @@ const CalendarPage = () => {
                 Feriados
               </Typography>
 
-              <BasicModal
-                titulo="Crear nuevo Feriado"
-                nombreBtn="Nuevo Feriado"
-              >
+              {dataUser.idRol === 0 && (
                 <>
-                  <div className="modal-input-container">
-                    <TextField
-                      id="date"
-                      label="Fecha"
-                      defaultValue="2023-02-18"
-                      type="date"
-                      // value={}
-                      // onChange={}
-                    />
-                    <TextField
-                      id="motivo"
-                      defaultValue="motivo"
-                      label="Motivo"
-                      type="text"
-                      // value={}
-                      // onChange={}
-                    />
-                  </div>
-                  <div className="calendar-modal-btn-container">
-                    <Button variant="contained" color="error">
-                      Cancelar
-                    </Button>
-                    <Button variant="contained" color="success">
-                      Confirmar
-                    </Button>
-                  </div>
+                  <BasicModal
+                    titulo="Crear nuevo Feriado"
+                    nombreBtn="Nuevo Feriado"
+                  >
+                    <>
+                      <div className="modal-input-container">
+                        <TextField
+                          id="date"
+                          label="Fecha"
+                          defaultValue="2023-02-18"
+                          type="date"
+                          // value={}
+                          // onChange={}
+                        />
+                        <TextField
+                          id="motivo"
+                          defaultValue="motivo"
+                          label="Motivo"
+                          type="text"
+                          // value={}
+                          // onChange={}
+                        />
+                      </div>
+                      <div className="calendar-modal-btn-container">
+                        <Button variant="contained" color="error">
+                          Cancelar
+                        </Button>
+                        <Button variant="contained" color="success">
+                          Confirmar
+                        </Button>
+                      </div>
+                    </>
+                  </BasicModal>
                 </>
-              </BasicModal>
+              )}
             </div>
+
             <HolidayList>
               {holidays.map((holiday, index) => (
                 <ListItem key={`holiday-${index}`} divider={true}>

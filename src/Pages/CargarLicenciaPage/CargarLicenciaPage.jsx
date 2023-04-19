@@ -190,6 +190,7 @@ const CargarLicenciaPage = () => {
                       {errores.startDate}
                     </Typography>
                   )}
+
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>
