@@ -22,7 +22,7 @@ const ListaAusentesDashboard = () => {
     <div>
       <List
         sx={{
-          width: "20vw",
+          Width: "82vw",
           maxWidth: 360,
           bgcolor: "background.paper",
           border: "1px solid gray",
