@@ -1,10 +1,11 @@
-import { ListItem, TextField } from "@mui/material";
+import { IconButton, InputAdornment, ListItem, TextField } from "@mui/material";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 import Lista from "../../components/lista/Lista";
 import "./DashboardPageSupervisor.css";
 import ListItemSolicitudes from "../../components/ListItemSolicitudes/ListItemSolicitudes";
 import MockupCalendario from "../../components/MockupCalendario/MockupCalendario";
 import MockupWeather from "../../components/MockupWeather/MockupWeather";
+import SearchIcon from "@mui/icons-material/Search";
 
 const DashboardPage = () => {
   const solicitudesPendientes = [
@@ -52,15 +53,25 @@ const DashboardPage = () => {
   return (
     <section className="dashboardSup-container-gral">
       <div className="dashboardSup-mockup-container">
+        <div className="dash-busqueda">
+          <TextField
+            id="outlined-basic"
+            label="Busqueda"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon></SearchIcon>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
         <MockupWeather></MockupWeather>
         <MockupCalendario></MockupCalendario>
       </div>
 
       <div className="lista-dashboard-container">
-        <div className="hola">
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        </div>
-
         <div className="lista-dashboard">
           <Lista titulo="Solicitudes Pendientes">
             {solicitudesPendientes.map((el, index) => (

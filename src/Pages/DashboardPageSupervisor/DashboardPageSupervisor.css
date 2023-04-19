@@ -7,10 +7,10 @@
   align-items: center;
   padding-left: 2em;
 }
-.hola {
+.dash-busqueda {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 .lista-dashboard {
   width: 350px;
