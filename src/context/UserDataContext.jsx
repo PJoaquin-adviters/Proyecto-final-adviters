@@ -17,10 +17,10 @@ const UserDataProvider = ({ children }) => {
     //id = 0 supervisor, 1 es user
     // axios.post()
     setDataUser({
-      name: user.name,
-      lastname: user.lastname,
-      idRol: user.idRol,
-      userPicture: user.userPicture,
+      name: user?.name,
+      lastname: user?.lastname,
+      idRol: user?.idRol,
+      userPicture: user?.userPicture,
     });
   };
 
