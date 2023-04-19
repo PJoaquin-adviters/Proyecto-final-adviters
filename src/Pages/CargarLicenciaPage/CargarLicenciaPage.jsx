@@ -268,9 +268,6 @@ const CargarLicenciaPage = () => {
               SOLICITAR APROBACION
             </Button>
           </section>
-          {/* <div className="cargarLicenciaPageErrors">
-            {errores && errores.map((err, index) => <p key={index}>{err}</p>)}
-          </div> */}
         </main>
       </Grid>
 

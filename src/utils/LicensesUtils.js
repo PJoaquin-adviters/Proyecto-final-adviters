@@ -20,12 +20,12 @@ export const newLicense = (data) => {
       fecha
     );
   };
-  const inputEstaVacio = (inputValor) =>{
-    if(inputValor.length === 0){
+  const inputEstaVacio = (inputValor) => {
+    if (inputValor.length === 0) {
       return true;
     }
     return false;
-  }
+  };
   const getTotalDiasLicencia = (fechaInicio, fechaFin) => {
     const diferenciaDiasMilisegundos = Math.abs(fechaInicio - fechaFin);
     const totalDiasLicencia = Math.ceil(
@@ -35,12 +35,19 @@ export const newLicense = (data) => {
   };
 
   //tipo de licencias
-  if (inputEstaVacio(data.idLicenceType)){errors.idLicenceType = "Debes ingresar un tipo de licencia.";}
+  if (inputEstaVacio(data.idLicenceType)) {
+    errors.idLicenceType = "Debes ingresar un tipo de licencia.";
+  }
 
   //fecha inicio
-  if(inputEstaVacio(data.startDate)){errors.startDate = "La fecha debe estar completa.";}
-  else if(data.startDate > data.endDate){errors.startDate = "La fecha de inicio de licencia debe ser mayor a la de finalización.";}
-  else if (new Date(data.startDate) < new Date()){errors.startDate = "La fecha de inicio de licencia no puede haber pasado.";}
+  if (inputEstaVacio(data.startDate)) {
+    errors.startDate = "La fecha debe estar completa.";
+  } else if (data.startDate > data.endDate) {
+    errors.startDate =
+      "La fecha de inicio de licencia debe ser mayor a la de finalización.";
+  } else if (new Date(data.startDate) < new Date()) {
+    errors.startDate = "La fecha de inicio de licencia no puede haber pasado.";
+  }
 
   // if (!formatoFechaEsValido(data.startDate) || !formatoFechaEsValido(data.endDate)
   // )
@@ -49,13 +56,22 @@ export const newLicense = (data) => {
   //   );
 
   //fecha final
-  if(inputEstaVacio(data.endDate)){errors.endDate = "La fecha debe estar completa.";}
-  else if (data.totalAvailableDates > getTotalDiasLicencia(data.startDate, data.endDate)){ errors.endDate = "La licencia cargada no debe exceder el número de días totales"}
-  
-  //description
-  if(inputEstaVacio(data.description)){errors.description = "Debes ingresar una descripción.";}
-  
+  if (inputEstaVacio(data.endDate)) {
+    errors.endDate = "La fecha debe estar completa.";
+  } else if (
+    data.totalAvailableDates >
+    getTotalDiasLicencia(data.startDate, data.endDate)
+  ) {
+    errors.endDate =
+      "La licencia cargada no debe exceder el número de días totales";
+  }
 
-  if( Object.keys(errors).length > 0) throw errors;
+  //description
+  if (inputEstaVacio(data.description)) {
+    errors.description = "Debes ingresar una descripción.";
+  }
+
+  console.log(errors);
+  if (Object.keys(errors).length > 0) throw errors;
   //else return LicensesService.newLicense(data);
 };
