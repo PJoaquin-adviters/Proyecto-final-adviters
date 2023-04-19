@@ -8,7 +8,7 @@
 
 #cl-contenedor #cl-titulo {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
 }
 
@@ -20,6 +20,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+
   gap: 2em;
 }
 #cl-carga-licencia div {
@@ -37,7 +38,16 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: 5px;
+}
+
+.Layout-Descripcion-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 #cl-fecha-licencia {
@@ -118,6 +128,10 @@
   }
   .cl-aside-licencia {
     margin-top: 1em;
+  }
+  #cl-carga-licencia {
+    display: flex;
+    align-items: center;
   }
 }
 

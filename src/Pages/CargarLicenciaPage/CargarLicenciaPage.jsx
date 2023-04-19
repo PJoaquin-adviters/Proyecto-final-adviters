@@ -190,7 +190,6 @@ const CargarLicenciaPage = () => {
                       {errores.startDate}
                     </Typography>
                   )}
-
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>
@@ -225,7 +224,7 @@ const CargarLicenciaPage = () => {
                 <Button disabled>{24} dias disponibles</Button>
               </ButtonGroup>
             </div>
-            <div>
+            <div className="Layout-Descripcion-column">
               <Typography variant="h6">DESCRIPCION</Typography>
               <textarea
                 placeholder="Ingresa más información acerca de la licencia."
@@ -260,14 +259,19 @@ const CargarLicenciaPage = () => {
               <Avatar alt="avatar-usuario" src={scaloniUrl} />
               <Typography variant="overline">LIONEL SCALONI</Typography>
             </div>
-            <Button
-              variant="contained"
-              id="cl-boton-licencia"
-              sx={{ width: "fit-content", padding: "1em 2.5em" }}
-              onClick={handleSubmit}
-            >
-              SOLICITAR APROBACION
-            </Button>
+            <div id="cl-boton-licencia">
+              <Button
+                variant="contained"
+                sx={{
+                  width: "fit-content",
+                  padding: "1em 2.5em",
+                  float: "right",
+                }}
+                onClick={handleSubmit}
+              >
+                SOLICITAR APROBACION
+              </Button>
+            </div>
           </section>
         </main>
       </Grid>
