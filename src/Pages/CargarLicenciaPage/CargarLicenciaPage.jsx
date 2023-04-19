@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-
+import Select, { selectClasses } from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
+import { FormControl, FormHelperText, TextField } from "@mui/material";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import {
   Avatar,
   Badge,
-  Select,
   MenuItem,
   InputLabel,
   ButtonGroup,
@@ -34,21 +36,31 @@ const CargarLicenciaPage = () => {
     updatedBy: "",
   };
   const [form, setForm] = useState(formInicial);
-  const [errores, setErrores] = useState(null);
+  const [errores, setErrores] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
+  const handleChange = (e, nameInput) => {
+    // const { name, value } = e.target;
+
+    // if (e.target.id == ":r2:-option-0") {
+    //   name = "idLicenceType",
+    //   value = "0"
+    // } else if (e.target.id == ":r2:-option-1") {
+    //   name = "idLicenceType",
+    //   value = "1"
+    // }
+    const info = form;
+    form[nameInput] = e.target.value;
+    console.log(info);
+    setForm({ ...info });
   };
 
   const handleSubmit = async () => {
+    console.log(form);
     try {
       await newLicense(form);
     } catch (error) {
       setErrores(error);
+      console.log(error);
       // errores.foreach(err =>{
       //   console.log(err)});
     }
@@ -109,25 +121,34 @@ const CargarLicenciaPage = () => {
           </section>
           <section id="cl-carga-licencia">
             <div>
-              <span className="center-items">
-                <InputLabel id="cl-demo-select-small" sx={{}}>
-                  TIPO DE LICENCIA
-                </InputLabel>
-                <Select
-                  labelId="cl-demo-select-small"
-                  defaultValue="None"
+              <span
+                className="center-items"
+                style={{ flexDirection: "column" }}
+              >
+                <Typography variant="button">TIPO DE LICENCIA</Typography>
+
+                <TextField
+                  select
+                  label="Licencia"
+                  onChange={(e) => {
+                    handleChange(e, "idLicenceType");
+                  }}
+                  error={errores.idLicenceType && true}
+                  value={form?.idLicenceType}
+                  indicator={<KeyboardArrowDown />}
+                  placeholder="licencia"
                   name="idLicenceType"
-                  onChange={handleChange}
-                  error={errores.supervisor}
-                  helpertext={errores.supervisor}
+                  helpertext={errores.idLicenceType}
                 >
-                  <MenuItem value="None" disabled>
-                    <em>SELECCIONE EL MOTIVO</em>
-                  </MenuItem>
                   <MenuItem value={0}>Licencia médica</MenuItem>
                   <MenuItem value={1}>Vacaciones</MenuItem>
                   <MenuItem value={2}>Dia de estudio</MenuItem>
-                </Select>
+                </TextField>
+                {errores.idLicenceType && (
+                  <Typography variant="caption" color={"darkred"}>
+                    {errores.idLicenceType}
+                  </Typography>
+                )}
               </span>
               <span className="center-items">
                 <Typography variant="h6">Archivo adjuntos</Typography>
@@ -136,8 +157,15 @@ const CargarLicenciaPage = () => {
                 </Typography>
                 <Button variant="contained" component="label">
                   SUBIR ARCHIVO
-                  <input type="file" hidden name="documentation" />
-                  value={form?.documentation}
+                  <input
+                    type="file"
+                    hidden
+                    name="documentation"
+                    value={form?.documentation}
+                    onChange={(e) => {
+                      handleChange(e, "documentation");
+                    }}
+                  />
                 </Button>
               </span>
             </div>
@@ -145,17 +173,43 @@ const CargarLicenciaPage = () => {
               <div>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">DESDE</Typography>
-                  <input type="date" name="startDate" onChange={handleChange} />
-                  value={form?.startDate}
-                  error = {errores.startDate} 
-                  helpertext = {errores.startDate}
+                  <TextField
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    label="Día Inicio"
+                    name="startDate"
+                    error={errores.startDate && true}
+                    onChange={(e) => {
+                      handleChange(e, "startDate");
+                    }}
+                    value={form?.startDate}
+                    helpertext={errores.startDate}
+                  />
+                  {errores.startDate && (
+                    <Typography variant="caption" color={"darkred"}>
+                      {errores.startDate}
+                    </Typography>
+                  )}
+
                 </span>
                 <span className="cl-calendario-widget">
                   <Typography variant="overline">HASTA</Typography>
-                  <input type="date" name="endDate" onChange={handleChange} />
-                  value={form?.endDate}
-                  error = {errores.endDate} 
-                  helpertext = {errores.endDate}
+                  <TextField
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    label="Día Fin"
+                    name="endDate"
+                    onChange={(e) => {
+                      handleChange(e, "endDate");
+                    }}
+                    value={form?.endDate}
+                    error={errores.endDate && true}
+                  />
+                  {errores.endDate && (
+                    <Typography variant="caption" color={"darkred"}>
+                      {errores.endDate}
+                    </Typography>
+                  )}
                 </span>
               </div>
               <ButtonGroup
@@ -179,11 +233,23 @@ const CargarLicenciaPage = () => {
                 cols="50"
                 className="cl-textarea"
                 name="description"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e, "description");
+                }}
+                style={
+                  errores.description && {
+                    border: "1px solid darkred",
+                    borderRadius: "5px",
+                  }
+                }
                 value={form?.description}
-                error = {errores.description} 
-                helpertext = {errores.description}
+                helpertext={errores.description}
               ></textarea>
+              {errores.description && (
+                <Typography variant="caption" color={"darkred"}>
+                  {errores.description}
+                </Typography>
+              )}
             </div>
           </section>
           <section id="cl-responsable-licencia">
@@ -203,9 +269,6 @@ const CargarLicenciaPage = () => {
               SOLICITAR APROBACION
             </Button>
           </section>
-          <div className="cargarLicenciaPageErrors">
-            {errores && errores.map((err, index) => <p key={index}>{err}</p>)}
-          </div>
         </main>
       </Grid>
 
