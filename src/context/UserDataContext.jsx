@@ -6,7 +6,7 @@ const UserDataProvider = ({ children }) => {
   const innitData = {
     name: "",
     lastname: "",
-    idRol: null,
+    idRol: /*null*/ 0,
     userPicture: "",
   };
 
@@ -22,7 +22,6 @@ const UserDataProvider = ({ children }) => {
       idRol: user.idRol,
       userPicture: user.userPicture,
     });
-
   };
 
   const cerrarSesion = () => {
@@ -30,12 +29,11 @@ const UserDataProvider = ({ children }) => {
     setDataUser(null);
   };
 
-    return (
-      <UserDataContext.Provider value={{ dataUser, abrirSesion, cerrarSesion }}>
-        {children}
-      </UserDataContext.Provider>
-    );
-  
+  return (
+    <UserDataContext.Provider value={{ dataUser, abrirSesion, cerrarSesion }}>
+      {children}
+    </UserDataContext.Provider>
+  );
 };
 
 export { UserDataProvider };
