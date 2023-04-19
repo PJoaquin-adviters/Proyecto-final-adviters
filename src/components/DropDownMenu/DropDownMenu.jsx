@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
+import "./DropDownMenuStyle.css";
 
 const CustomizedMenus = ({ name, botonIcono, listItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const redirect = (path, title) => {
-    window.location.href = `${path}?title=${title.toUpperCase()}`
-  }
+    window.location.href = `${path}?title=${title.toUpperCase()}`;
+  };
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -53,7 +54,7 @@ const CustomizedMenus = ({ name, botonIcono, listItems }) => {
             }}
           >
             <Link to={el.path}>
-            {el.icono} {el.text}
+              {el.icono} {el.text}
             </Link>
             {/* poner link, link to.  */}
           </MenuItem>
