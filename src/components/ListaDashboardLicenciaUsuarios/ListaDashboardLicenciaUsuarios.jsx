@@ -51,7 +51,7 @@ const ListaDashboardLicenciaUsuarios = () => {
       username: "joe",
       startDate: "22/2",
       endDate: "22/3",
-      idLicenceType: "estudio",
+      idLicenceType: "vacaciones",
     },
     {
       img: "null",
@@ -65,14 +65,30 @@ const ListaDashboardLicenciaUsuarios = () => {
       username: "joe",
       startDate: "22/2",
       endDate: "22/3",
-      idLicenceType: "estudio",
+      idLicenceType: "vacaciones",
+    },
+    {
+      img: "null",
+      username: "joe",
+      startDate: "22/2",
+      endDate: "22/3",
+      idLicenceType: "vacaciones",
+    },
+    {
+      img: "null",
+      username: "joe",
+      startDate: "22/2",
+      endDate: "22/3",
+      idLicenceType: "vacaciones",
     },
   ];
   return (
     <List
       sx={{
-        width: "20vw",
+        minWidth: "22vw",
         maxWidth: 360,
+        maxHeight: "90vh",
+        overflowY: "scroll",
         bgcolor: "background.paper",
         border: "1px solid gray",
         borderRadius: "10px",
