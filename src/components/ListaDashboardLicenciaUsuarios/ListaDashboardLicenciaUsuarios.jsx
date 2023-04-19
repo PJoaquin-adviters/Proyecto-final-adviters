@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import jordi from "../../assets/img/jordi2.jpg";
 import "../../components/ListaDashboardLicenciaUsuarios/listaDashboardLicenciaUsuarios.css";
 
-const ListaDashboardLicenciaUsuarios = () => {
+const ListaDashboardLicenciaUsuarios = ({ titulo }) => {
   const ausentesLista = [
     {
       img: "null",
@@ -104,7 +104,7 @@ const ListaDashboardLicenciaUsuarios = () => {
           borderLeft: "",
         }}
       >
-        Mis proximas licencias
+        {titulo}
       </Typography>
       <Divider></Divider>
       {ausentesLista.map((element, index) => (

@@ -11,9 +11,9 @@ const ListItemCargaLicencia = ({
 }) => {
   const totalDiasTomados = endDate - startDate;
   const coloresIconoLicencia = {
-    vacaciones: "purple",
-    "dias estudio": "yellow",
-    "licencia medica": "blue",
+    Salud: "purple",
+    Estudio: "yellow",
+    Vacaciones: "blue",
   };
 
   const editarLicencia = () => {
@@ -43,9 +43,6 @@ const ListItemCargaLicencia = ({
         </p>
       </span>
       <span>
-        <p className="item-cl-texto-secundario">
-          dias tomados: <b>{totalDiasTomados}</b>
-        </p>
         <p className="item-cl-fecha">
           <b>{startDate}</b> - <b>{endDate}</b>
         </p>

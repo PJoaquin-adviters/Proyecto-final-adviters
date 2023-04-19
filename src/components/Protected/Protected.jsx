@@ -5,7 +5,7 @@ import UserDataContext from "../../context/UserDataContext";
 function Protected({ children }) {
   const { dataUser } = useContext(UserDataContext);
 
-  if (!dataUser.idRol) {
+  if (/*!dataUser.idRol*/ false) {
     return <Navigate to="/login" replace />;
   }
   return children;

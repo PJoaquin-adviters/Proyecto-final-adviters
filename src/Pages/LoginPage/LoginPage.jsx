@@ -36,6 +36,8 @@ const LoginPage = () => {
         lastname: headers.get("lastname"),
         idRol: headers.get("roleId"),
         userPicture: headers.get("profilePicture"),
+        idUser: headers.get("idUser"),
+        supervisorId: headers.get("supervisorId"),
       };
 
       abrirSesion(user);

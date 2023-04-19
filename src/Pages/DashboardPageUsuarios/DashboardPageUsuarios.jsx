@@ -15,15 +15,14 @@ import { Box, Button } from "@mui/material";
 const DashboardPageUsuarios = () => {
   return (
     <div className="dashUsuarios-container-Gral">
-
       <div className="dashUsuarios-mockup-container">
         <MockupWeather></MockupWeather>
         <MockupCalendario></MockupCalendario>
       </div>
 
       <div className="dashUsuarios-lista-licencias">
-        <ListaDashboardLicenciaUsuarios></ListaDashboardLicenciaUsuarios>
-        <ListaDashboardLicenciaUsuarios></ListaDashboardLicenciaUsuarios>
+        <ListaDashboardLicenciaUsuarios titulo="Mi historial de solicitudes"></ListaDashboardLicenciaUsuarios>
+        <ListaDashboardLicenciaUsuarios titulo="Mis próximas licencias"></ListaDashboardLicenciaUsuarios>
       </div>
 
       <div className="dashUsuarios-flexColumn">

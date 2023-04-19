@@ -2,7 +2,7 @@ import "./Loading.css";
 
 const Loading = () => {
   return (
-    <div class="loadingContainer">
+    <div className="loadingContainer">
       <img
         src={require("./img/advitersLogo.png")}
         alt="icono de la empresa"
