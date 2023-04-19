@@ -17,7 +17,7 @@ import TaskIcon from "@mui/icons-material/Task";
 import "./Header.css";
 
 const Header = () => {
-  const { dataUser } = useContext(UserDataContext);
+  const { dataUser, cerrarSesion } = useContext(UserDataContext);
   const { idRol } = dataUser;
 
   const avatar = (
@@ -64,10 +64,14 @@ const Header = () => {
     {
       icono: <AccountCircleIcon />,
       text: "Editar mi perfil",
+      // La idea es que lleve a userPage con edicion de perfil, tipo, que agarre solo al campo del usuario en la base y modifique eso
+      path: "/user?title=EDITAR PERFIL",
     },
     {
       icono: <CloseIcon />,
       text: "Cerrar sesión",
+      onclick: cerrarSesion,
+      path: "/login",
     },
   ];
 
