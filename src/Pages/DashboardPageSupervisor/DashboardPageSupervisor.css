@@ -1,27 +1,34 @@
 .lista-dashboard-container {
   display: flex;
-  width: 100%;
+  width: 100vw;
   gap: 50px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-left: 2em;
 }
-
+.hola {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
 .lista-dashboard {
-  width: 450px;
+  width: 350px;
 }
-
+.lista-dashboard-licencias-aprobadas {
+  width: 350px;
+}
 .btn-check-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.dashboardSup-container-gral{
-    display: flex;
-    gap: 1em;
-    padding: 1em;
-}  
+.dashboardSup-container-gral {
+  display: flex;
+  gap: 1em;
+  padding: 1em;
+}
 
 .dashboardSup-mockup-container {
   display: flex;
@@ -31,4 +38,17 @@
   gap: 1em;
 }
 
-
+@media screen and (max-width: 767px) {
+  .dashboardSup-container-gral {
+    display: flex;
+    flex-direction: column;
+  }
+  .lista-dashboard-container {
+    width: 300px;
+    padding-right: 1em;
+  }
+  .dashboardSup-mockup-container {
+    width: 280px;
+    padding-left: 1em;
+  }
+}

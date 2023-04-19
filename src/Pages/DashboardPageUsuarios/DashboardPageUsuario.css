@@ -6,7 +6,8 @@
 
 .dashUsuarios-container-Gral {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  width: 100%;
   min-height: 100%;
   padding: 1em;
 }
@@ -66,11 +67,12 @@
     width: 85vw;
   }
   .dashUsuarios-lista-licencias {
-    width: 82vw;
+    width: 100vw;
     align-items: end;
     height: 80vh;
     position: relative;
     top: 180px;
+    padding-right: 1.4em;
   }
   .dashUsuarios-mockup-container {
     display: flex;
