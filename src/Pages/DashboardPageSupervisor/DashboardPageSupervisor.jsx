@@ -13,6 +13,8 @@ import CalendarService from '../../services/CalendarService'
 import Loading from "../../components/Loading/Loading";
 import HolidayList from "../../components/HolidayList/HolidayList";
 import UserDataContext from "../../context/UserDataContext";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardPage = () => {
 
@@ -126,13 +128,13 @@ const DashboardPage = () => {
   }
 
   const displayError = () => {
-    alert("Ocurrió un error. Recarge la página e intente nuevamente.")
+    toast.error("¡Lo sentimos, ocurrió un error :(!")
   }
 
   useEffect(() => {
-    // getLicenciasPendientes()
-    // getLicenciasAprobadas()
-    // getFeriados()
+    getLicenciasPendientes()
+    getLicenciasAprobadas()
+    getFeriados()
   }, [])
 
   return (
@@ -199,6 +201,7 @@ const DashboardPage = () => {
         </div>
       </section>
       }
+      <ToastContainer/>
     </>
   );
 };

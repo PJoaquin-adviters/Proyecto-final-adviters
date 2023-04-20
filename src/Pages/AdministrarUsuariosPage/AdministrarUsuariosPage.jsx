@@ -11,6 +11,7 @@ import UserDataContext from "../../context/UserDataContext";
 import { useNavigate } from "react-router-dom";
 import UsersService from '../../services/UsersService'
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdministrarUsuariosPage = () => {
   const [userList, setUserList] = useState(null);
@@ -30,7 +31,7 @@ const AdministrarUsuariosPage = () => {
     } catch (e) {
 
       console.log(e)
-      alert('Ocurrió un error')
+      toast.error("¡Lo sentimos, ocurrió un error :(!")
 
     }
 
@@ -72,6 +73,7 @@ const AdministrarUsuariosPage = () => {
 
   return (
     <div className="admUsuariosContainer">
+      <ToastContainer/>
       {!userList ? (
         <Loading />
       ) : (
@@ -124,7 +126,6 @@ const AdministrarUsuariosPage = () => {
           </div>
         </div>
       )}
-      <ToastContainer/>
     </div>
   );
 };

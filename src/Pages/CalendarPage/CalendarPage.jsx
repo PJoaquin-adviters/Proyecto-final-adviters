@@ -10,69 +10,8 @@ import BasicModal from "../../components/BasicModal/BasicModal";
 import Loading from "../../components/Loading/Loading";
 import UserDataContext from "../../context/UserDataContext";
 import CalendarService from "../../services/CalendarService";
-
-const holidayFakeApi = [
-  {
-    id: "sdkjfhskdfa",
-    name: "año Nuevo",
-    date: "2023-01-01",
-  },
-  {
-    id: "sdkjfhskdfa",
-    name: "feriado inventado",
-    date: "2023-01-02",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "carnaval",
-    date: "2023-02-20",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "carnaval",
-    date: "2023-02-21",
-  },
-  {
-    id: "sdkjfhskdfa",
-    name: "Día de la Memoria",
-    date: "2023-03-24",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Viernes Santo",
-    date: "2023-04-07",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Día del Trabajador",
-    date: "2023-05-01",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Día de la Revolución de Mayo",
-    date: "2023-05-25",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Puente",
-    date: "2023-05-26",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Puente",
-    date: "2023-06-19",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Puente",
-    date: "2023-06-20",
-  },
-  {
-    id: "askfjasnfdsdf",
-    name: "Día de la Independencia",
-    date: "2023-07-09",
-  },
-];
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const CalendarPage = () => {
   const [holidays, setHolidays] = useState(null);
@@ -89,7 +28,7 @@ const CalendarPage = () => {
       setHolidays(data);
     } catch (e) {
       console.log(e);
-      alert("Ocurrió un error");
+      toast.error("¡Lo sentimos, ocurrió un error :(!")
     }
   };
 
@@ -172,6 +111,7 @@ const CalendarPage = () => {
           </div>
         </section>
       )}
+      <ToastContainer/>
     </>
   );
 };
