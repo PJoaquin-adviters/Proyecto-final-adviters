@@ -11,7 +11,7 @@ const newUser = (data) => httpRequest.post("/users/new", data);
 const updateUser = (userId, data) => httpRequest.put(`/users/${userId}`, data);
 
 //DELETE USER
-const deleteUser = (userId) => httpRequest.delete(`/users/${userId}`);
+const deleteUser = (id) => httpRequest.delete(`/usuario`, {data: {id}});
 
 //GET USER ROLES
 const getUserRoles = () => httpRequest.get("/users/roles");

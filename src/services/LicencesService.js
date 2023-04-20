@@ -30,9 +30,9 @@ const getLicenceByUser = (userId) =>
 const getLicencesBySupervisor = (userId) =>
   httpRequest.get(`/licencia/team/${userId}`);
 
-const getPendingLicences = () => httpRequest.get("/list?status=0");
+const getPendingLicences = () => httpRequest.get("/licencia/list?status=0");
 
-const getApprovedLicences = () => httpRequest.get("/list?status=1");
+const getApprovedLicences = () => httpRequest.get("/licencia/list?status=1");
 
 const methods = {
   newLicence,

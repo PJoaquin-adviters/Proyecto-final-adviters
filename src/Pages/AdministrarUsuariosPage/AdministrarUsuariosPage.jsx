@@ -1,9 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useId, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import "./AdministrarUsuariosPage.css";
-import { Paper, Button } from "@mui/material";
-import { Height } from "@mui/icons-material";
-import Jordi from "../../assets/img/jordi2.jpg";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NoUser from "../../assets/img/user-not-found.png";
@@ -13,7 +19,13 @@ import UsersService from "../../services/UsersService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const AdministrarUsuariosPage = () => {
+  const [deleteDialog, setDeleteDialog] = useState({});
+
   const [userList, setUserList] = useState(null);
   const { dataUser, setAppTitle } = useContext(UserDataContext);
   setAppTitle("ADMINISTRAR USUARIOS");
@@ -57,7 +69,31 @@ const AdministrarUsuariosPage = () => {
 
   const editUser = (userId) => redirect(`/user?function=1&userId=${userId}`);
 
-  const deleteUser = (userId) => {};
+  const deleteUser = (user, index) => {
+    setDeleteDialog({
+      open: true,
+      userId: user.id,
+      username: user.name,
+      userLastname: user.last_name,
+      index,
+    });
+  };
+
+  const confirmDeleteUser = async () => {
+    const userId = deleteDialog.userId;
+    const index = deleteDialog.index;
+
+    setDeleteDialog({});
+
+    try {
+      await UsersService.deleteUser(userId);
+      setUserList(userList.filter((item) => item.id != userId));
+      toast.success("Usuario eliminado correctamente.");
+    } catch (e) {
+      console.log(e);
+      toast.error("No se pudo eliminar el usuario. Intente nuevamente.");
+    }
+  };
 
   useEffect(() => {
     getData();
@@ -91,7 +127,7 @@ const AdministrarUsuariosPage = () => {
                         src={usuario.img ? usuario.img : NoUser}
                         alt=""
                       />
-                      <h3 className="tittlename">{`${usuario.name} ${usuario.lastName}`}</h3>
+                      <h3 className="tittlename">{`${usuario.name} ${usuario.last_name}`}</h3>
                     </div>
                     <h3 className="cargo">{usuario.role}</h3>
                     <div className="admuItemButtons">
@@ -103,7 +139,7 @@ const AdministrarUsuariosPage = () => {
                       </button>
                       <button
                         className="buttonDelete"
-                        onClick={() => deleteUser(usuario.id)}
+                        onClick={() => deleteUser(usuario, index)}
                       >
                         <DeleteIcon sx={{ color: "#ff7b7b" }} />
                       </button>
@@ -118,6 +154,23 @@ const AdministrarUsuariosPage = () => {
           </div>
         </div>
       )}
+      <Dialog
+        open={deleteDialog.open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={() => setDeleteDialog({})}
+      >
+        <DialogTitle>CONFIRMAR ELIMINACIÓN</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`¿Seguro que desea eliminar a ${deleteDialog.username} ${deleteDialog.userLastname} del sistema?`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialog({})}>CANCELAR</Button>
+          <Button onClick={confirmDeleteUser}>ELIMINAR</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

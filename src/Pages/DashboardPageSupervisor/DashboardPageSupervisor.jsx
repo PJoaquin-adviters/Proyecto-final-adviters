@@ -77,10 +77,11 @@ const DashboardPage = () => {
   const getLicenciasPendientes = async () => {
     try {
       const { data } = await LicencesService.getPendingLicences();
+      console.log();
       savingData.licenciasPendientes = data;
       checkIfAllDataWasGetted();
     } catch (e) {
-      console.log(e);
+      console.log("error en pendientes", e);
       displayError();
     }
   };
@@ -91,7 +92,7 @@ const DashboardPage = () => {
       savingData.licenciasAprobadas = data;
       checkIfAllDataWasGetted();
     } catch (e) {
-      console.log(e);
+      console.log("error en aprobadas", e);
       displayError();
     }
   };
@@ -102,7 +103,7 @@ const DashboardPage = () => {
       savingData.feriados = data;
       checkIfAllDataWasGetted();
     } catch (e) {
-      console.log(e);
+      console.log("error en feriados", e);
       displayError();
     }
   };
@@ -121,11 +122,11 @@ const DashboardPage = () => {
     toast.error("¡Lo sentimos, ocurrió un error :(!");
   };
 
-  // useEffect(() => {
-  //   getLicenciasPendientes()
-  //   getLicenciasAprobadas()
-  //   getFeriados()
-  // }, [])
+  useEffect(() => {
+    getLicenciasPendientes();
+    getLicenciasAprobadas();
+    getFeriados();
+  }, []);
 
   return (
     <>

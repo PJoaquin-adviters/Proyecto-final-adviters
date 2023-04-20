@@ -35,8 +35,12 @@ const CargarLicenciaPage = () => {
   const [errores, setErrores] = useState({});
   const [userLicences, setUserLicences] = useState(null);
   const [supervisorData, setSupervisorData] = useState(null);
-  const { dataUser, setAppTitle } = useContext(UserDataContext);
-  setAppTitle("CARGAR LICENCIA")
+  const {
+    dataUser,
+    dataUser: { idRol },
+    setAppTitle,
+  } = useContext(UserDataContext);
+  setAppTitle("CARGAR LICENCIA");
   const redirect = useNavigate();
 
   const getUserLicences = async () => {
@@ -76,15 +80,6 @@ const CargarLicenciaPage = () => {
   };
 
   const handleChange = (e, nameInput) => {
-    // const { name, value } = e.target;
-
-    // if (e.target.id == ":r2:-option-0") {
-    //   name = "idLicenceType",
-    //   value = "0"
-    // } else if (e.target.id == ":r2:-option-1") {
-    //   name = "idLicenceType",
-    //   value = "1"
-    // }
     const info = form;
     form[nameInput] = e.target.value;
     console.log(info);
@@ -105,8 +100,6 @@ const CargarLicenciaPage = () => {
   };
 
   useEffect(() => {
-    const { idRol } = dataUser;
-
     idRol == 0 ? getLicencesBySupervisor() : getUserLicences();
   }, []);
 

@@ -21,10 +21,15 @@ import UserDataContext from "../../context/UserDataContext";
 
 const UserPage = () => {
   const { setAppTitle } = useContext(UserDataContext);
-  setAppTitle("EDITAR USUARIO");
-  const esconderTitulo = () => {
-    //  (setAppTitle() == ("EDITAR USUARIO")) ? (setAppTitle("CREAR USUARIO"));
-  };
+  const funcion = new URL(window.location).searchParams.get("function");
+
+  const titles = [
+    "CREAR NUEVO USUARIO",
+    "EDITAR UN USUARIO",
+    "EDITAR MI PERFIL",
+  ];
+
+  setAppTitle(titles[funcion]);
 
   const initData = {
     //id?

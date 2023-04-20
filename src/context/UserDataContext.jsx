@@ -17,15 +17,14 @@ const UserDataProvider = ({ children }) => {
   const [appTitle, setAppTitle] = useState("");
 
   const abrirSesion = (user) => {
-    // setDataUser({
-    //   name: user?.name,
-    //   lastname: user?.lastname,
-    //   idRol: user?.idRol,
-    //   userPicture: user?.userPicture,
-    //   idUser: user?.idUser,
-    //   supervisorId: user?.supervisorId,
-    // });
-    setDataUser(innitData);
+    setDataUser({
+      name: user?.name,
+      lastname: user?.lastname,
+      idRol: user?.idRol,
+      userPicture: user?.userPicture,
+      idUser: user?.idUser,
+      supervisorId: user?.supervisorId,
+    });
   };
 
   const cerrarSesion = () => {
