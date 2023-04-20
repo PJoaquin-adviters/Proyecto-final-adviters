@@ -17,17 +17,15 @@ const UserDataProvider = ({ children }) => {
   const [appTitle, setAppTitle] = useState("");
 
   const abrirSesion = (user) => {
-    //setear la data con la base
-    //id = 0 supervisor, 1 es user
-    // axios.post()
-    setDataUser({
-      name: user?.name,
-      lastname: user?.lastname,
-      idRol: user?.idRol,
-      userPicture: user?.userPicture,
-      idUser: user?.idUser,
-      supervisorId: user?.supervisorId,
-    });
+    // setDataUser({
+    //   name: user?.name,
+    //   lastname: user?.lastname,
+    //   idRol: user?.idRol,
+    //   userPicture: user?.userPicture,
+    //   idUser: user?.idUser,
+    //   supervisorId: user?.supervisorId,
+    // });
+    setDataUser(innitData);
   };
 
   const cerrarSesion = () => {
@@ -37,7 +35,9 @@ const UserDataProvider = ({ children }) => {
   };
 
   return (
-    <UserDataContext.Provider value={{ appTitle, setAppTitle, dataUser, abrirSesion, cerrarSesion }}>
+    <UserDataContext.Provider
+      value={{ appTitle, setAppTitle, dataUser, abrirSesion, cerrarSesion }}
+    >
       {children}
     </UserDataContext.Provider>
   );

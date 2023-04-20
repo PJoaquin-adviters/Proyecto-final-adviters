@@ -18,7 +18,7 @@ const getUserRoles = () => httpRequest.get("/users/roles");
 
 const getUserById = (id) => httpRequest.get(`/usuario/${id}`);
 
-const getUsersBySupervisor = (id) => httpRequest.get(`usuario/supervisor/${id}`)
+const getUsersBySupervisor = (id) => httpRequest.get(`/usuario/supervisor/${id}`)
 
 
 
