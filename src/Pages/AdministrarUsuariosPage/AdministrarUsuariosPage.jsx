@@ -9,32 +9,25 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import NoUser from "../../assets/img/user-not-found.png";
 import UserDataContext from "../../context/UserDataContext";
 import { useNavigate } from "react-router-dom";
-import UsersService from '../../services/UsersService'
+import UsersService from "../../services/UsersService";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const AdministrarUsuariosPage = () => {
   const [userList, setUserList] = useState(null);
   const { dataUser, setAppTitle } = useContext(UserDataContext);
-  setAppTitle("ADMINISTRAR USUARIOS")
+  setAppTitle("ADMINISTRAR USUARIOS");
   const redirect = useNavigate();
 
   const getData = async () => {
-
-    
-
     try {
-
-      const {data} = await UsersService.getUsersBySupervisor(dataUser.idUser)
+      const { data } = await UsersService.getUsersBySupervisor(dataUser.idUser);
+      console.log(data);
       setUserList(data);
-
     } catch (e) {
-
-      console.log(e)
-      toast.error("¡Lo sentimos, ocurrió un error :(!")
-
+      console.log(e);
+      toast.error("¡Lo sentimos, ocurrió un error :(!");
     }
-
 
     // const data = [
     //   {
@@ -63,17 +56,17 @@ const AdministrarUsuariosPage = () => {
     // setUserList(data);
   };
 
-  const editUser = (userId) => {};
+  const editUser = (userId) => redirect(`/user?function=1&userId=${userId}`);
 
   const deleteUser = (userId) => {};
 
   useEffect(() => {
-      getData();
+    getData();
   }, []);
 
   return (
     <div className="admUsuariosContainer">
-      <ToastContainer/>
+      <ToastContainer />
       {!userList ? (
         <Loading />
       ) : (
@@ -83,7 +76,7 @@ const AdministrarUsuariosPage = () => {
             <Button
               variant="contained"
               color="success"
-              onClick={() => redirect('/user')}
+              onClick={() => redirect("/user?function=0")}
             >
               Crear Usuario
             </Button>

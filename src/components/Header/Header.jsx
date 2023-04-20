@@ -60,7 +60,7 @@ const Header = () => {
       icono: <AccountCircleIcon />,
       text: "Editar mi perfil",
       // La idea es que lleve a userPage con edicion de perfil, tipo, que agarre solo al campo del usuario en la base y modifique eso
-      path: "/user?title=EDITAR PERFIL",
+      path: "/user",
     },
     {
       icono: <CloseIcon />,

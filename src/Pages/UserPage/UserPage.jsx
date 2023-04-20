@@ -20,9 +20,11 @@ import { BorderColor } from "@mui/icons-material";
 import UserDataContext from "../../context/UserDataContext";
 
 const UserPage = () => {
-
-  const {setAppTitle} = useContext(UserDataContext);
-  setAppTitle("EDITAR USUARIO")
+  const { setAppTitle } = useContext(UserDataContext);
+  setAppTitle("EDITAR USUARIO");
+  const esconderTitulo = () => {
+    //  (setAppTitle() == ("EDITAR USUARIO")) ? (setAppTitle("CREAR USUARIO"));
+  };
 
   const initData = {
     //id?
@@ -50,7 +52,7 @@ const UserPage = () => {
     Vacation_days: null,
     Available_vacations_days: "",
     Available_study_days: "",
-    supervisor: null
+    supervisor: null,
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]
@@ -110,11 +112,6 @@ const UserPage = () => {
       ) : (
         <section className="profile-page">
           <form className="form-user">
-            <div>
-              <Typography variant="h2" align="center">
-                {isNew ? "Crear Usuario" : "Editar Usuario"}
-              </Typography>
-            </div>
             <section className="input-section">
               <div className="input-column-container-user">
                 {/* sumar para sumar una imagen */}
