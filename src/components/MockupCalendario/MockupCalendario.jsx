@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import CalendarService from "../../services/CalendarService";
+import "./MockupCalendarioStyles.css"
 
 const MockupCalendario = () => {
   const [holidays, setHolidays] = useState([]);
@@ -38,7 +39,6 @@ const MockupCalendario = () => {
       style={{
         width: "400px",
         overflow: "hidden",
-        height: "auto",
       }}
     >
       <FullCalendar
@@ -49,7 +49,6 @@ const MockupCalendario = () => {
           right: "next",
         }}
         initialView="dayGridMonth"
-        //que los días sean una letra
         events={holidays}
       />
     </div>
@@ -57,3 +56,4 @@ const MockupCalendario = () => {
 };
 
 export default MockupCalendario;
+

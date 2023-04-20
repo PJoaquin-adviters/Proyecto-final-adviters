@@ -12,3 +12,8 @@
   text-align: left;
   margin: 0 0.5em;
 }
+
+.fc-view-harness, .fc-view-harness-active {
+  height: 500px !important;
+}
+
