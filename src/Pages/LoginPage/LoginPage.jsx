@@ -1,6 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./LoginPage.css";
-import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import logoAdviters from "../../assets/img/adviterslogo.png";
@@ -36,7 +42,7 @@ const LoginPage = () => {
         idUser: headers.get("idUser"),
         supervisorId: headers.get("supervisorId"),
       };
-      
+
       abrirSesion(user);
       navigate("/");
     } catch (e) {
@@ -106,7 +112,7 @@ const LoginPage = () => {
               }}
             />
 
-            <p style={{color: 'red', fontSize: '12px'}}>{error}</p>
+            <p style={{ color: "red", fontSize: "12px" }}>{error}</p>
 
             <Box
               sx={{
@@ -117,23 +123,25 @@ const LoginPage = () => {
               }}
             >
               <>
-                {loading ? <CircularProgress/>
-                : <Button
-                variant="contained"
-                endIcon={<ArrowForwardIcon />}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  minWidth: "15vw",
-                }}
-                onClick={(e) => {
-                  handleClick(e);
-                }}
-              >
-                Iniciar
-              </Button>}
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <Button
+                    variant="contained"
+                    endIcon={<ArrowForwardIcon />}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      minWidth: "15vw",
+                    }}
+                    onClick={(e) => {
+                      handleClick(e);
+                    }}
+                  >
+                    Iniciar
+                  </Button>
+                )}
               </>
-              
             </Box>
           </Box>
         </div>

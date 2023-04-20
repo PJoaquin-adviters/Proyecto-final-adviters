@@ -11,10 +11,11 @@ const CustomizedMenus = ({ name, botonIcono, listItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const navigate = useNavigate();
-  
 
   const redirect = (path, title) => {
-    navigate(path)
+    title != "Editar mi perfil"
+      ? navigate(path)
+      : navigate(`${path}?function=2`);
   };
 
   const open = Boolean(anchorEl);

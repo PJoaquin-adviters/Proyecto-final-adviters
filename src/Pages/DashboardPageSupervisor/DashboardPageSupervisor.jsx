@@ -1,4 +1,11 @@
-import { IconButton, InputAdornment, ListItem, ListItemText, TextField, Typography } from "@mui/material";
+import {
+  IconButton,
+  InputAdornment,
+  ListItem,
+  ListItemText,
+  TextField,
+  Typography,
+} from "@mui/material";
 import ListItemCargaLicencia from "../../components/ListItemCargaLicencia/ListItemCargaLicencia";
 import Lista from "../../components/lista/Lista";
 import "./DashboardPageSupervisor.css";
@@ -8,18 +15,17 @@ import MockupWeather from "../../components/MockupWeather/MockupWeather";
 import SearchIcon from "@mui/icons-material/Search";
 import { Fragment, useContext, useEffect, useState } from "react";
 
-import LicencesService from '../../services/LicencesService'
-import CalendarService from '../../services/CalendarService'
+import LicencesService from "../../services/LicencesService";
+import CalendarService from "../../services/CalendarService";
 import Loading from "../../components/Loading/Loading";
 import HolidayList from "../../components/HolidayList/HolidayList";
 import UserDataContext from "../../context/UserDataContext";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const DashboardPage = () => {
-
   const { setAppTitle } = useContext(UserDataContext);
-  setAppTitle("DASHBOARD")
+  setAppTitle("DASHBOARD");
 
   const solicitudesPendientes = [
     {
@@ -68,140 +74,133 @@ const DashboardPage = () => {
   const [state, setState] = useState(null);
   let savingData = {};
 
-
   const getLicenciasPendientes = async () => {
-
     try {
-
-      const {data} = await LicencesService.getPendingLicences();
+      const { data } = await LicencesService.getPendingLicences();
       savingData.licenciasPendientes = data;
       checkIfAllDataWasGetted();
-
     } catch (e) {
-
       console.log(e);
       displayError();
-
     }
+  };
 
-  }
-  
   const getLicenciasAprobadas = async () => {
-
     try {
-
-      const {data} = await LicencesService.getApprovedLicences();
+      const { data } = await LicencesService.getApprovedLicences();
       savingData.licenciasAprobadas = data;
       checkIfAllDataWasGetted();
-
     } catch (e) {
-
       console.log(e);
       displayError();
-
     }
-
-  }
+  };
 
   const getFeriados = async () => {
     try {
-
       const { data } = await CalendarService.getHolidays();
       savingData.feriados = data;
       checkIfAllDataWasGetted();
-
     } catch (e) {
-
       console.log(e);
       displayError();
-
     }
-  }; 
+  };
 
   const checkIfAllDataWasGetted = () => {
-    solicitudesTerminadas++
-    if (solicitudesTerminadas == 3) setState({
-      licenciasPendientes: savingData.licenciasPendientes,
-      licenciasAprobadas: savingData.licenciasAprobadas,
-      feriados: savingData.feriados
-    })
-  }
+    solicitudesTerminadas++;
+    if (solicitudesTerminadas == 3)
+      setState({
+        licenciasPendientes: savingData.licenciasPendientes,
+        licenciasAprobadas: savingData.licenciasAprobadas,
+        feriados: savingData.feriados,
+      });
+  };
 
   const displayError = () => {
-    toast.error("¡Lo sentimos, ocurrió un error :(!")
-  }
+    toast.error("¡Lo sentimos, ocurrió un error :(!");
+  };
 
-  useEffect(() => {
-    getLicenciasPendientes()
-    getLicenciasAprobadas()
-    getFeriados()
-  }, [])
+  // useEffect(() => {
+  //   getLicenciasPendientes()
+  //   getLicenciasAprobadas()
+  //   getFeriados()
+  // }, [])
 
   return (
     <>
-      {
-        !state ? <Loading/>
-        : <section className="dashboardSup-container-gral">
-        <div className="dashboardSup-mockup-container">
-          <div className="dash-busqueda">
-            <TextField
-              id="outlined-basic"
-              label="Busqueda"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon></SearchIcon>
-                  </InputAdornment>
-                ),
-              }}
-            />
+      {!state ? (
+        <Loading />
+      ) : (
+        <section className="dashboardSup-container-gral">
+          <div className="dashboardSup-mockup-container">
+            <div className="dash-busqueda">
+              <TextField
+                id="outlined-basic"
+                label="Busqueda"
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon></SearchIcon>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            <MockupWeather></MockupWeather>
+            <MockupCalendario></MockupCalendario>
+            <div className="mock-calendar-holidayList">
+              <Typography variant="h5">Próximos feriados</Typography>
+              <HolidayList>
+                {state.feriados?.map((holiday, index) => (
+                  <ListItem key={`holiday-${index}`} divider={true}>
+                    <ListItemText
+                      primary={
+                        <Fragment>
+                          <Typography
+                            component="span"
+                            variant="h5"
+                            color="text.primary"
+                          >
+                            {holiday.date} - {holiday.descripcion}
+                          </Typography>
+                        </Fragment>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </HolidayList>
+            </div>
           </div>
-          <MockupWeather></MockupWeather>
-          <MockupCalendario></MockupCalendario>
-          <div className="mock-calendar-holidayList">
-          <Typography variant="h5">Próximos feriados</Typography>
-          <HolidayList>
-              {state.feriados?.map((holiday, index) => (
-                <ListItem key={`holiday-${index}`} divider={true}>
-                  <ListItemText
-                    primary={
-                      <Fragment>
-                        <Typography
-                          component="span"
-                          variant="h5"
-                          color="text.primary"
-                        >
-                          {holiday.date} - {holiday.descripcion}
-                        </Typography>
-                      </Fragment>
-                    }
+
+          <div className="lista-dashboard-container">
+            <div className="lista-dashboard">
+              <Lista titulo="Solicitudes Pendientes">
+                {state?.licenciasPendientes.map((el, index) => (
+                  <ListItemSolicitudes
+                    key={index}
+                    data={el}
+                    displayIconos={true}
                   />
-                </ListItem>
-              ))}
-            </HolidayList>
-        </div>
-        </div>
-  
-        <div className="lista-dashboard-container">
-          <div className="lista-dashboard">
-            <Lista titulo="Solicitudes Pendientes">
-              {state?.licenciasPendientes.map((el, index) => (
-                <ListItemSolicitudes key={index} data={el} displayIconos={true} />
-              ))}
-            </Lista>
+                ))}
+              </Lista>
+            </div>
+            <div className="lista-dashboard-licencias-aprobadas">
+              <Lista titulo="Proximas licencias aprobadas">
+                {state?.licenciasAprobadas.map((el, index) => (
+                  <ListItemSolicitudes
+                    key={index}
+                    data={el}
+                    displayIconos={false}
+                  />
+                ))}
+              </Lista>
+            </div>
           </div>
-          <div className="lista-dashboard-licencias-aprobadas">
-            <Lista titulo="Proximas licencias aprobadas">
-              {state?.licenciasAprobadas.map((el, index) => (
-                <ListItemSolicitudes key={index} data={el} displayIconos={false} />
-              ))}
-            </Lista>
-          </div>
-        </div>
-      </section>
-      }
-      <ToastContainer/>
+        </section>
+      )}
+      <ToastContainer />
     </>
   );
 };

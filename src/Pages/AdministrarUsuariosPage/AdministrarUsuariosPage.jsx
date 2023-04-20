@@ -55,7 +55,7 @@ const AdministrarUsuariosPage = () => {
     // setUserList(data);
   };
 
-  const editUser = (userId) => {};
+  const editUser = (userId) => redirect(`/user?function=1&userId=${userId}`);
 
   const deleteUser = (userId) => {};
 
@@ -75,7 +75,7 @@ const AdministrarUsuariosPage = () => {
             <Button
               variant="contained"
               color="success"
-              onClick={() => redirect("/user")}
+              onClick={() => redirect("/user?function=0")}
             >
               Crear Usuario
             </Button>
