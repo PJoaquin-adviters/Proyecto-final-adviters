@@ -14,6 +14,8 @@ const UserDataProvider = ({ children }) => {
 
   const [dataUser, setDataUser] = useState(innitData);
 
+  const [appTitle, setAppTitle] = useState("");
+
   const abrirSesion = (user) => {
     //setear la data con la base
     //id = 0 supervisor, 1 es user
@@ -35,7 +37,7 @@ const UserDataProvider = ({ children }) => {
   };
 
   return (
-    <UserDataContext.Provider value={{ dataUser, abrirSesion, cerrarSesion }}>
+    <UserDataContext.Provider value={{ appTitle, setAppTitle, dataUser, abrirSesion, cerrarSesion }}>
       {children}
     </UserDataContext.Provider>
   );

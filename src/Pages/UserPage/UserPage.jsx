@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
@@ -17,7 +17,13 @@ import Loading from "../../components/Loading/Loading";
 import { getUserRoles } from "../../services/UsersService";
 import { newUser } from "../../utils/UsersUtils";
 import { BorderColor } from "@mui/icons-material";
+import UserDataContext from "../../context/UserDataContext";
+
 const UserPage = () => {
+
+  const {setAppTitle} = useContext(UserDataContext);
+  setAppTitle("EDITAR USUARIO")
+
   const initData = {
     //id?
     name: "",
@@ -44,13 +50,7 @@ const UserPage = () => {
     Vacation_days: null,
     Available_vacations_days: "",
     Available_study_days: "",
-    supervisor: null,
-    //
-    Created_at: "",
-    Created_by: "",
-    Updated_at: "",
-    Updated_by: "",
-    Deleted_at: "",
+    supervisor: null
   };
   const [isNew, setIsNew] = useState(true);
   // const ´loader, setLoader]

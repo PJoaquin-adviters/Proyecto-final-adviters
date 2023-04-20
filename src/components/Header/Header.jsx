@@ -17,7 +17,7 @@ import TaskIcon from "@mui/icons-material/Task";
 import "./Header.css";
 
 const Header = () => {
-  const { dataUser, cerrarSesion } = useContext(UserDataContext);
+  const { dataUser, cerrarSesion, appTitle } = useContext(UserDataContext);
   const { idRol } = dataUser;
 
   const avatar = (
@@ -25,11 +25,6 @@ const Header = () => {
       <AccountCircleIcon />
     </Avatar>
   );
-
-  const getTitle = () => {
-    const query = new URLSearchParams(window.location.search);
-    return query.get("title");
-  };
 
   const itemListHam = [
     {
@@ -84,7 +79,7 @@ const Header = () => {
             botonIcono={<MenuIcon />}
             listItems={itemListHam}
           />
-          <h2 style={{ width: "100%", textAlign: "center" }}>{getTitle()}</h2>
+          <h2 style={{ width: "100%", textAlign: "center" }}>{appTitle}</h2>
           <nav className="nav-header">
             <DropDownMenu
               name="notification"

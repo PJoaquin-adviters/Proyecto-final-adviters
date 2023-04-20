@@ -1,23 +1,26 @@
 import httpRequest from "./httpRequest";
 
 //GET USERS LIST
-export const getUsers = (queryParams) =>
+const getUsers = (queryParams) =>
   httpRequest.get(`/users?${queryParams}`);
 
 //CREATE NEW USER
-export const newUser = (data) => httpRequest.post("/users/new", data);
+const newUser = (data) => httpRequest.post("/users/new", data);
 
 //UPDATE USER DATA
-export const updateUser = (userId, data) =>
-  httpRequest.put(`/users/${userId}`, data);
+const updateUser = (userId, data) => httpRequest.put(`/users/${userId}`, data);
 
 //DELETE USER
-export const deleteUser = (userId) => httpRequest.delete(`/users/${userId}`);
+const deleteUser = (userId) => httpRequest.delete(`/users/${userId}`);
 
 //GET USER ROLES
-export const getUserRoles = () => httpRequest.get("/users/roles");
+const getUserRoles = () => httpRequest.get("/users/roles");
 
-export const getUserById = (id) => httpRequest.get(`/usuario/${id}`);
+const getUserById = (id) => httpRequest.get(`/usuario/${id}`);
+
+const getUsersBySupervisor = (id) => httpRequest.get(`usuario/supervisor/${id}`)
+
+
 
 const methods = {
   getUsers,
@@ -26,6 +29,7 @@ const methods = {
   deleteUser,
   getUserRoles,
   getUserById,
+  getUsersBySupervisor
 };
 
 export default methods;

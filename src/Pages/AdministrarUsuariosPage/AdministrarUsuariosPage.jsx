@@ -8,48 +8,67 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NoUser from "../../assets/img/user-not-found.png";
 import UserDataContext from "../../context/UserDataContext";
+import { useNavigate } from "react-router-dom";
+import UsersService from '../../services/UsersService'
+import { ToastContainer, toast } from "react-toastify";
 
 const AdministrarUsuariosPage = () => {
   const [userList, setUserList] = useState(null);
-  const { dataUser } = useContext(UserDataContext);
+  const { dataUser, setAppTitle } = useContext(UserDataContext);
+  setAppTitle("ADMINISTRAR USUARIOS")
+  const redirect = useNavigate();
 
-  const getData = () => {
-    const data = [
-      {
-        id: "646546135421",
-        name: "Juan",
-        lastName: "Rodriguez",
-        role: "Supervisor",
-        img: Jordi,
-      },
-      {
-        id: "646854152454",
-        name: "Marcos",
-        lastName: "Aurelio",
-        role: "Usuario",
-        img: null,
-      },
-      {
-        id: "646854152454",
-        name: "Marcos",
-        lastName: "Aurelio",
-        role: "Usuario",
-        img: null,
-      },
-    ];
+  const getData = async () => {
 
-    setUserList(data);
+    
+
+    try {
+
+      const {data} = await UsersService.getUsersBySupervisor(dataUser.idUser)
+      setUserList(data);
+
+    } catch (e) {
+
+      console.log(e)
+      alert('Ocurrió un error')
+
+    }
+
+
+    // const data = [
+    //   {
+    //     id: "646546135421",
+    //     name: "Juan",
+    //     lastName: "Rodriguez",
+    //     role: "Supervisor",
+    //     img: Jordi,
+    //   },
+    //   {
+    //     id: "646854152454",
+    //     name: "Marcos",
+    //     lastName: "Aurelio",
+    //     role: "Usuario",
+    //     img: null,
+    //   },
+    //   {
+    //     id: "646854152454",
+    //     name: "Marcos",
+    //     lastName: "Aurelio",
+    //     role: "Usuario",
+    //     img: null,
+    //   },
+    // ];
+
+    // setUserList(data);
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      getData();
-    }, 1500);
-  }, []);
 
   const editUser = (userId) => {};
 
   const deleteUser = (userId) => {};
+
+  useEffect(() => {
+      getData();
+  }, []);
 
   return (
     <div className="admUsuariosContainer">
@@ -62,9 +81,7 @@ const AdministrarUsuariosPage = () => {
             <Button
               variant="contained"
               color="success"
-              onClick={() =>
-                (window.location.href = "/user?title=CREAR USUARIO")
-              }
+              onClick={() => redirect('/user')}
             >
               Crear Usuario
             </Button>
@@ -107,6 +124,7 @@ const AdministrarUsuariosPage = () => {
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 };

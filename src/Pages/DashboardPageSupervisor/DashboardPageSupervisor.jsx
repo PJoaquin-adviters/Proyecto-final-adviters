@@ -6,14 +6,19 @@ import ListItemSolicitudes from "../../components/ListItemSolicitudes/ListItemSo
 import MockupCalendario from "../../components/MockupCalendario/MockupCalendario";
 import MockupWeather from "../../components/MockupWeather/MockupWeather";
 import SearchIcon from "@mui/icons-material/Search";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 
 import LicencesService from '../../services/LicencesService'
 import CalendarService from '../../services/CalendarService'
 import Loading from "../../components/Loading/Loading";
 import HolidayList from "../../components/HolidayList/HolidayList";
+import UserDataContext from "../../context/UserDataContext";
 
 const DashboardPage = () => {
+
+  const { setAppTitle } = useContext(UserDataContext);
+  setAppTitle("DASHBOARD")
+
   const solicitudesPendientes = [
     {
       username: "flex",

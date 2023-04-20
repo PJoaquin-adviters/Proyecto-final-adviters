@@ -35,7 +35,8 @@ const CargarLicenciaPage = () => {
   const [errores, setErrores] = useState({});
   const [userLicences, setUserLicences] = useState(null);
   const [supervisorData, setSupervisorData] = useState(null);
-  const { dataUser } = useContext(UserDataContext);
+  const { dataUser, setAppTitle } = useContext(UserDataContext);
+  setAppTitle("CARGAR LICENCIA")
   const redirect = useNavigate();
 
   const getUserLicences = async () => {

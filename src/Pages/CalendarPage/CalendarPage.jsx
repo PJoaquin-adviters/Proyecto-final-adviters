@@ -76,7 +76,8 @@ const holidayFakeApi = [
 
 const CalendarPage = () => {
   const [holidays, setHolidays] = useState(null);
-  const { dataUser } = useContext(UserDataContext);
+  const { dataUser, setAppTitle } = useContext(UserDataContext);
+  setAppTitle("CALENDARIO")
 
   useEffect(() => {
     getHolidays();

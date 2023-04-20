@@ -12,7 +12,13 @@ import "./DashboardPageUsuario.css";
 import MockupCalendario from "../../components/MockupCalendario/MockupCalendario";
 import MockupWeather from "../../components/MockupWeather/MockupWeather";
 import { Box, Button } from "@mui/material";
+import UserDataContext from "../../context/UserDataContext";
 const DashboardPageUsuarios = () => {
+
+  
+  const { setAppTitle } = React.useContext(UserDataContext);
+  setAppTitle("DASHBOARD")
+
   return (
     <div className="dashUsuarios-container-Gral">
       <div className="dashUsuarios-mockup-container">

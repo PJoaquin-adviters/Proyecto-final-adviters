@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
 import "./DropDownMenuStyle.css";
+import { useNavigate } from "react-router-dom";
+import UserDataContext from "../../context/UserDataContext";
 
 const CustomizedMenus = ({ name, botonIcono, listItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const navigate = useNavigate();
+  
+
   const redirect = (path, title) => {
-    window.location.href = `${path}?title=${title.toUpperCase()}`;
+    navigate(path)
   };
 
   const open = Boolean(anchorEl);
@@ -47,7 +52,7 @@ const CustomizedMenus = ({ name, botonIcono, listItems }) => {
         {listItems.map((el, index) => (
           <MenuItem
             key={`${name}-${index}`}
-            // onClick={() => redirect(el.path, el.text)}
+            onClick={() => redirect(el.path, el.text)}
             sx={{
               display: "flex",
               gap: "20px",
