@@ -1,22 +1,18 @@
 import React, { useContext, useState } from "react";
 import "./LoginPage.css";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import waves from "../../assets/img/waves.png";
 import { useNavigate } from "react-router-dom";
-import fondo1 from "../../assets/img/fondo1.jpg";
 import logoAdviters from "../../assets/img/adviterslogo.png";
 import UserDataContext from "../../context/UserDataContext";
-import { getUsers } from "../../services/UsersService";
-import foto from "../../assets/img/fotoPerfil.jpg";
 import LoginService from "../../services/LoginService";
 
 const LoginPage = () => {
-  const { dataUser, abrirSesion, setDataUser, cerrarSesion } =
-    useContext(UserDataContext);
+  const { abrirSesion } = useContext(UserDataContext);
   const [userAuth, setUserAuth] = useState("");
   const [passwordAuth, setPasswordAuth] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,6 +20,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     setError("");
+    setLoading(true);
 
     try {
       const { headers } = await LoginService.auth(userAuth, passwordAuth);
@@ -39,10 +36,11 @@ const LoginPage = () => {
         idUser: headers.get("idUser"),
         supervisorId: headers.get("supervisorId"),
       };
-
+      
       abrirSesion(user);
       navigate("/");
     } catch (e) {
+      setLoading(false);
       const status = e.response?.status;
       if (status == 401) return setError("Usuario y/o contraseña incorrectos.");
       setError("Ocurrió un error. Intente nuevamente.");
@@ -98,8 +96,6 @@ const LoginPage = () => {
               onChange={(e) => {
                 setUserAuth(e.target.value);
               }}
-              error={error && true}
-              helperText={error}
             />
             <TextField
               id="outlined-required"
@@ -108,9 +104,9 @@ const LoginPage = () => {
               onChange={(e) => {
                 setPasswordAuth(e.target.value);
               }}
-              error={error && true}
-              helperText={error}
             />
+
+            <p style={{color: 'red', fontSize: '12px'}}>{error}</p>
 
             <Box
               sx={{
@@ -120,7 +116,9 @@ const LoginPage = () => {
                 paddingLeft: "20px",
               }}
             >
-              <Button
+              <>
+                {loading ? <CircularProgress/>
+                : <Button
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
                 sx={{
@@ -133,7 +131,9 @@ const LoginPage = () => {
                 }}
               >
                 Iniciar
-              </Button>
+              </Button>}
+              </>
+              
             </Box>
           </Box>
         </div>

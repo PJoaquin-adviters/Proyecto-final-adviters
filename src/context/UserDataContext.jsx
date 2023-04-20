@@ -6,7 +6,7 @@ const UserDataProvider = ({ children }) => {
   const innitData = {
     name: "admin",
     lastname: "admin",
-    idRol: /*null*/ 1,
+    idRol: /*null*/ 0,
     userPicture: "asd",
     idUser: "2c8cb2bb878f6d2901878f6dbfe20000",
     supervisorId: "2c8cb2bb878f6d2901878f6dbfe20000",

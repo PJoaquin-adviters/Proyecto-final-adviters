@@ -7,11 +7,7 @@ const MockupCalendario = () => {
   return (
     <div className="mock-calendar-container">
       <HolidayCalendar></HolidayCalendar>
-      <div className="mock-calendar-holidayList">
-        <Typography variant="h5">Próximos feriados</Typography>
-        <p>24 Febrero: carnaval</p>
-        <p>25 Febrero: carnaval</p>
-      </div>
+      
     </div>
   );
 };

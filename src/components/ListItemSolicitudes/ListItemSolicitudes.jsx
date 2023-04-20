@@ -7,11 +7,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 const ListItemSolicitudes = ({ data, displayIconos }) => {
     const color = {
-        Vacaciones: "verde",
-        Estudio: "amarillo",
-        "Licencia medica": "azul"
+        'Vacaciones': "verde",
+        'Estudio': "amarillo",
+        'Salud': "azul"
     }
-
 
     return (
         <ListItem alignItems="flex-start" sx={{ display: "flex", alignItems: "center" }} divider={true} >
@@ -27,7 +26,7 @@ const ListItemSolicitudes = ({ data, displayIconos }) => {
                             variant="h6"
                             color="text.primary"
                         >
-                            {`${data.username} ${data.lastname}`}
+                            {`${data.name} ${data.lastname}`}
 
                         </Typography>
 
@@ -51,7 +50,7 @@ const ListItemSolicitudes = ({ data, displayIconos }) => {
                             variant="body2"
                             color="text.primary"
                         >
-                            <div className={`punto color-${color[data.type]}`}></div>{data.type}
+                            <div className={`punto color-${color[data.tipoDeLicencia?.descripcion]}`}></div>{data.tipoDeLicencia?.descripcion}
                         </Typography>
 
 

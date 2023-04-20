@@ -32,6 +32,8 @@ const getLicencesBySupervisor = (userId) =>
 
 const getPendingLicences = () => httpRequest.get("/list?status=0");
 
+const getApprovedLicences = () => httpRequest.get("/list?status=1");
+
 const methods = {
   newLicence,
   getLicences,
@@ -39,6 +41,8 @@ const methods = {
   updateLicenceState,
   getLicenceByUser,
   getLicencesBySupervisor,
+  getPendingLicences,
+  getApprovedLicences
 };
 
 export default methods;
