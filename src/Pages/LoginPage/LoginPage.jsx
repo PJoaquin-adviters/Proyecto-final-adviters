@@ -61,12 +61,6 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    const auth = localStorage.getItem("Authorization");
-
-    if (auth) navigate("/");
-  }, []);
-
   return (
     <>
       <section className="login-center-page">
