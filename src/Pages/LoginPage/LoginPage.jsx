@@ -32,10 +32,15 @@ const LoginPage = () => {
       const { headers } = await LoginService.auth(userAuth, passwordAuth);
       const token = headers.get("Authorization");
 
-      console.log(headers)
+      console.log(headers);
 
       localStorage.setItem("Authorization", token);
-      localStorage.setItem("idUser", headers.get('idUser'));
+      localStorage.setItem("name", headers.get("name"));
+      localStorage.setItem("lastname", headers.get("lastname"));
+      localStorage.setItem("roleId", headers.get("roleId"));
+      localStorage.setItem("profilePicture", headers.get("profilePicture"));
+      localStorage.setItem("idUser", headers.get("idUser"));
+      localStorage.setItem("supervisorId", headers.get("supervisorId"));
 
       const user = {
         name: headers.get("name"),
@@ -99,53 +104,74 @@ const LoginPage = () => {
             <Typography variant="h4" component="h4">
               ¡Bienvenido!
             </Typography>
-            <TextField
-              id="outlined-required"
-              label="Usuario"
-              onChange={(e) => {
-                setUserAuth(e.target.value);
-              }}
-            />
-            <TextField
-              id="outlined-required"
-              label="Password"
-              type="password"
-              onChange={(e) => {
-                setPasswordAuth(e.target.value);
-              }}
-            />
-
-            <p style={{ color: "red", fontSize: "12px" }}>{error}</p>
-
-            <Box
-              sx={{
+            <form
+              style={{
+                "& .MuiTextField-root": {
+                  width: "100%",
+                },
                 display: "flex",
                 justifyContent: "center",
-                paddingRight: "20px",
-                paddingLeft: "20px",
+                alignItems: "center",
+                flexDirection: "column",
+                gap: "20px",
+                backgroundColor: "whitesmoke",
+                padding: "30px",
+                borderRadius: "10px",
+                marginRight: "1em",
+                marginLeft: "1em",
+                width: "300px",
+                height: "400px",
               }}
             >
-              <>
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <Button
-                    variant="contained"
-                    endIcon={<ArrowForwardIcon />}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      minWidth: "15vw",
-                    }}
-                    onClick={(e) => {
-                      handleClick(e);
-                    }}
-                  >
-                    Iniciar
-                  </Button>
-                )}
-              </>
-            </Box>
+              <TextField
+                id="outlined-required"
+                label="Usuario"
+                onChange={(e) => {
+                  setUserAuth(e.target.value);
+                }}
+              />
+              <TextField
+                id="outlined-required"
+                label="Password"
+                type="password"
+                onChange={(e) => {
+                  setPasswordAuth(e.target.value);
+                }}
+              />
+
+              <p style={{ color: "red", fontSize: "12px" }}>{error}</p>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingRight: "20px",
+                  paddingLeft: "20px",
+                }}
+              >
+                <>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      endIcon={<ArrowForwardIcon />}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        minWidth: "15vw",
+                      }}
+                      onClick={(e) => {
+                        handleClick(e);
+                      }}
+                    >
+                      Iniciar
+                    </Button>
+                  )}
+                </>
+              </Box>
+            </form>
           </Box>
         </div>
       </section>

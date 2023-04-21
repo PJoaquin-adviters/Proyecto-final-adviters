@@ -18,14 +18,13 @@ import "./Header.css";
 
 const Header = () => {
   const { dataUser, cerrarSesion, appTitle } = useContext(UserDataContext);
-  const { idRol } = dataUser;
+  const idRol = dataUser?.idRol;
 
   const avatar = (
     <Avatar>
-      {`${dataUser.name.substring(
-            0,
-            1
-          ).toUpperCase()}${dataUser.lastname.substring(0, 1).toUpperCase()}`}
+      {`${dataUser.name?.substring(0, 1).toUpperCase()}${dataUser.lastname
+        ?.substring(0, 1)
+        .toUpperCase()}`}
     </Avatar>
   );
 

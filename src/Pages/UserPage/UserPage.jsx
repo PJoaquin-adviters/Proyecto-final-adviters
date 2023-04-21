@@ -22,11 +22,11 @@ import { newUser } from "../../utils/UsersUtils";
 import { BorderColor } from "@mui/icons-material";
 import UserDataContext from "../../context/UserDataContext";
 import { toast } from "react-toastify";
-import UsersService from '../../services/UsersService'
+import UsersService from "../../services/UsersService";
 import { useNavigate } from "react-router-dom";
 
 const UserPage = () => {
-  const {dataUser} = useContext(UserDataContext)
+  const { dataUser } = useContext(UserDataContext);
 
   const { setAppTitle } = useContext(UserDataContext);
   const funcion = new URL(window.location).searchParams.get("function");
@@ -71,36 +71,41 @@ const UserPage = () => {
 
   const [supervisores, setSupervisores] = useState([]);
 
-  const getUserData = () => {
+  const getUserData = async () => {
+    const idParam = new URL(window.location).searchParams.get("userId");
+    const userId = funcion == 1 ? idParam : dataUser.idUser;
 
-  }
+    try {
+      const { data } = await UsersService.getUserById(userId);
+      setUserInfo({ ...data, password: "" });
+    } catch (e) {
+      console.log(e);
+      toast.error("Ocurrió un error.");
+    }
+  };
 
   const getSupervisores = async () => {
-    
     try {
-
-      const {data} = await UsersService.getSupervisores();
-      let list = data.filter(e => e.id != dataUser.idUser)
+      const { data } = await UsersService.getSupervisores();
+      let list = data.filter((e) => e.id != dataUser.idUser);
       list.unshift({
         id: dataUser.idUser,
         name: "YO",
-        last_name: ""
-      })
-      setSupervisores(list)
+        last_name: "",
+      });
+      setSupervisores(list);
 
-      funcion == 0 ? setUserInfo({supervisor: dataUser.idUser}) : getUserData()
-
+      funcion == 0
+        ? setUserInfo({ supervisor: dataUser.idUser })
+        : getUserData();
     } catch (e) {
-
       console.log(e);
-      toast.error("Ocurrió un error. Intente nuevamente.")
-
+      toast.error("Ocurrió un error. Intente nuevamente.");
     }
-
-  }
+  };
 
   useEffect(() => {
-    getSupervisores()
+    getSupervisores();
   }, []);
 
   const handleChange = (e, inputName) => {
@@ -110,26 +115,21 @@ const UserPage = () => {
     setUserInfo({ ...info });
   };
 
-  
   const createUser = async () => {
     try {
       await newUser(userInfo);
-      toast.success("Usuario creado correctamente.")
-      redirect("/administrarUsuarios")
+      toast.success("Usuario creado correctamente.");
+      redirect("/administrarUsuarios");
     } catch (error) {
       if (error.isAnValidationError) setErrores(error);
-      else alert("otro error")
+      else alert("otro error");
       console.log(error);
     }
   };
 
-  const editUser = (userId) => {
-    
-  };
+  const editUser = (userId) => {};
 
-  const editMyProfile = () => {
-
-  }
+  const editMyProfile = () => {};
 
   return (
     <>
@@ -144,13 +144,25 @@ const UserPage = () => {
                 <img src={pictureNotFound} className="profile-picture" alt="" />
 
                 <div>
-                <p style={{margin: '10px'}}>BAJO SUPERVISIÓN DE</p>
-                <select style={{width: "100%", maxWidth: "300px", padding: "10px"}} onChange={(e) => handleChange(e, "supervisor")}>
-                {supervisores?.map(e => <option value={e.id}>{`${e.name} ${e.last_name}`}</option>)}
-                </select>
+                  <p style={{ margin: "10px" }}>BAJO SUPERVISIÓN DE</p>
+                  <select
+                    style={{
+                      width: "100%",
+                      maxWidth: "300px",
+                      padding: "10px",
+                    }}
+                    onChange={(e) => handleChange(e, "supervisor")}
+                  >
+                    {supervisores?.map((e) => (
+                      <option value={e.id}>{`${e.name} ${e.last_name}`}</option>
+                    ))}
+                  </select>
                 </div>
 
-                <FormControlLabel control={<Switch id="switchRole"/>} label="Es supervisor" />
+                <FormControlLabel
+                  control={<Switch id="switchRole" />}
+                  label="Es supervisor"
+                />
 
                 <TextField
                   sx={{
@@ -260,8 +272,8 @@ const UserPage = () => {
                   type="password"
                   value={rePassword}
                   onChange={(e) => {
-                    handleChange(e, "rePassword")
-                    setRePassword(e.target.value)
+                    handleChange(e, "rePassword");
+                    setRePassword(e.target.value);
                   }}
                   error={errores.rePassword}
                   helperText={errores.rePassword}
@@ -441,11 +453,7 @@ const UserPage = () => {
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
                 onClick={() => {
-                  const options = [
-                    createUser,
-                    editUser,
-                    editMyProfile,
-                  ];
+                  const options = [createUser, editUser, editMyProfile];
                   options[funcion]();
                 }}
               >

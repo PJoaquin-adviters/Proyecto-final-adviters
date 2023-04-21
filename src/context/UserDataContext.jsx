@@ -3,7 +3,6 @@ import axios from "axios";
 
 const UserDataContext = createContext();
 const UserDataProvider = ({ children }) => {
-
   const [dataUser, setDataUser] = useState();
 
   const [appTitle, setAppTitle] = useState("");
@@ -17,12 +16,12 @@ const UserDataProvider = ({ children }) => {
       idUser: user?.idUser,
       supervisorId: user?.supervisorId,
     });
+    console.log(dataUser);
   };
 
   const cerrarSesion = () => {
     //setear data como null, se cierra
-    localStorage.removeItem("Authorization");
-    localStorage.removeItem("idUser");
+    localStorage.clear();
     setDataUser(null);
   };
 
