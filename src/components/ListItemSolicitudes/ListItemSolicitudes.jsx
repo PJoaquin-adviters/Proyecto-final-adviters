@@ -11,7 +11,7 @@ import "./ListItemSolicitudes.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-const ListItemSolicitudes = ({ data, displayIconos }) => {
+const ListItemSolicitudes = ({ data, displayIconos, action }) => {
   const color = {
     Vacaciones: "verde",
     Estudio: "amarillo",

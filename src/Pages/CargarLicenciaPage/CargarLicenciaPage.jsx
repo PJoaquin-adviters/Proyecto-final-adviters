@@ -92,7 +92,7 @@ const CargarLicenciaPage = () => {
     try {
       const { idUser } = dataUser;
       await LicencesService.newLicence(idUser, form);
-      redirect("/");
+      redirect("/?licenceCreated=true");
     } catch (error) {
       setErrores(error);
       console.log(error);
@@ -113,14 +113,12 @@ const CargarLicenciaPage = () => {
             <main id="cl-contenedor">
               <section id="cl-titulo">
                 <div>
-                  <Avatar
-                    sx={{
-                      marginRight: "20px",
-                    }}
-                    className="fotocargarlicencia"
-                    alt="scaloni"
-                    src={scaloniUrl}
-                  />
+                <Avatar sx={{marginRight: '15px'}}>
+      {`${dataUser.name.substring(
+            0,
+            1
+          ).toUpperCase()}${dataUser.lastname.substring(0, 1).toUpperCase()}`}
+    </Avatar>
                   <Typography
                     variant="overline"
                     sx={{
@@ -265,32 +263,7 @@ const CargarLicenciaPage = () => {
                     <Button disabled>{24} dias disponibles</Button>
                   </ButtonGroup>
                 </div>
-                {/* <div className="Layout-Descripcion-column">
-                  <Typography variant="h6">DESCRIPCION</Typography>
-                  <textarea
-                    placeholder="Ingresa más información acerca de la licencia."
-                    rows="4"
-                    cols="50"
-                    className="cl-textarea"
-                    name="description"
-                    onChange={(e) => {
-                      handleChange(e, "description");
-                    }}
-                    style={
-                      errores.description && {
-                        border: "1px solid darkred",
-                        borderRadius: "5px",
-                      }
-                    }
-                    value={form?.description}
-                    helpertext={errores.description}
-                  ></textarea>
-                  {errores.description && (
-                    <Typography variant="caption" color={"darkred"}>
-                      {errores.description}
-                    </Typography>
-                  )} */}
-                {/* </div> */}
+                
               </section>
 
               <section id="cl-responsable-licencia">
@@ -300,7 +273,12 @@ const CargarLicenciaPage = () => {
                       Aprobación a cargo de:
                     </Typography>
                     <div id="cl-contenedor-usuario">
-                      <Avatar alt="avatar-usuario" src={scaloniUrl} />
+                    <Avatar>
+      {`${supervisorData?.name.substring(
+            0,
+            1
+          ).toUpperCase()}${supervisorData?.lastname.substring(0, 1).toUpperCase()}`}
+    </Avatar>
                       <Typography variant="overline">{`${supervisorData?.name} ${supervisorData?.lastname}`}</Typography>
                     </div>
                   </>

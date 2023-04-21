@@ -22,7 +22,10 @@ const Header = () => {
 
   const avatar = (
     <Avatar>
-      <AccountCircleIcon />
+      {`${dataUser.name.substring(
+            0,
+            1
+          ).toUpperCase()}${dataUser.lastname.substring(0, 1).toUpperCase()}`}
     </Avatar>
   );
 

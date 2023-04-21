@@ -22,6 +22,7 @@ import HolidayList from "../../components/HolidayList/HolidayList";
 import UserDataContext from "../../context/UserDataContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ViewLicenceDetails from "../../components/ViewLicenceDetails/ViewLicenceDetails";
 
 const DashboardPage = () => {
   const { setAppTitle } = useContext(UserDataContext);
@@ -77,7 +78,7 @@ const DashboardPage = () => {
   const getLicenciasPendientes = async () => {
     try {
       const { data } = await LicencesService.getPendingLicences();
-      console.log();
+      console.log(data);
       savingData.licenciasPendientes = data;
       checkIfAllDataWasGetted();
     } catch (e) {
@@ -110,11 +111,10 @@ const DashboardPage = () => {
 
   const checkIfAllDataWasGetted = () => {
     solicitudesTerminadas++;
-    if (solicitudesTerminadas == 3)
+    if (solicitudesTerminadas == 2)
       setState({
         licenciasPendientes: savingData.licenciasPendientes,
-        licenciasAprobadas: savingData.licenciasAprobadas,
-        feriados: savingData.feriados,
+        licenciasAprobadas: savingData.licenciasAprobadas
       });
   };
 
@@ -123,10 +123,14 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
+    if (new URL(window.location).searchParams.get("licenceCreated")) {
+      toast.success("¡Usuario creado correctamente!")
+    }
     getLicenciasPendientes();
     getLicenciasAprobadas();
-    getFeriados();
   }, []);
+
+  const [editingLicence, setEditingLicence] = useState(null)
 
   return (
     <>
@@ -134,6 +138,7 @@ const DashboardPage = () => {
         <Loading />
       ) : (
         <section className="dashboardSup-container-gral">
+          <ViewLicenceDetails licencia={editingLicence} opened={editingLicence}/>
           <div className="dashboardSup-mockup-container">
             <div className="dash-busqueda">
               <TextField
@@ -150,51 +155,33 @@ const DashboardPage = () => {
               />
             </div>
             <MockupWeather></MockupWeather>
-            <MockupCalendario></MockupCalendario>
-            <div className="mock-calendar-holidayList">
-              <Typography variant="h5">Próximos feriados</Typography>
-              <HolidayList>
-                {state.feriados?.map((holiday, index) => (
-                  <ListItem key={`holiday-${index}`} divider={true}>
-                    <ListItemText
-                      primary={
-                        <Fragment>
-                          <Typography
-                            component="span"
-                            variant="h5"
-                            color="text.primary"
-                          >
-                            {holiday.date} - {holiday.descripcion}
-                          </Typography>
-                        </Fragment>
-                      }
-                    />
-                  </ListItem>
-                ))}
-              </HolidayList>
-            </div>
           </div>
 
           <div className="lista-dashboard-container">
             <div className="lista-dashboard">
               <Lista titulo="Solicitudes Pendientes">
                 {state?.licenciasPendientes.map((el, index) => (
+                  <div onclick={() => setEditingLicence(true)}>
                   <ListItemSolicitudes
-                    key={index}
-                    data={el}
-                    displayIconos={true}
-                  />
+                key={index}
+                data={el}
+                displayIconos={true}
+              />
+              </div>
                 ))}
               </Lista>
             </div>
             <div className="lista-dashboard-licencias-aprobadas">
               <Lista titulo="Proximas licencias aprobadas">
                 {state?.licenciasAprobadas.map((el, index) => (
-                  <ListItemSolicitudes
+                  <div onclick={() => setEditingLicence(true)}>
+                      <ListItemSolicitudes
                     key={index}
                     data={el}
                     displayIconos={false}
                   />
+                  </div>
+                  
                 ))}
               </Lista>
             </div>

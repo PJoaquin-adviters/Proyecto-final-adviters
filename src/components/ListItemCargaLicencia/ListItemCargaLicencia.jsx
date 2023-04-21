@@ -8,6 +8,7 @@ const ListItemCargaLicencia = ({
   totalDiasDisponibles,
   startDate,
   endDate,
+  hideEdit
 }) => {
   const totalDiasTomados = endDate - startDate;
   const coloresIconoLicencia = {
@@ -48,7 +49,7 @@ const ListItemCargaLicencia = ({
         </p>
       </span>
       <span>
-        <CreateIcon onClick={editarLicencia} id="icono-lapiz"></CreateIcon>
+        {!hideEdit && <CreateIcon onClick={editarLicencia} id="icono-lapiz"></CreateIcon>}
       </span>
     </div>
   );

@@ -8,85 +8,13 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import jordi from "../../assets/img/jordi2.jpg";
 import "../../components/ListaDashboardLicenciaUsuarios/listaDashboardLicenciaUsuarios.css";
+import ListItemCargaLicencia from "../ListItemCargaLicencia/ListItemCargaLicencia";
 
-const ListaDashboardLicenciaUsuarios = ({ titulo }) => {
-  const ausentesLista = [
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "estudio",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "estudio",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-    {
-      img: "null",
-      username: "joe",
-      startDate: "22/2",
-      endDate: "22/3",
-      idLicenceType: "vacaciones",
-    },
-  ];
+const ListaDashboardLicenciaUsuarios = ({ titulo, data }) => {
   return (
     <List
       sx={{
-        minWidth: "22vw",
-        maxWidth: 360,
+        minWidth: "300px",
         maxHeight: "90vh",
         overflowY: "scroll",
         bgcolor: "background.paper",
@@ -107,43 +35,15 @@ const ListaDashboardLicenciaUsuarios = ({ titulo }) => {
         {titulo}
       </Typography>
       <Divider></Divider>
-      {ausentesLista.map((element, index) => (
-        <>
-          <ListItem
-            alignItems="flex-start"
-            sx={{
-              borderLeft: "10px solid green",
-            }}
-          >
-            <ListItemText
-              primary={element.username}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "flex", flexDirection: "column" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {element.startDate} , {element.endDate}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {element.idLicenceType}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider></Divider>
-        </>
+      {data.map((licencia, index) => (
+        <ListItemCargaLicencia
+        key={index}
+        type={licencia?.tipoDeLicencia?.descripcion}
+        totalDiasDisponibles={licencia?.totalAvailableDays}
+        startDate={licencia?.startDate}
+        endDate={licencia?.endDate}
+        hideEdit={true}
+      />
       ))}
     </List>
   );
