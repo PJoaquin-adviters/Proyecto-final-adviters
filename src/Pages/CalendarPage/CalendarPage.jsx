@@ -86,8 +86,10 @@ const CalendarPage = () => {
               <Typography variant="h3" color="initial">
                 Feriados
               </Typography>
+              {dataUser.idRol == 0 && (
+                      <NewHolidayModal holidays={holidays} setHolidays={setHolidays}/>
+              )}
             </div>
-
             <HolidayList>
               {holidays.map((holiday, index) => (
                 <ListItem key={`holiday-${index}`} divider={true}>
@@ -112,7 +114,6 @@ const CalendarPage = () => {
                           >
                         <DeleteIcon sx={{ color: "#ff7b7b" }} />
                       </button>
-                      <NewHolidayModal holidays={holidays} setHolidays={setHolidays}/>
                 </>
               )}
                         

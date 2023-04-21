@@ -90,25 +90,24 @@ const UserPage = () => {
   };
 
   const createUser = async () => {
-    try {
-      await newUser(userInfo);
-    } catch (error) {
-      setErrores(error);
-      console.log(error);
-    }
-  };
-
-  const editUser = () => {
-    //no sacar una funcion, sino dejar las dos pero que la segunda haga un fetch anterior
-    //traer datos anteriores
-    //permitir que se sobreescriban, validar, guardar
     // try {
-    //   await getUsers();
+    //   await newUser(userInfo);
     // } catch (error) {
     //   setErrores(error);
     //   console.log(error);
     // }
+    alert("createUser")
   };
+
+  const editUser = (userId) => {
+    alert("editUser")
+    
+  };
+
+  const editMyProfile = () => {
+    alert("editMyProfile")
+
+  }
 
   return (
     <>
@@ -438,9 +437,16 @@ const UserPage = () => {
                 }}
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
-                onClick={() => (isNew ? createUser() : editUser())}
+                onClick={() => {
+                  const options = [
+                    createUser,
+                    editUser,
+                    editMyProfile,
+                  ];
+                  options[funcion]();
+                }}
               >
-                {isNew ? "Guardar" : "Editar"}
+                Guardar
               </Button>
             </Box>
           </form>
