@@ -114,7 +114,8 @@ const UserPage = () => {
   const createUser = async () => {
     try {
       await newUser(userInfo);
-      redirect("/administrarUsuarios?userCreated=true")
+      toast.success("Usuario creado correctamente.")
+      redirect("/administrarUsuarios")
     } catch (error) {
       if (error.isAnValidationError) setErrores(error);
       else alert("otro error")

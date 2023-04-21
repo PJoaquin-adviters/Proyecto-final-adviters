@@ -13,8 +13,6 @@ import CalendarPage from "./Pages/CalendarPage/CalendarPage";
 import AdministrarUsuariosPage from "./Pages/AdministrarUsuariosPage/AdministrarUsuariosPage";
 import UserDataContext from "./context/UserDataContext";
 import Protected from "./components/Protected/Protected";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from "react-toastify";
 
 function App() {
   const { dataUser } = useContext(UserDataContext);
@@ -22,7 +20,6 @@ function App() {
 
   return (
     <div className="App">
-      <ToastContainer/>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />

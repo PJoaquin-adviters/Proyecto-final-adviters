@@ -17,13 +17,6 @@ const newLicence = (userId, data) => {
 const getLicences = (queryParams) =>
   httpRequest.get(`/licences?${queryParams}`);
 
-//GET LICENSE TYPES
-const getLicenceTypes = () => httpRequest.get("/licences/types");
-
-//GET LICENSE TYPES
-const updateLicenceState = (licenseId, state) =>
-  httpRequest.post(`/licenses/${licenseId}`, { state });
-
 const getLicenceByUser = (userId) =>
   httpRequest.get(`/licencia/user/${userId}/list`);
 
@@ -34,15 +27,19 @@ const getPendingLicences = () => httpRequest.get("/licencia/list?status=0");
 
 const getApprovedLicences = () => httpRequest.get("/licencia/list?status=1");
 
+const aprobarLicencia = (id) => httpRequest.put(`/licencia/${id}`, {status: 1});
+
+const rechazarLicencia = (id) => httpRequest.put(`/licencia/${id}`, {status: 2});
+
 const methods = {
   newLicence,
   getLicences,
-  getLicenceTypes,
-  updateLicenceState,
   getLicenceByUser,
   getLicencesBySupervisor,
   getPendingLicences,
-  getApprovedLicences
+  getApprovedLicences,
+  aprobarLicencia,
+  rechazarLicencia
 };
 
 export default methods;

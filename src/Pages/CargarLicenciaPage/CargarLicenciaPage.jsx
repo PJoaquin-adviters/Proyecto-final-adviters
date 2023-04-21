@@ -22,6 +22,7 @@ import LicencesService from "../../services/LicencesService";
 import UsersService from "../../services/UsersService";
 import UserDataContext from "../../context/UserDataContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CargarLicenciaPage = () => {
   const formInicial = {
@@ -92,7 +93,8 @@ const CargarLicenciaPage = () => {
     try {
       const { idUser } = dataUser;
       await LicencesService.newLicence(idUser, form);
-      redirect("/?licenceCreated=true");
+      toast.success("Licencia creada correctamente!")
+      redirect("/");
     } catch (error) {
       setErrores(error);
       console.log(error);
@@ -181,7 +183,7 @@ const CargarLicenciaPage = () => {
                     >
                       <MenuItem value={0}>Licencia médica</MenuItem>
                       <MenuItem value={1}>Vacaciones</MenuItem>
-                      <MenuItem value={2}>Dia de estudio</MenuItem>
+                      <MenuItem value={2}>Estudio</MenuItem>
                     </TextField>
                     {errores.idLicenceType && (
                       <Typography variant="caption" color={"darkred"}>

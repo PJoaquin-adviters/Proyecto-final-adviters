@@ -30,11 +30,15 @@ const DashboardPageUsuarios = () => {
     try {
 
       const response = await LicencesService.getLicenceByUser(dataUser.idUser);
-      let todas = response.data;
+
+      console.log(response.data)
+      let aceptadas = response.data.filter(e => e.status.id == 1)
+
+      console.log(aceptadas)
 
       const hoy = Date.now();
-      let historial = todas.filter(e => Date.parse(e.startDate) < hoy)
-      let proximas = todas.filter(e => Date.parse(e.startDate) > hoy)
+      let historial = aceptadas.filter(e => Date.parse(e.startDate) < hoy)
+      let proximas = aceptadas.filter(e => Date.parse(e.startDate) > hoy)
 
       setData({historial, proximas})
 
@@ -48,9 +52,6 @@ const DashboardPageUsuarios = () => {
   }
 
   React.useEffect(() => {
-    if (new URL(window.location).searchParams.get("licenceCreated")) {
-      toast.success("¡Usuario creado correctamente!")
-    }
     getData()
   }, [])
 

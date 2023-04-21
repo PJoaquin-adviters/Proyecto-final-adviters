@@ -10,13 +10,52 @@ import {
 import "./ListItemSolicitudes.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import LicencesService from '../../services/LicencesService';
+import {toast} from 'react-toastify'
 
-const ListItemSolicitudes = ({ data, displayIconos, action }) => {
+const ListItemSolicitudes = ({ data, displayIconos, action, refresh }) => {
+
   const color = {
     Vacaciones: "verde",
     Estudio: "amarillo",
     Salud: "azul",
   };
+
+
+  const aprobarLicencia = async () => {
+
+    try {
+
+      await LicencesService.aprobarLicencia(data.id);
+      toast.success("Se aprobó la licencia.")
+      refresh()
+
+    } catch (e) {
+
+      console.log(e);
+      toast.error("No se pudo aprobar la licencia :(")
+
+    }
+
+  }
+
+  const rechazarLicencia = async () => {
+
+    try {
+
+      await LicencesService.rechazarLicencia(data.id);
+      toast.success("Se rechazó la licencia.")
+      refresh()
+
+    } catch (e) {
+
+      console.log(e);
+      toast.error("No se pudo rechazar la licencia :(")
+
+    }
+
+  }
+
 
   return (
     <ListItem
@@ -78,6 +117,7 @@ const ListItemSolicitudes = ({ data, displayIconos, action }) => {
       {displayIconos && (
         <div className="btn-check-container">
           <CheckCircleIcon
+          onClick={aprobarLicencia}
             sx={{
               display: "flex",
               justifyContent: "flex-end",
@@ -87,7 +127,8 @@ const ListItemSolicitudes = ({ data, displayIconos, action }) => {
             color="success"
           />
 
-          <CancelIcon
+            <CancelIcon
+            onClick={rechazarLicencia}
             sx={{
               display: "flex",
               justifyContent: "flex-end",
@@ -95,7 +136,9 @@ const ListItemSolicitudes = ({ data, displayIconos, action }) => {
               cursor: "pointer",
             }}
             color="error"
+            
           />
+          
         </div>
       )}
     </ListItem>

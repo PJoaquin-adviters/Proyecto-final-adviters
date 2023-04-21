@@ -1,8 +1,8 @@
 import "./Loading.css";
 
-const Loading = () => {
+const Loading = ({fullHeight}) => {
   return (
-    <div className="loadingContainer">
+    <div style={fullHeight && {height: '100vh'}} className="loadingContainer">
       <img
         src={require("./img/advitersLogo.png")}
         alt="icono de la empresa"

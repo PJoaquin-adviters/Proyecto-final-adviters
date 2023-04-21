@@ -35,6 +35,7 @@ const LoginPage = () => {
       console.log(headers)
 
       localStorage.setItem("Authorization", token);
+      localStorage.setItem("idUser", headers.get('idUser'));
 
       const user = {
         name: headers.get("name"),

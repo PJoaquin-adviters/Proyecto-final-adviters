@@ -22,58 +22,20 @@ import HolidayList from "../../components/HolidayList/HolidayList";
 import UserDataContext from "../../context/UserDataContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ViewLicenceDetails from "../../components/ViewLicenceDetails/ViewLicenceDetails";
 
 const DashboardPage = () => {
   const { setAppTitle } = useContext(UserDataContext);
   setAppTitle("DASHBOARD");
 
-  const solicitudesPendientes = [
-    {
-      username: "flex",
-      lastname: "joe",
-      img: null,
-      startDate: "2023-02-18",
-      endDate: "2023-02-18",
-      type: "Vacaciones",
-    },
-    {
-      username: "jordi",
-      lastname: "joe",
-      img: "fgdfg",
-      startDate: "2023-02-18",
-      endDate: "2023-02-18",
-      type: "Vacaciones",
-    },
-    {
-      username: "flex",
-      lastname: "joe",
-      img: null,
-      startDate: "2023-02-18",
-      endDate: "2023-02-18",
-      type: "Vacaciones",
-    },
-    {
-      username: "jordi",
-      lastname: "joe",
-      img: "fgdfg",
-      startDate: "2023-02-18",
-      endDate: "2023-02-18",
-      type: "Vacaciones",
-    },
-    {
-      username: "flex",
-      lastname: "joe",
-      img: null,
-      startDate: "2023-02-18",
-      endDate: "2023-02-18",
-      type: "Vacaciones",
-    },
-  ];
-
   let solicitudesTerminadas = 0;
   const [state, setState] = useState(null);
   let savingData = {};
+
+  const refresh = () => {
+    setState(null);
+    getLicenciasPendientes();
+    getLicenciasAprobadas();
+  }
 
   const getLicenciasPendientes = async () => {
     try {
@@ -98,24 +60,15 @@ const DashboardPage = () => {
     }
   };
 
-  const getFeriados = async () => {
-    try {
-      const { data } = await CalendarService.getHolidays();
-      savingData.feriados = data;
-      checkIfAllDataWasGetted();
-    } catch (e) {
-      console.log("error en feriados", e);
-      displayError();
-    }
-  };
-
   const checkIfAllDataWasGetted = () => {
     solicitudesTerminadas++;
-    if (solicitudesTerminadas == 2)
+    if (solicitudesTerminadas == 2){
       setState({
         licenciasPendientes: savingData.licenciasPendientes,
         licenciasAprobadas: savingData.licenciasAprobadas
       });
+      solicitudesTerminadas = 0
+    }
   };
 
   const displayError = () => {
@@ -123,9 +76,6 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
-    if (new URL(window.location).searchParams.get("licenceCreated")) {
-      toast.success("¡Usuario creado correctamente!")
-    }
     getLicenciasPendientes();
     getLicenciasAprobadas();
   }, []);
@@ -138,7 +88,6 @@ const DashboardPage = () => {
         <Loading />
       ) : (
         <section className="dashboardSup-container-gral">
-          <ViewLicenceDetails licencia={editingLicence} opened={editingLicence}/>
           <div className="dashboardSup-mockup-container">
             <div className="dash-busqueda">
               <TextField
@@ -163,6 +112,7 @@ const DashboardPage = () => {
                 {state?.licenciasPendientes.map((el, index) => (
                   <div onclick={() => setEditingLicence(true)}>
                   <ListItemSolicitudes
+                  refresh={refresh}
                 key={index}
                 data={el}
                 displayIconos={true}
@@ -179,6 +129,7 @@ const DashboardPage = () => {
                     key={index}
                     data={el}
                     displayIconos={false}
+                    refresh={refresh}
                   />
                   </div>
                   
