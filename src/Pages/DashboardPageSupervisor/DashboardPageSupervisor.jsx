@@ -35,7 +35,7 @@ const DashboardPage = () => {
     setState(null);
     getLicenciasPendientes();
     getLicenciasAprobadas();
-  }
+  };
 
   const getLicenciasPendientes = async () => {
     try {
@@ -62,12 +62,12 @@ const DashboardPage = () => {
 
   const checkIfAllDataWasGetted = () => {
     solicitudesTerminadas++;
-    if (solicitudesTerminadas == 2){
+    if (solicitudesTerminadas == 2) {
       setState({
         licenciasPendientes: savingData.licenciasPendientes,
-        licenciasAprobadas: savingData.licenciasAprobadas
+        licenciasAprobadas: savingData.licenciasAprobadas,
       });
-      solicitudesTerminadas = 0
+      solicitudesTerminadas = 0;
     }
   };
 
@@ -80,7 +80,7 @@ const DashboardPage = () => {
     getLicenciasAprobadas();
   }, []);
 
-  const [editingLicence, setEditingLicence] = useState(null)
+  const [editingLicence, setEditingLicence] = useState(null);
 
   return (
     <>
@@ -104,6 +104,7 @@ const DashboardPage = () => {
               />
             </div>
             <MockupWeather></MockupWeather>
+            <MockupCalendario></MockupCalendario>
           </div>
 
           <div className="lista-dashboard-container">
@@ -111,13 +112,13 @@ const DashboardPage = () => {
               <Lista titulo="Solicitudes Pendientes">
                 {state?.licenciasPendientes.map((el, index) => (
                   <div onclick={() => setEditingLicence(true)}>
-                  <ListItemSolicitudes
-                  refresh={refresh}
-                key={index}
-                data={el}
-                displayIconos={true}
-              />
-              </div>
+                    <ListItemSolicitudes
+                      refresh={refresh}
+                      key={index}
+                      data={el}
+                      displayIconos={true}
+                    />
+                  </div>
                 ))}
               </Lista>
             </div>
@@ -125,14 +126,13 @@ const DashboardPage = () => {
               <Lista titulo="Proximas licencias aprobadas">
                 {state?.licenciasAprobadas.map((el, index) => (
                   <div onclick={() => setEditingLicence(true)}>
-                      <ListItemSolicitudes
-                    key={index}
-                    data={el}
-                    displayIconos={false}
-                    refresh={refresh}
-                  />
+                    <ListItemSolicitudes
+                      key={index}
+                      data={el}
+                      displayIconos={false}
+                      refresh={refresh}
+                    />
                   </div>
-                  
                 ))}
               </Lista>
             </div>
