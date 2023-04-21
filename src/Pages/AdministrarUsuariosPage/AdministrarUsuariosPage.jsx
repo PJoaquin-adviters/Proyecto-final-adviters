@@ -69,6 +69,9 @@ const AdministrarUsuariosPage = () => {
   };
 
   useEffect(() => {
+    if (new URL(window.location).searchParams.get("userCreated")) {
+      toast.success("¡Usuario creado correctamente!")
+    }
     getData();
   }, []);
 

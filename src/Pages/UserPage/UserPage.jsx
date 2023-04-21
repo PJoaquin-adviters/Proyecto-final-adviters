@@ -9,6 +9,9 @@ import {
   Typography,
   FormControl,
   FormHelperText,
+  Switch,
+  FormControlLabel,
+  MenuItem,
 } from "@mui/material";
 import "./UserPage.css";
 import pictureNotFound from "../../assets/img/user-not-found.png";
@@ -18,21 +21,24 @@ import { getUserRoles } from "../../services/UsersService";
 import { newUser } from "../../utils/UsersUtils";
 import { BorderColor } from "@mui/icons-material";
 import UserDataContext from "../../context/UserDataContext";
+import { toast } from "react-toastify";
+import UsersService from '../../services/UsersService'
+import { useNavigate } from "react-router-dom";
 
 const UserPage = () => {
+  const {dataUser} = useContext(UserDataContext)
+
   const { setAppTitle } = useContext(UserDataContext);
   const funcion = new URL(window.location).searchParams.get("function");
-
   const titles = [
     "CREAR NUEVO USUARIO",
     "EDITAR UN USUARIO",
     "EDITAR MI PERFIL",
   ];
-
   setAppTitle(titles[funcion]);
+  const redirect = useNavigate();
 
-  const initData = {
-    //id?
+  const [userInfo, setUserInfo] = useState({
     name: "",
     lastname: "",
     password: "",
@@ -42,44 +48,59 @@ const UserPage = () => {
     floor: "",
     apartment: "",
     street: "",
-    Street_number: "",
+    street_number: "",
     Postal_code: "",
     tower: "",
     town: "",
     state: "",
     country: "",
     Profile_picture: "",
-    Role_id: "0",
-    Birth_date: "",
-    Start_working_date: "",
+    role_id: 0,
+    birth_date: "",
+    start_working_date: "",
     dni: "",
     cuil: "",
-    Vacation_days: null,
-    Available_vacations_days: "",
-    Available_study_days: "",
+    vacation_days: null,
+    study_days: null,
     supervisor: null,
-  };
-  const [isNew, setIsNew] = useState(true);
-  // const ´loader, setLoader]
-  // const [state, setState] = useState({
-  //   userInfo: {},
-  //   rePassword: state.userInfo.password
-  // })
-  const [userInfo, setUserInfo] = useState(null);
+  });
   const [rePassword, setRePassword] = useState(userInfo?.password);
 
   //
   const [errores, setErrores] = useState({});
 
-  useEffect(() => {
-    // si es true traemos los datos del usuario desde llamando a una funcion en service
-    // isNew && setUserInfo({});
-    if (isNew) setUserInfo(initData);
-    else {
-      setTimeout(() => {
-        setUserInfo({});
-      }, 1500);
+  const [supervisores, setSupervisores] = useState([]);
+
+  const getUserData = () => {
+
+  }
+
+  const getSupervisores = async () => {
+    
+    try {
+
+      const {data} = await UsersService.getSupervisores();
+      let list = data.filter(e => e.id != dataUser.idUser)
+      list.unshift({
+        id: dataUser.idUser,
+        name: "YO",
+        last_name: ""
+      })
+      setSupervisores(list)
+
+      funcion == 0 ? setUserInfo({supervisor: dataUser.idUser}) : getUserData()
+
+    } catch (e) {
+
+      console.log(e);
+      toast.error("Ocurrió un error. Intente nuevamente.")
+
     }
+
+  }
+
+  useEffect(() => {
+    getSupervisores()
   }, []);
 
   const handleChange = (e, inputName) => {
@@ -89,23 +110,23 @@ const UserPage = () => {
     setUserInfo({ ...info });
   };
 
+  
   const createUser = async () => {
-    // try {
-    //   await newUser(userInfo);
-    // } catch (error) {
-    //   setErrores(error);
-    //   console.log(error);
-    // }
-    alert("createUser")
+    try {
+      await newUser(userInfo);
+      redirect("/administrarUsuarios?userCreated=true")
+    } catch (error) {
+      if (error.isAnValidationError) setErrores(error);
+      else alert("otro error")
+      console.log(error);
+    }
   };
 
   const editUser = (userId) => {
-    alert("editUser")
     
   };
 
   const editMyProfile = () => {
-    alert("editMyProfile")
 
   }
 
@@ -121,31 +142,14 @@ const UserPage = () => {
                 {/* sumar para sumar una imagen */}
                 <img src={pictureNotFound} className="profile-picture" alt="" />
 
-                <FormControl error={errores.supervisor} sx={{ width: 200 }}>
-                  <Select
-                    placeholder="Bajo supervisión  de:"
-                    name="supervisor"
-                    indicator={<KeyboardArrowDown />}
-                    onChange={(e) => {
-                      handleChange(e, "supervisor");
-                    }}
-                    className={`${errores.supervisor && "selectError"}`}
-                    sx={{
-                      height: 60,
-                      [`& .${selectClasses.indicator}`]: {
-                        transition: "0.2s",
-                        [`&.${selectClasses.expanded}`]: {
-                          transform: "rotate(-180deg)",
-                        },
-                      },
-                    }}
-                  >
-                    <Option value="1">Pepito</Option>
-                    <Option value="2">Marcus</Option>
-                    <Option value="3">Marge</Option>
-                  </Select>
-                  <FormHelperText>{errores.supervisor}</FormHelperText>
-                </FormControl>
+                <div>
+                <p style={{margin: '10px'}}>BAJO SUPERVISIÓN DE</p>
+                <select style={{width: "100%", maxWidth: "300px", padding: "10px"}} onChange={(e) => handleChange(e, "supervisor")}>
+                {supervisores?.map(e => <option value={e.id}>{`${e.name} ${e.last_name}`}</option>)}
+                </select>
+                </div>
+
+                <FormControlLabel control={<Switch id="switchRole"/>} label="Es supervisor" />
 
                 <TextField
                   sx={{
@@ -208,27 +212,13 @@ const UserPage = () => {
                     width: "80%",
                   }}
                   InputLabelProps={{ shrink: true, required: true }}
-                  id="Birth_date"
+                  id="birth_date"
                   label="Fecha de nacimiento"
                   type="date"
-                  value={userInfo?.Birth_date}
-                  onChange={(e) => handleChange(e, "Birth_date")}
-                  error={errores.Birth_date}
-                  helperText={errores.Birth_date}
-                />
-
-                <TextField
-                  sx={{
-                    width: "80%",
-                  }}
-                  id="cuil"
-                  label="Cuil"
-                  required
-                  type="number"
-                  value={userInfo?.ciul}
-                  onChange={(e) => handleChange(e, "cuil")}
-                  error={errores.cuil}
-                  helperText={errores.cuil}
+                  value={userInfo?.birth_date}
+                  onChange={(e) => handleChange(e, "birth_date")}
+                  error={errores.birth_date}
+                  helperText={errores.birth_date}
                 />
 
                 <TextField
@@ -238,7 +228,7 @@ const UserPage = () => {
                   id="phone"
                   label="Teléfono"
                   type="number"
-                  value={userInfo?.telephone}
+                  value={userInfo?.phone}
                   onChange={(e) => handleChange(e, "phone")}
                   error={errores.phone}
                   helperText={errores.phone}
@@ -268,7 +258,10 @@ const UserPage = () => {
                   required
                   type="password"
                   value={rePassword}
-                  onChange={(e) => handleChange(e, "rePassword")}
+                  onChange={(e) => {
+                    handleChange(e, "rePassword")
+                    setRePassword(e.target.value)
+                  }}
                   error={errores.rePassword}
                   helperText={errores.rePassword}
                 />
@@ -278,13 +271,13 @@ const UserPage = () => {
                     width: "80%",
                   }}
                   InputLabelProps={{ shrink: true, required: true }}
-                  id="Start_working_date"
+                  id="start_working_date"
                   label="Fecha de ingreso"
                   type="date"
-                  value={userInfo?.Start_working_date}
-                  onChange={(e) => handleChange(e, "Start_working_date")}
-                  error={errores.Start_working_date}
-                  helperText={errores.Start_working_date}
+                  value={userInfo?.start_working_date}
+                  onChange={(e) => handleChange(e, "start_working_date")}
+                  error={errores.start_working_date}
+                  helperText={errores.start_working_date}
                 />
               </div>
             </section>
@@ -296,7 +289,6 @@ const UserPage = () => {
                   }}
                   id="street"
                   label="Calle"
-                  required
                   value={userInfo?.street}
                   onChange={(e) => handleChange(e, "street")}
                   error={errores.street}
@@ -321,7 +313,6 @@ const UserPage = () => {
                   }}
                   id="town"
                   label="Localidad"
-                  required
                   value={userInfo?.town}
                   onChange={(e) => handleChange(e, "town")}
                   error={errores.town}
@@ -333,13 +324,27 @@ const UserPage = () => {
                     width: "80%",
                   }}
                   id="Vacation_days"
-                  label="Dias vacaciones"
+                  label="Dias de vacaciones"
                   required
                   type="number"
-                  value={userInfo?.Vacation_days}
-                  onChange={(e) => handleChange(e, "Vacation_days")}
-                  error={errores.Vacation_days}
-                  helperText={errores.Vacation_days}
+                  value={userInfo?.vacation_days}
+                  onChange={(e) => handleChange(e, "vacation_days")}
+                  error={errores.vacation_days}
+                  helperText={errores.vacation_days}
+                />
+
+                <TextField
+                  sx={{
+                    width: "80%",
+                  }}
+                  id="study_days"
+                  label="Dias de estudio"
+                  required
+                  type="number"
+                  value={userInfo?.study_days}
+                  onChange={(e) => handleChange(e, "study_days")}
+                  error={errores.study_days}
+                  helperText={errores.study_days}
                 />
               </div>
               <div className="input-column-container-ciudad">
@@ -347,14 +352,13 @@ const UserPage = () => {
                   sx={{
                     width: "80%",
                   }}
-                  id="Street_number"
+                  id="street_number"
                   label="Altura"
-                  required
                   type="number"
                   value={userInfo?.streetNumber}
-                  onChange={(e) => handleChange(e, "Street_number")}
-                  error={errores.Street_number}
-                  helperText={errores.Street_number}
+                  onChange={(e) => handleChange(e, "street_number")}
+                  error={errores.street_number}
+                  helperText={errores.street_number}
                 />
 
                 <TextField
@@ -386,12 +390,12 @@ const UserPage = () => {
                   sx={{
                     width: "80%",
                   }}
-                  id="Postal_code"
+                  id="postal_code"
                   label="Codigo postal"
-                  value={userInfo?.Postal_code}
-                  onChange={(e) => handleChange(e, "Postal_code")}
-                  error={errores.Postal_code}
-                  helperText={errores.Postal_code}
+                  value={userInfo?.postal_code}
+                  onChange={(e) => handleChange(e, "postal_code")}
+                  error={errores.postal_code}
+                  helperText={errores.postal_code}
                 />
 
                 <TextField
@@ -400,7 +404,6 @@ const UserPage = () => {
                   }}
                   id="state"
                   label="Provincia"
-                  required
                   value={userInfo?.state}
                   onChange={(e) => handleChange(e, "state")}
                   error={errores.state}
@@ -413,7 +416,6 @@ const UserPage = () => {
                   }}
                   id="country"
                   label="Pais"
-                  required
                   value={userInfo?.country}
                   onChange={(e) => handleChange(e, "country")}
                   error={errores.country}

@@ -5,7 +5,7 @@ const getUsers = (queryParams) =>
   httpRequest.get(`/users?${queryParams}`);
 
 //CREATE NEW USER
-const newUser = (data) => httpRequest.post("/users/new", data);
+const newUser = (data) => httpRequest.post("/usuario", data);
 
 //UPDATE USER DATA
 const updateUser = (userId, data) => httpRequest.put(`/users/${userId}`, data);
@@ -20,6 +20,8 @@ const getUserById = (id) => httpRequest.get(`/usuario/${id}`);
 
 const getUsersBySupervisor = (id) => httpRequest.get(`/usuario/supervisor/${id}`)
 
+const getSupervisores = () => httpRequest.get('/usuario/supervisor');
+
 
 
 const methods = {
@@ -29,7 +31,8 @@ const methods = {
   deleteUser,
   getUserRoles,
   getUserById,
-  getUsersBySupervisor
+  getUsersBySupervisor,
+  getSupervisores
 };
 
 export default methods;

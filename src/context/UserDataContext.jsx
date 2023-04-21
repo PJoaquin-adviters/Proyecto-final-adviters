@@ -12,7 +12,7 @@ const UserDataProvider = ({ children }) => {
     supervisorId: "2c8cb2bb878f6d2901878f6dbfe20000",
   };
 
-  const [dataUser, setDataUser] = useState(innitData);
+  const [dataUser, setDataUser] = useState();
 
   const [appTitle, setAppTitle] = useState("");
 
