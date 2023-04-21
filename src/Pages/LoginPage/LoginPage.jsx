@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./LoginPage.css";
 import {
   Box,
@@ -60,6 +60,12 @@ const LoginPage = () => {
       setError("Ocurrió un error. Intente nuevamente.");
     }
   };
+
+  useEffect(() => {
+    const auth = localStorage.getItem("Authorization");
+
+    if (auth) navigate("/");
+  }, []);
 
   return (
     <>
