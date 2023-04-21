@@ -14,76 +14,81 @@ import MockupWeather from "../../components/MockupWeather/MockupWeather";
 import { Box, Button } from "@mui/material";
 import UserDataContext from "../../context/UserDataContext";
 import Loading from "../../components/Loading/Loading";
-import LicencesService from '../../services/LicencesService'
+import LicencesService from "../../services/LicencesService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const DashboardPageUsuarios = () => {
-
-  const { setAppTitle, dataUser} = React.useContext(UserDataContext);
-  setAppTitle("DASHBOARD")
+  const { setAppTitle, dataUser } = React.useContext(UserDataContext);
+  setAppTitle("DASHBOARD");
   const redirect = useNavigate();
 
   const [data, setData] = React.useState(null);
 
   const getData = async () => {
-
     try {
-
       const response = await LicencesService.getLicenceByUser(dataUser.idUser);
 
-      console.log(response.data)
-      let aceptadas = response.data.filter(e => e.status.id == 1)
+      console.log(response.data);
+      let aceptadas = response.data.filter((e) => e.status.id == 1);
 
-      console.log(aceptadas)
+      console.log(aceptadas);
 
       const hoy = Date.now();
-      let historial = aceptadas.filter(e => Date.parse(e.startDate) < hoy)
-      let proximas = aceptadas.filter(e => Date.parse(e.startDate) > hoy)
+      let historial = aceptadas.filter((e) => Date.parse(e.startDate) < hoy);
+      let proximas = aceptadas.filter((e) => Date.parse(e.startDate) > hoy);
 
-      setData({historial, proximas})
-
+      setData({ historial, proximas });
     } catch (e) {
-
-      toast.error("Ocurrió un error. Intente nuevamente.")
+      toast.error("Ocurrió un error. Intente nuevamente.");
       console.log(e);
-
     }
-
-  }
+  };
 
   React.useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
     <>
-    {!data ? <Loading/> :
-    <div className="dashUsuarios-container-Gral">
-      <MockupWeather></MockupWeather>
+      {!data ? (
+        <Loading />
+      ) : (
+        <div className="dashUsuarios-container-Gral">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
+            <MockupWeather></MockupWeather>
+            <MockupCalendario></MockupCalendario>
+          </div>
 
-      <ListaDashboardLicenciaUsuarios titulo="Mi historial de solicitudes" data={data.historial}/>
-      <ListaDashboardLicenciaUsuarios titulo="Mis próximas licencias" data={data.proximas}/>
+          <ListaDashboardLicenciaUsuarios
+            titulo="Mi historial de solicitudes"
+            data={data.historial}
+          />
+          <ListaDashboardLicenciaUsuarios
+            titulo="Mis próximas licencias"
+            data={data.proximas}
+          />
 
-    <div className="dashUsuarios-flexColumn">
-      <Button
-        sx={{
-          padding: "5px",
-          width: "200px",
-          margin: "2em",
-        }}
-        variant="contained"
-        color="success"
-        onClick={() => redirect("/cargarLicencia")}
-      >
-        Crear Nueva Solicitud
-      </Button>
-      <ListaAusentesDashboard />
-      <div className="ds-usu-vacaciones">
-        <h2>Dias Disponibles</h2>
-        <p>23</p>
-      </div>
-    </div>
-  </div>}
+          <div className="dashUsuarios-flexColumn">
+            <Button
+              sx={{
+                padding: "5px",
+                width: "200px",
+                margin: "2em",
+              }}
+              variant="contained"
+              color="success"
+              onClick={() => redirect("/cargarLicencia")}
+            >
+              Crear Nueva Solicitud
+            </Button>
+            <ListaAusentesDashboard />
+            <div className="ds-usu-vacaciones">
+              <h2>Dias Disponibles</h2>
+              <p>23</p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
