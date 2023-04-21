@@ -1,14 +1,15 @@
-.mock-calendar-container {
-  display: flex;
-  flex-direction: column;
+.fc {
+  height: fit-content !important;
 }
 
-.mock-calendar-holidayList {
-  text-align: left;
-  margin: 0.5em;
+.fc-view-harness,
+.fc-view-harness-active {
+  height: 391px !important;
 }
 
-.mock-calendar-holidayList p {
-  text-align: left;
-  margin: 0 0.5em;
+.fc-day,
+.fc-day-past,
+.fc-day-other {
+  min-height: 20px !important;
+  height: 20px !important;
 }
