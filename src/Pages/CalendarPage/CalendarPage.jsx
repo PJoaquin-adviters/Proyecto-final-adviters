@@ -5,15 +5,28 @@ import HolidayList from "../../components/HolidayList/HolidayList";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./CalendarPage.css";
-import { Button, TextField } from "@mui/material";
-import BasicModal from "../../components/BasicModal/BasicModal";
+import NewHolidayModal from "../../components/NewHolidayModal/NewHolidayModal";
 import Loading from "../../components/Loading/Loading";
 import UserDataContext from "../../context/UserDataContext";
 import CalendarService from "../../services/CalendarService";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+} from "@mui/material";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const CalendarPage = () => {
+  const [deleteDialog, setDeleteDialog] = useState({});
   const [holidays, setHolidays] = useState(null);
   const { dataUser, setAppTitle } = useContext(UserDataContext);
   setAppTitle("CALENDARIO")
@@ -29,6 +42,30 @@ const CalendarPage = () => {
     } catch (e) {
       console.log(e);
       toast.error("¡Lo sentimos, ocurrió un error :(!")
+    }
+  };
+
+  const deleteHoliday = (holiday) => {
+    setDeleteDialog({
+      open: true,
+      holidayId: holiday.id,
+      descripcion: holiday.descripcion,
+    });
+  }
+
+  const confirmDeleteHoliday = async () => {
+    const holidayId = deleteDialog.holidayId;
+
+    setDeleteDialog({});
+
+    try {
+      await CalendarService.deleteHoliday(holidayId);
+      setHolidays(holidays.filter(item => item.id != holidayId))
+      toast.success("Feriado eliminado correctamente.");
+    } catch (e) {
+      console.log(e);
+      const message = e.response.data?.message || "No se pudo eliminar el feriado. Intente nuevamente.";
+      toast.error(message);
     }
   };
 
@@ -49,44 +86,6 @@ const CalendarPage = () => {
               <Typography variant="h3" color="initial">
                 Feriados
               </Typography>
-
-              {dataUser.idRol == 0 && (
-                <>
-                  <BasicModal
-                    titulo="Crear nuevo Feriado"
-                    nombreBtn="Nuevo Feriado"
-                  >
-                    <>
-                      <div className="modal-input-container">
-                        <TextField
-                          id="date"
-                          label="Fecha"
-                          defaultValue="2023-02-18"
-                          type="date"
-                          // value={}
-                          // onChange={}
-                        />
-                        <TextField
-                          id="motivo"
-                          defaultValue="motivo"
-                          label="Motivo"
-                          type="text"
-                          // value={}
-                          // onChange={}
-                        />
-                      </div>
-                      <div className="calendar-modal-btn-container">
-                        <Button variant="contained" color="error">
-                          Cancelar
-                        </Button>
-                        <Button variant="contained" color="success">
-                          Confirmar
-                        </Button>
-                      </div>
-                    </>
-                  </BasicModal>
-                </>
-              )}
             </div>
 
             <HolidayList>
@@ -94,15 +93,30 @@ const CalendarPage = () => {
                 <ListItem key={`holiday-${index}`} divider={true}>
                   <ListItemText
                     primary={
-                      <React.Fragment>
+                      <div className="feriadoListItemConDelete">
+
                         <Typography
+                          sx={{width: '100%'}}
                           component="span"
                           variant="h5"
                           color="text.primary"
                         >
                           {holiday.date} - {holiday.descripcion}
                         </Typography>
-                      </React.Fragment>
+
+                        {dataUser.idRol == 0 && (
+                <>
+                      <button
+                          className="buttonDelete"
+                          onClick={() => deleteHoliday(holiday)}
+                          >
+                        <DeleteIcon sx={{ color: "#ff7b7b" }} />
+                      </button>
+                      <NewHolidayModal holidays={holidays} setHolidays={setHolidays}/>
+                </>
+              )}
+                        
+                        </div>
                     }
                   />
                 </ListItem>
@@ -111,7 +125,23 @@ const CalendarPage = () => {
           </div>
         </section>
       )}
-      <ToastContainer/>
+      <Dialog
+        open={deleteDialog.open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={() => setDeleteDialog({})}
+      >
+        <DialogTitle>CONFIRMAR ELIMINACIÓN</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`¿Seguro que desea eliminar el feriado "${deleteDialog.descripcion}" del sistema?`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialog({})}>CANCELAR</Button>
+          <Button onClick={confirmDeleteHoliday}>ELIMINAR</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

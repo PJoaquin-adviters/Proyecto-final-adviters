@@ -4,12 +4,12 @@ import httpRequest from "./httpRequest";
 const getHolidays = () => httpRequest.get("/feriado/");
 
 //SAVE NEW HOLIDAY
-const newHoliday = (name, date) =>
-  httpRequest.post("/calendar/holidays/new", { name, date });
+const newHoliday = (date, descripcion) =>
+  httpRequest.post("/feriado", { date, descripcion });
 
 //DELETE A HOLIDAY
 const deleteHoliday = (holidayId) =>
-  httpRequest.delete(`/calendar/holidays/${holidayId}`);
+  httpRequest.delete(`/feriado/${holidayId}`);
 
 const methods = {
   getHolidays,

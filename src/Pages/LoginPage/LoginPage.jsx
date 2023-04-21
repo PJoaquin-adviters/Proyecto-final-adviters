@@ -32,6 +32,8 @@ const LoginPage = () => {
       const { headers } = await LoginService.auth(userAuth, passwordAuth);
       const token = headers.get("Authorization");
 
+      console.log(headers)
+
       localStorage.setItem("Authorization", token);
 
       const user = {

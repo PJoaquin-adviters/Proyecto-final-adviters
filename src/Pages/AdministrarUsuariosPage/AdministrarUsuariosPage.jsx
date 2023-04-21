@@ -39,32 +39,6 @@ const AdministrarUsuariosPage = () => {
       console.log(e);
       toast.error("¡Lo sentimos, ocurrió un error :(!");
     }
-
-    // const data = [
-    //   {
-    //     id: "646546135421",
-    //     name: "Juan",
-    //     lastName: "Rodriguez",
-    //     role: "Supervisor",
-    //     img: Jordi,
-    //   },
-    //   {
-    //     id: "646854152454",
-    //     name: "Marcos",
-    //     lastName: "Aurelio",
-    //     role: "Usuario",
-    //     img: null,
-    //   },
-    //   {
-    //     id: "646854152454",
-    //     name: "Marcos",
-    //     lastName: "Aurelio",
-    //     role: "Usuario",
-    //     img: null,
-    //   },
-    // ];
-
-    // setUserList(data);
   };
 
   const editUser = (userId) => redirect(`/user?function=1&userId=${userId}`);
@@ -81,7 +55,6 @@ const AdministrarUsuariosPage = () => {
 
   const confirmDeleteUser = async () => {
     const userId = deleteDialog.userId;
-    const index = deleteDialog.index;
 
     setDeleteDialog({});
 

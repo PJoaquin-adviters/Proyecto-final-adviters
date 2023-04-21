@@ -7,6 +7,11 @@
   gap: 50px;
 }
 
+.feriadoListItemConDelete {
+  display: flex;
+  width: 100%;
+}
+
 .calendar-page-section-container {
   display: flex;
   flex-direction: column;
@@ -14,6 +19,7 @@
   border: 1px solid rgb(207, 207, 207);
   width: fit-content;
   padding: 30px;
+  margin-bottom: 30px;
 }
 
 .list-calendar {
